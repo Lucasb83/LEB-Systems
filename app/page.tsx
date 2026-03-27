@@ -20,7 +20,7 @@ const COLORS = {
 };
 
 // ==========================================
-// 1. MOTOR 3D: LA FLOR DE LA VIDA (WEBGL REAL & MOBILE OPTIMIZED)
+// 1. MOTOR 3D: LA FLOR DE LA VIDA (WEBGL REAL & MICRO-SCALED)
 // ==========================================
 const getFlowerOfLifePositions = (radius: number) => {
   const positions: [number, number, number][] = [[0, 0, 0]]; 
@@ -48,13 +48,13 @@ const FLOWER_POSITIONS = getFlowerOfLifePositions(1.2);
 const Flower3DModel = ({ isHovered, isSynapsing }: { isHovered: boolean, isSynapsing: boolean }) => {
   const groupRef = useRef<THREE.Group>(null);
   const materialRef = useRef<THREE.MeshPhysicalMaterial>(null);
-  const [mobileScale, setMobileScale] = useState(0.5); // Escala base reducida para que se vea completa
+  const [mobileScale, setMobileScale] = useState(0.36); // Escala Desktop por defecto (1/3 más pequeña)
 
   // Detector de Mobile para ajustar la escala del objeto 3D
   useEffect(() => {
     const checkMobile = () => {
-      // Proporciones perfectas: 0.35 para celulares, 0.55 para desktop
-      setMobileScale(window.innerWidth < 768 ? 0.35 : 0.55);
+      // Reducción exacta de 1/3 sobre las escalas anteriores (0.35 -> 0.23, 0.55 -> 0.36)
+      setMobileScale(window.innerWidth < 768 ? 0.23 : 0.36);
     };
     checkMobile(); 
     window.addEventListener('resize', checkMobile);
@@ -70,8 +70,8 @@ const Flower3DModel = ({ isHovered, isSynapsing }: { isHovered: boolean, isSynap
     } else {
       groupRef.current.rotation.y += delta * 15;
       groupRef.current.rotation.x += delta * 5;
-      // En sinapsis crece, pero partiendo de la nueva escala ajustada
-      const targetScale = mobileScale * 1.8;
+      // En sinapsis crece suavemente desde su nueva base micro
+      const targetScale = mobileScale * 2.5; 
       groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
     }
 
@@ -86,8 +86,8 @@ const Flower3DModel = ({ isHovered, isSynapsing }: { isHovered: boolean, isSynap
     <group ref={groupRef} rotation={[Math.PI / 6, 0, 0]} scale={[mobileScale, mobileScale, mobileScale]}>
       {FLOWER_POSITIONS.map((pos, idx) => (
         <mesh key={idx} position={pos}>
-          {/* Geometría ligeramente ajustada en grosor (0.02) para que no se pierda al achicarse */}
-          <torusGeometry args={[1.2, 0.02, 16, 100]} />
+          {/* Geometría ajustada (0.03 de grosor) para retener presencia física al achicarse */}
+          <torusGeometry args={[1.2, 0.03, 16, 100]} />
           <meshPhysicalMaterial 
             ref={idx === 0 ? materialRef : undefined} 
             color={COLORS.goldBase}
@@ -104,7 +104,7 @@ const Flower3DModel = ({ isHovered, isSynapsing }: { isHovered: boolean, isSynap
   );
 };
 // ==========================================
-// 2. STATE A: THE ENTRY PORTAL (3D SINGULARITY - MOBILE OPTIMIZED)
+// 2. STATE A: THE ENTRY PORTAL (3D SINGULARITY - MICRO SCALE)
 // ==========================================
 const EntryPortal = ({ onEnter }: { onEnter: () => void }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -136,8 +136,8 @@ const EntryPortal = ({ onEnter }: { onEnter: () => void }) => {
           <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
             <Flower3DModel isHovered={isHovered} isSynapsing={isSynapsing} />
           </Float>
-          {/* Contact shadow for depth, slightly adjusted for mobile screens */}
-          <ContactShadows position={[0, -2.5, 0]} opacity={0.3} scale={15} blur={2.5} far={4} color={COLORS.goldBase} />
+          {/* Contact shadow ajustada para el nuevo tamaño micro */}
+          <ContactShadows position={[0, -1.5, 0]} opacity={0.25} scale={10} blur={2} far={4} color={COLORS.goldBase} />
         </Canvas>
       </div>
 
@@ -149,31 +149,30 @@ const EntryPortal = ({ onEnter }: { onEnter: () => void }) => {
         className="absolute inset-0 bg-white z-40 pointer-events-none mix-blend-overlay"
       />
 
-      {/* UI HTML superpuesta (El botón invisible / interactivo en el centro) */}
-      {/* touch-manipulation y select-none previenen el comportamiento de zoom nativo en celulares */}
+      {/* UI HTML superpuesta (El botón interactivo en el centro) */}
       <div className="relative z-50 flex flex-col items-center justify-center w-full h-full touch-manipulation select-none">
         <motion.button
           onClick={handleTrigger}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          // Añadimos onTouchStart para que dispositivos móviles detecten el hover instantáneamente
           onTouchStart={() => setIsHovered(true)} 
           onTouchEnd={() => setIsHovered(false)}
-          className="relative w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center group focus:outline-none cursor-pointer"
+          // Hitbox reducida (w-16 h-16) para coincidir con la flor más pequeña
+          className="relative w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center group focus:outline-none cursor-pointer"
           animate={{ scale: isSynapsing ? 0 : 1 }}
           transition={{ duration: 0.5, ease: APPLE_EASE }}
           style={{ WebkitTapHighlightColor: "transparent" }}
         >
           {/* Núcleo microscópico físico que reacciona al mouse/touch */}
-          <div className="relative z-10 w-2 h-2 bg-[#D4AF37] rounded-full group-hover:bg-[#FFDF00] group-hover:scale-[2.5] transition-all duration-500 shadow-[0_0_10px_rgba(212,175,55,0.5)] group-hover:shadow-[0_0_25px_rgba(255,223,0,1)]"></div>
+          <div className="relative z-10 w-1.5 h-1.5 md:w-2 md:h-2 bg-[#D4AF37] rounded-full group-hover:bg-[#FFDF00] group-hover:scale-[2.5] transition-all duration-500 shadow-[0_0_8px_rgba(212,175,55,0.6)] group-hover:shadow-[0_0_20px_rgba(255,223,0,1)]"></div>
           
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: isHovered && !isSynapsing ? 1 : 0, y: isHovered && !isSynapsing ? 0 : 10 }}
             transition={{ duration: 0.4, ease: APPLE_EASE }}
-            className="absolute bottom-[-30px] md:bottom-[-40px] whitespace-nowrap pointer-events-none"
+            className="absolute bottom-[-25px] md:bottom-[-30px] whitespace-nowrap pointer-events-none"
           >
-            <span className="text-[#94A3B8] text-[8px] md:text-[9px] font-bold tracking-[0.4em] uppercase">
+            <span className="text-[#94A3B8] text-[7px] md:text-[8px] font-bold tracking-[0.4em] uppercase">
               Initialize
             </span>
           </motion.div>
@@ -189,7 +188,6 @@ const EntryPortal = ({ onEnter }: { onEnter: () => void }) => {
 const TopNavigation = () => (
   <nav className="fixed top-0 left-0 right-0 z-50 w-full flex items-center justify-between px-4 md:px-12 py-5 md:py-6 bg-[#010614]/80 backdrop-blur-xl border-b border-white/5">
     <div className="flex items-center gap-3 md:gap-4 cursor-pointer group">
-      {/* Versión 2D minimalista del logo para la barra de navegación */}
       <div className="w-6 h-6 md:w-8 md:h-8 text-[#D4AF37] group-hover:text-[#FFDF00] transition-colors duration-500">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g stroke="currentColor" strokeWidth="1.5">
@@ -259,7 +257,6 @@ const MainSite = () => {
           </div>
           
           <h1 className="font-black tracking-tighter mb-6 md:mb-8 flex flex-col items-center w-full leading-[0.85] md:leading-[0.85] uppercase">
-            {/* VW units ensure this text expands perfectly side-to-side on mobile without line breaks */}
             <span className="text-[14vw] md:text-[10vw] text-[#F0F0F0]">Beyond</span>
             <span className="text-[14vw] md:text-[10vw] text-transparent bg-clip-text bg-gradient-to-b from-[#F0F0F0] to-[#94A3B8]">
               Infrastructure
@@ -281,7 +278,7 @@ const MainSite = () => {
         </motion.div>
       </section>
 
-      {/* Global Metrics - Stacked optimally for mobile */}
+      {/* Global Metrics */}
       <section className="relative z-10 py-16 md:py-20 px-4 md:px-6 bg-[#010614] border-y border-white/5">
         <div className="max-w-[1400px] mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 text-center divide-x-0 lg:divide-x divide-white/5">
