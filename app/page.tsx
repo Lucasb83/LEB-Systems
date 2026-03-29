@@ -120,7 +120,7 @@ export default function MaintenancePage() {
       {/* Footer Branding */}
       <div className="absolute bottom-8 text-center w-full">
         <span className="text-[9px] md:text-[10px] font-bold tracking-[0.4em] uppercase text-slate-600">
-          LEB Systems International
+          LEB Systems
         </span>
       </div>
     </main>
