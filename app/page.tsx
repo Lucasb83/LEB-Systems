@@ -1,398 +1,427 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Shield, Server, Code2, BrainCircuit, ArrowRight, Activity } from "lucide-react";
-import * as THREE from "three";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, Float, ContactShadows, Sparkles, MeshTransmissionMaterial } from "@react-three/drei";
-import { EffectComposer, Bloom, Noise } from "@react-three/postprocessing";
-import { BlendFunction } from "postprocessing";
+import React from "react";
+import { motion } from "framer-motion";
+import { 
+  Server, 
+  Shield, 
+  Code2, 
+  BrainCircuit, 
+  ArrowRight, 
+  CheckCircle2, 
+  Lock, 
+  Activity,
+  Workflow,
+  Database
+} from "lucide-react";
 
 // ==========================================
-// CONSTANTS & PALETTE
+// 1. N8N-STYLE NODE BACKGROUND ANIMATION
 // ==========================================
-const APPLE_EASE = [0.22, 1, 0.36, 1] as const;
-const COLORS = {
-  obsidian: "#010614", 
-  goldBase: "#D4AF37", 
-  goldGlow: "#FFDF00", 
-  textLight: "#F0F0F0",
-  textMuted: "#94A3B8"
-};
-
-// ==========================================
-// 1. 3D HOLOGRAM ENGINE (CINEMATIC UPGRADE)
-// ==========================================
-const getFlowerOfLifePositions = (radius: number) => {
-  const positions: [number, number, number][] = [[0, 0, 0]]; 
-  
-  for (let i = 0; i < 6; i++) {
-    const angle = (i * Math.PI) / 3;
-    positions.push([Math.cos(angle) * radius, Math.sin(angle) * radius, 0]);
-  }
-  
-  for (let i = 0; i < 6; i++) {
-    const angle = (i * Math.PI) / 3;
-    positions.push([Math.cos(angle) * radius * 2, Math.sin(angle) * radius * 2, 0]);
-    
-    const halfAngle = angle + Math.PI / 6;
-    const distance = radius * Math.sqrt(3);
-    positions.push([Math.cos(halfAngle) * distance, Math.sin(halfAngle) * distance, 0]);
-  }
-  return positions;
-};
-
-const FLOWER_POSITIONS = getFlowerOfLifePositions(1.2);
-
-const Flower3DModel = ({ isHovered, isSynapsing }: { isHovered: boolean, isSynapsing: boolean }) => {
-  const groupRef = useRef<THREE.Group>(null);
-  const coreRef = useRef<THREE.Mesh>(null);
-  const instancedMeshRef = useRef<THREE.InstancedMesh>(null);
-
-  // Escala mucho más pequeña (Micro-Singularity)
-  const [mobileScale, setMobileScale] = useState(0.15);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setMobileScale(window.innerWidth < 768 ? 0.10 : 0.15);
-    };
-    checkMobile(); 
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  useEffect(() => {
-    if (!instancedMeshRef.current) return;
-    const dummy = new THREE.Object3D();
-    FLOWER_POSITIONS.forEach((pos, idx) => {
-      dummy.position.set(pos[0], pos[1], pos[2]);
-      dummy.updateMatrix();
-      instancedMeshRef.current!.setMatrixAt(idx, dummy.matrix);
-    });
-    instancedMeshRef.current.instanceMatrix.needsUpdate = true;
-  }, []);
-
-  useFrame((state, delta) => {
-    if (!groupRef.current || !coreRef.current) return;
-
-    // Mouse Parallax Calculation
-    const targetX = (state.pointer.x * Math.PI) / 4;
-    const targetY = (state.pointer.y * Math.PI) / 4;
-
-    if (!isSynapsing) {
-      // Rotación orgánica combinada con el movimiento del mouse (Parallax)
-      groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, targetY + Math.sin(state.clock.elapsedTime * 0.2) * 0.15, 0.05);
-      groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetX + state.clock.elapsedTime * 0.15, 0.05);
-    } else {
-      // Hiper-velocidad durante el click
-      groupRef.current.rotation.y += delta * 25;
-      groupRef.current.rotation.x += delta * 12;
-      const targetScale = mobileScale * 8.0; 
-      groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.08);
-    }
-
-    // El núcleo central late
-    const pulse = 1 + Math.sin(state.clock.elapsedTime * 4) * 0.3;
-    coreRef.current.scale.set(pulse, pulse, pulse);
-  });
-
+const NodeNetworkBackground = () => {
   return (
-    <group ref={groupRef} rotation={[Math.PI / 6, 0, 0]} scale={[mobileScale, mobileScale, mobileScale]}>
-      
-      {/* Geometría instanciada con el nuevo material de Cristal de Refracción */}
-      <instancedMesh ref={instancedMeshRef} args={[null as any, null as any, 19]}>
-        <torusGeometry args={[1.2, 0.04, 16, 64]} />
-        <MeshTransmissionMaterial 
-          background={new THREE.Color(COLORS.obsidian)}
-          color={isSynapsing || isHovered ? COLORS.goldGlow : COLORS.goldBase}
-          transmission={0.95} // 95% de transparencia de cristal
-          thickness={0.5}     // Grosor del cristal para doblar la luz
-          roughness={0.05}
-          chromaticAberration={isSynapsing ? 0.2 : 0.04} // Distorsión de colores en los bordes
-          anisotropy={0.1}
-          distortion={0.0}
-          resolution={256}    // Resolución optimizada para mobile
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      <svg className="absolute w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#D4AF37" stopOpacity="0" />
+            <stop offset="50%" stopColor="#D4AF37" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#D4AF37" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="line-gradient-reverse" x1="100%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stopColor="#D4AF37" stopOpacity="0" />
+            <stop offset="50%" stopColor="#D4AF37" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#D4AF37" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+
+        {/* Nodes (Circles) */}
+        <circle cx="20%" cy="30%" r="4" fill="#D4AF37" opacity="0.8" />
+        <circle cx="80%" cy="20%" r="6" fill="#D4AF37" opacity="0.6" />
+        <circle cx="70%" cy="60%" r="5" fill="#D4AF37" opacity="0.8" />
+        <circle cx="30%" cy="70%" r="7" fill="#D4AF37" opacity="0.5" />
+        <circle cx="50%" cy="50%" r="8" fill="#FFDF00" opacity="0.9" />
+
+        {/* Animated Connecting Lines (Paths) */}
+        <motion.path
+          d="M 20% 30% L 50% 50%"
+          stroke="url(#line-gradient)"
+          strokeWidth="2"
+          fill="none"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
         />
-      </instancedMesh>
-
-      {/* Núcleo emisor puro (dispara el Bloom) */}
-      <mesh ref={coreRef} position={[0, 0, 0]}>
-        <sphereGeometry args={[0.15, 16, 16]} />
-        <meshBasicMaterial color={isSynapsing || isHovered ? "#FFFFFF" : COLORS.goldGlow} />
-      </mesh>
-
-      <Sparkles count={200} scale={6} size={2} speed={0.4} opacity={0.6} color={COLORS.goldBase} />
-    </group>
-  );
-};
-
-// ==========================================
-// 2. ENTRY PORTAL (WITH POST-PROCESSING)
-// ==========================================
-const EntryPortal = ({ onEnter }: { onEnter: () => void }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isSynapsing, setIsSynapsing] = useState(false);
-
-  const handleTrigger = () => {
-    setIsSynapsing(true);
-    setTimeout(onEnter, 1500);
-  };
-
-  return (
-    <motion.div 
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1.5, ease: APPLE_EASE }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#010614] overflow-hidden overscroll-none touch-none"
-    >
-      <div className="absolute inset-0 z-0 bg-[#010614] pointer-events-none" />
-
-      <div className="absolute inset-0 z-10 pointer-events-none">
-        <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 5], fov: 45 }}>
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[10, 10, 5]} intensity={2} color={COLORS.textLight} />
-          <directionalLight position={[-10, -10, -5]} intensity={0.5} color={COLORS.goldBase} />
-          <Environment preset="city" />
-          
-          <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
-            <Flower3DModel isHovered={isHovered} isSynapsing={isSynapsing} />
-          </Float>
-          
-          <ContactShadows resolution={256} position={[0, -1.0, 0]} opacity={0.25} scale={8} blur={2} far={4} color={COLORS.goldBase} />
-          
-          {/* CINEAMATIC POST-PROCESSING PIPELINE */}
-          <EffectComposer disableNormalPass multisampling={4}>
-            {/* El bloom hace que el núcleo y el cristal brillen ópticamente */}
-            <Bloom luminanceThreshold={0.5} mipmapBlur intensity={isSynapsing ? 5.0 : 1.5} />
-            {/* El ruido le saca el aspecto "plástico" al render */}
-            <Noise opacity={0.025} blendFunction={BlendFunction.OVERLAY} />
-          </EffectComposer>
-        </Canvas>
-      </div>
-
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isSynapsing ? 1 : 0 }}
-        transition={{ duration: 0.8, delay: 0.4, ease: "easeIn" }}
-        className="absolute inset-0 bg-white z-40 pointer-events-none mix-blend-overlay"
-      />
-
-      <div className="relative z-50 flex flex-col items-center justify-center w-full h-full touch-manipulation select-none">
-        <motion.button
-          onClick={handleTrigger}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          onTouchStart={() => setIsHovered(true)} 
-          onTouchEnd={() => setIsHovered(false)}
-          className="relative w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center group focus:outline-none cursor-pointer"
-          animate={{ scale: isSynapsing ? 0 : 1 }}
-          transition={{ duration: 0.5, ease: APPLE_EASE }}
-          style={{ WebkitTapHighlightColor: "transparent" }}
-        >
-          <div className="relative z-10 w-1 h-1 md:w-1.5 md:h-1.5 bg-[#D4AF37] rounded-full group-hover:bg-[#FFDF00] group-hover:scale-[3] transition-all duration-500 shadow-[0_0_8px_rgba(212,175,55,0.6)] group-hover:shadow-[0_0_20px_rgba(255,223,0,1)]"></div>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: isHovered && !isSynapsing ? 1 : 0, y: isHovered && !isSynapsing ? 0 : 10 }}
-            transition={{ duration: 0.4, ease: APPLE_EASE }}
-            className="absolute bottom-[-15px] md:bottom-[-20px] whitespace-nowrap pointer-events-none"
-          >
-            <span className="text-[#94A3B8] text-[6px] md:text-[7px] font-bold tracking-[0.4em] uppercase">
-              Initialize
-            </span>
-          </motion.div>
-        </motion.button>
-      </div>
-    </motion.div>
-  );
-};
-
-// ==========================================
-// 3. MAIN SITE & NAVIGATION
-// ==========================================
-const TopNavigation = () => (
-  <nav className="fixed top-0 left-0 right-0 z-50 w-full flex items-center justify-between px-4 md:px-12 py-5 md:py-6 bg-[#010614]/80 backdrop-blur-xl border-b border-white/5">
-    <div className="flex items-center gap-3 md:gap-4 cursor-pointer group">
-      <div className="w-6 h-6 md:w-8 md:h-8 text-[#D4AF37] group-hover:text-[#FFDF00] transition-colors duration-500">
-        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g stroke="currentColor" strokeWidth="1.5">
-            <circle cx="50" cy="50" r="16" />
-            <circle cx="50" cy="34" r="16" />
-            <circle cx="63.8" cy="42" r="16" />
-            <circle cx="63.8" cy="58" r="16" />
-            <circle cx="50" cy="66" r="16" />
-            <circle cx="36.2" cy="58" r="16" />
-            <circle cx="36.2" cy="42" r="16" />
-          </g>
-        </svg>
-      </div>
-      <span className="text-lg md:text-xl font-black tracking-[0.1em] md:tracking-[0.2em] text-[#F0F0F0] uppercase leading-none">
-        LEB <span className="text-[#D4AF37]">SYSTEMS</span>
-      </span>
+        <motion.path
+          d="M 80% 20% L 50% 50%"
+          stroke="url(#line-gradient-reverse)"
+          strokeWidth="2"
+          fill="none"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{ duration: 2.5, delay: 0.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+        />
+        <motion.path
+          d="M 70% 60% L 50% 50%"
+          stroke="url(#line-gradient)"
+          strokeWidth="1.5"
+          fill="none"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{ duration: 3, delay: 1, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+        />
+        <motion.path
+          d="M 30% 70% L 50% 50%"
+          stroke="url(#line-gradient-reverse)"
+          strokeWidth="1.5"
+          fill="none"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{ duration: 2.2, delay: 0.2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+        />
+      </svg>
     </div>
-    
-    <div className="hidden lg:flex items-center gap-10 text-[10px] font-bold tracking-[0.2em] uppercase text-[#94A3B8]">
-      <a href="#architecture" className="hover:text-[#F0F0F0] transition-colors duration-300">Architecture</a>
-      <a href="#security" className="hover:text-[#F0F0F0] transition-colors duration-300">Security</a>
-      <a href="#intelligence" className="hover:text-[#F0F0F0] transition-colors duration-300">Intelligence</a>
-    </div>
-
-    <a href="/portal" className="px-5 md:px-8 py-2 md:py-3 bg-transparent border border-[#D4AF37]/50 text-[#D4AF37] font-bold text-[8px] md:text-[10px] uppercase tracking-[0.2em] hover:bg-[#D4AF37] hover:text-[#010614] transition-colors duration-500">
-      Access Portal
-    </a>
-  </nav>
-);
-
-const MainSite = () => {
-  const services = [
-    { title: "Scalable Infrastructure", desc: "Multi-region, high-availability cloud deployments engineered for infinite resilience and absolute data sovereignty.", icon: <Server className="w-6 h-6 text-[#D4AF37]" /> },
-    { title: "Zero-Trust Cybersecurity", desc: "Military-grade perimeter defense. We assume breach and cryptographically secure digital assets from the inside out.", icon: <Shield className="w-6 h-6 text-[#D4AF37]" /> },
-    { title: "Advanced Engineering", desc: "Bespoke, high-performance software architecture and robust APIs engineered to dominate entire market sectors.", icon: <Code2 className="w-6 h-6 text-[#D4AF37]" /> },
-    { title: "Cognitive AI Services", desc: "Deploy advanced LLMs and predictive neural networks to automate complex operations at unprecedented scale.", icon: <BrainCircuit className="w-6 h-6 text-[#D4AF37]" /> },
-  ];
-
-  return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1.5, ease: APPLE_EASE }}
-      className="relative min-h-screen bg-[#010614] text-[#F0F0F0] overflow-x-hidden font-sans selection:bg-[#D4AF37]/30"
-    >
-      <TopNavigation />
-
-      <section className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center pt-24 pb-16 md:pt-32 md:pb-20 w-full max-w-[1800px] mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: APPLE_EASE, delay: 0.2 }}
-          className="w-full flex flex-col items-center"
-        >
-          <div className="inline-flex items-center gap-2 md:gap-3 px-3 md:px-4 py-1.5 mb-8 md:mb-10 border border-[#D4AF37]/20 bg-[#D4AF37]/5">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D4AF37] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#D4AF37]"></span>
-            </span>
-            <span className="text-[#D4AF37] text-[7px] md:text-[9px] font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase">
-              System Architecture Active
-            </span>
-          </div>
-          
-          <h1 className="font-black tracking-tighter mb-6 md:mb-8 flex flex-col items-center w-full leading-[0.85] md:leading-[0.85] uppercase">
-            <span className="text-[14vw] md:text-[10vw] text-[#F0F0F0]">Beyond</span>
-            <span className="text-[14vw] md:text-[10vw] text-transparent bg-clip-text bg-gradient-to-b from-[#F0F0F0] to-[#94A3B8]">
-              Infrastructure
-            </span>
-          </h1>
-          
-          <p className="text-xs sm:text-sm md:text-xl text-[#94A3B8] mb-12 md:mb-16 max-w-3xl leading-relaxed font-light tracking-wide px-2 md:px-4">
-            We architect mission-critical ecosystems. Transforming profound technical complexity into an <span className="text-[#F0F0F0] font-medium">absolute competitive advantage</span> through Elite Infrastructure, Zero-Trust Security, and AI.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6 w-full sm:w-auto px-4 sm:px-0">
-            <button className="w-full sm:w-auto px-8 md:px-12 py-4 md:py-5 bg-[#F0F0F0] text-[#010614] font-black text-[10px] md:text-xs tracking-[0.2em] uppercase hover:bg-[#D4AF37] transition-colors duration-500 flex items-center justify-center gap-3">
-              Deploy Systems <ArrowRight className="w-3 h-3" />
-            </button>
-            <button className="w-full sm:w-auto px-8 md:px-12 py-4 md:py-5 bg-transparent border border-white/10 text-[#F0F0F0] font-bold text-[10px] md:text-xs tracking-[0.2em] uppercase hover:bg-white/5 hover:border-[#D4AF37]/30 transition-all duration-500 flex items-center justify-center gap-3">
-              <Activity className="w-3 h-3 text-[#D4AF37]" /> Request Audit
-            </button>
-          </div>
-        </motion.div>
-      </section>
-
-      <section className="relative z-10 py-16 md:py-20 px-4 md:px-6 bg-[#010614] border-y border-white/5">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 text-center divide-x-0 lg:divide-x divide-white/5">
-            <div className="flex flex-col items-center">
-              <span className="text-3xl md:text-4xl lg:text-5xl font-black text-[#F0F0F0] mb-2 tracking-tighter">99.999<span className="text-[#D4AF37]">%</span></span>
-              <span className="text-[8px] md:text-[9px] font-bold tracking-[0.2em] uppercase text-[#94A3B8]">Guaranteed Uptime</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="text-3xl md:text-4xl lg:text-5xl font-black text-[#F0F0F0] mb-2 tracking-tighter">&lt;1<span className="text-[#D4AF37]">ms</span></span>
-              <span className="text-[8px] md:text-[9px] font-bold tracking-[0.2em] uppercase text-[#94A3B8]">Global Latency</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="text-3xl md:text-4xl lg:text-5xl font-black text-[#F0F0F0] mb-2 tracking-tighter">Zero</span>
-              <span className="text-[8px] md:text-[9px] font-bold tracking-[0.2em] uppercase text-[#94A3B8]">Trust Architecture</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="text-3xl md:text-4xl lg:text-5xl font-black text-[#F0F0F0] mb-2 tracking-tighter">24<span className="text-[#D4AF37]">/</span>7</span>
-              <span className="text-[8px] md:text-[9px] font-bold tracking-[0.2em] uppercase text-[#94A3B8]">Threat Monitoring</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="architecture" className="relative z-10 py-24 md:py-32 px-4 md:px-6 bg-[#010614]">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="mb-16 md:mb-20 flex flex-col items-center text-center">
-            <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
-              <div className="w-6 md:w-8 h-[1px] bg-[#D4AF37]"></div>
-              <div className="text-[8px] md:text-[9px] font-bold tracking-[0.3em] uppercase text-[#D4AF37]">Core Operations</div>
-              <div className="w-6 md:w-8 h-[1px] bg-[#D4AF37]"></div>
-            </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#F0F0F0] tracking-tighter uppercase">
-              Elite Engineering
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, delay: index * 0.1, ease: APPLE_EASE }}
-                className="group relative p-8 md:p-14 border border-white/5 bg-[#010614] hover:border-[#D4AF37]/30 transition-all duration-700 overflow-hidden"
-              >
-                <div className="relative z-10 mb-6 md:mb-8 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
-                  {service.icon}
-                </div>
-                
-                <h3 className="relative z-10 text-xl md:text-2xl font-black text-[#F0F0F0] mb-3 md:mb-4 tracking-tight uppercase">
-                  {service.title}
-                </h3>
-                
-                <p className="relative z-10 text-[#94A3B8] text-xs md:text-sm lg:text-base leading-relaxed mb-8 md:mb-10 font-light max-w-sm">
-                  {service.desc}
-                </p>
-                
-                <div className="relative z-10 h-[1px] w-full bg-white/5 mb-6 md:mb-8 group-hover:bg-[#D4AF37]/20 transition-colors duration-700"></div>
-                
-                <a href="#" className="relative z-10 inline-flex items-center gap-2 md:gap-3 text-[8px] md:text-[10px] font-bold tracking-[0.2em] uppercase text-[#F0F0F0] group-hover:text-[#D4AF37] transition-colors duration-500">
-                  Explore Architecture <ArrowRight className="w-3 h-3 group-hover:translate-x-2 transition-transform duration-500" />
-                </a>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <footer className="border-t border-white/5 bg-[#010614] py-8 md:py-10 text-center px-4">
-        <p className="text-[#94A3B8] text-[7px] md:text-[9px] font-bold tracking-[0.2em] uppercase">
-          © {new Date().getFullYear()} LEB Systems. Absolute Authority in IT Infrastructure.
-        </p>
-      </footer>
-    </motion.div>
   );
 };
 
 // ==========================================
-// 4. MASTER ORCHESTRATOR
+// 2. NAVIGATION BAR
+// ==========================================
+const Navigation = () => {
+  return (
+    <nav className="fixed top-0 w-full z-50 bg-[#010614]/90 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div className="flex items-center gap-3 cursor-pointer">
+          {/* LEB Symbol Placeholder */}
+          <div className="w-8 h-8 text-[#D4AF37] flex-shrink-0">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g stroke="currentColor" strokeWidth="2">
+                <circle cx="50" cy="50" r="16" />
+                <circle cx="50" cy="34" r="16" />
+                <circle cx="63.8" cy="42" r="16" />
+                <circle cx="63.8" cy="58" r="16" />
+                <circle cx="50" cy="66" r="16" />
+                <circle cx="36.2" cy="58" r="16" />
+                <circle cx="36.2" cy="42" r="16" />
+              </g>
+            </svg>
+          </div>
+          <span className="text-xl font-bold tracking-tight text-white">
+            LEB <span className="text-[#D4AF37] font-black">Systems</span>
+          </span>
+        </div>
+
+        <div className="hidden md:flex items-center gap-8">
+          <a href="#platform" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Platform</a>
+          <a href="#security" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Security</a>
+          <a href="#solutions" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Solutions</a>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <a href="/portal" className="hidden md:block text-sm font-medium text-slate-300 hover:text-white transition-colors">
+            Sign In
+          </a>
+          <a href="/portal" className="px-5 py-2.5 bg-[#D4AF37] hover:bg-[#FFDF00] text-[#010614] text-sm font-bold rounded-md transition-colors duration-300">
+            Start Building
+          </a>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+// ==========================================
+// 3. MAIN PAGE COMPONENT
 // ==========================================
 export default function Home() {
-  const [hasEntered, setHasEntered] = useState(false);
-
   return (
-    <main className="bg-[#010614] min-h-screen selection:bg-[#D4AF37]/30">
-      <AnimatePresence mode="wait">
-        {!hasEntered ? (
-          <EntryPortal key="portal" onEnter={() => setHasEntered(true)} />
-        ) : (
-          <MainSite key="main" />
-        )}
-      </AnimatePresence>
+    <main className="bg-[#010614] min-h-screen text-slate-200 font-sans selection:bg-[#D4AF37]/30">
+      <Navigation />
+
+      {/* SECTION 1: HERO (Dark Mode) */}
+      <section className="relative pt-40 pb-20 md:pt-52 md:pb-32 px-6 overflow-hidden flex flex-col items-center text-center border-b border-white/5">
+        <NodeNetworkBackground />
+        
+        <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 text-[#D4AF37] text-xs font-semibold mb-8"
+          >
+            <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse"></span>
+            Enterprise Grade Architecture
+          </motion.div>
+
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1] mb-6"
+          >
+            Architect the Future of <br className="hidden md:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#FFDF00]">
+              Your Infrastructure
+            </span>
+          </motion.h1>
+
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-lg md:text-xl text-slate-400 max-w-2xl mb-10 leading-relaxed"
+          >
+            Deploy scalable, zero-trust cloud environments and cognitive AI systems. Build interconnected workflows that dominate market sectors without compromising security.
+          </motion.p>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
+          >
+            <button className="w-full sm:w-auto px-8 py-4 bg-white text-[#010614] font-bold text-base rounded-md hover:bg-slate-200 transition-colors flex items-center justify-center gap-2">
+              Deploy Systems <ArrowRight className="w-4 h-4" />
+            </button>
+            <button className="w-full sm:w-auto px-8 py-4 bg-transparent border border-white/20 text-white font-bold text-base rounded-md hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
+              Request Security Audit
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* SECTION 2: SOCIAL PROOF / LOGOS (Dark Mode) */}
+      <section className="py-10 border-b border-white/5 bg-[#010614]">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <p className="text-sm text-slate-500 font-medium mb-8">TRUSTED BY ENGINEERING TEAMS AT FORWARD-THINKING COMPANIES</p>
+          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-50 grayscale">
+            {/* Fake logos represented by text for now */}
+            <span className="text-xl font-black font-serif">AcmeCorp</span>
+            <span className="text-xl font-bold tracking-widest">GLOBAL.NET</span>
+            <span className="text-xl font-bold italic">TechFlow</span>
+            <span className="text-xl font-bold">InnoVate</span>
+            <span className="text-xl font-extrabold">VERTEX</span>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 3: BENTO GRID FEATURES (Light Mode - exactly like n8n structure) */}
+      <section id="platform" className="py-24 bg-white text-slate-900">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">Everything you need to scale securely.</h2>
+            <p className="text-lg text-slate-600">
+              We provide the building blocks for modern enterprise. From custom software APIs to predictive AI nodes, everything integrates seamlessly.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Big Card - Spans 2 columns on desktop */}
+            <div className="md:col-span-2 bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-slate-200 rounded-lg flex items-center justify-center mb-6 text-slate-700">
+                <Server className="w-6 h-6" />
+              </div>
+              <h3 className="text-2xl font-bold mb-3">Infinite Scalability</h3>
+              <p className="text-slate-600 mb-6 max-w-md">
+                Multi-region, high-availability deployments engineered for absolute resilience. Auto-scaling infrastructure that adapts to your traffic spikes in milliseconds.
+              </p>
+              <a href="#" className="inline-flex items-center text-[#B8860B] font-semibold hover:text-[#D4AF37] transition-colors">
+                Explore Architecture <ArrowRight className="w-4 h-4 ml-1" />
+              </a>
+            </div>
+
+            {/* Normal Card */}
+            <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-slate-200 rounded-lg flex items-center justify-center mb-6 text-slate-700">
+                <Shield className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Zero-Trust Security</h3>
+              <p className="text-slate-600">
+                Military-grade perimeter defense. We assume breach and cryptographically secure digital assets from the inside out.
+              </p>
+            </div>
+
+            {/* Normal Card */}
+            <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-slate-200 rounded-lg flex items-center justify-center mb-6 text-slate-700">
+                <Code2 className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Custom Engineering</h3>
+              <p className="text-slate-600">
+                Bespoke software architecture and robust APIs designed to connect your disparate systems perfectly.
+              </p>
+            </div>
+
+            {/* Big Card - Spans 2 columns */}
+            <div className="md:col-span-2 bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-slate-200 rounded-lg flex items-center justify-center mb-6 text-slate-700">
+                <BrainCircuit className="w-6 h-6" />
+              </div>
+              <h3 className="text-2xl font-bold mb-3">Cognitive AI Integration</h3>
+              <p className="text-slate-600 mb-6 max-w-md">
+                Deploy advanced Large Language Models and predictive neural networks to automate complex, logic-based operations at unprecedented scale.
+              </p>
+              <a href="#" className="inline-flex items-center text-[#B8860B] font-semibold hover:text-[#D4AF37] transition-colors">
+                Discover AI Workflows <ArrowRight className="w-4 h-4 ml-1" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4: WORKFLOW / TECHNICAL DEEP DIVE (Dark Mode) */}
+      <section id="security" className="py-24 bg-[#010614] border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-sm font-semibold mb-6">
+              <Lock className="w-4 h-4" /> Secure by Design
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6 text-white">
+              Absolute control over your data.
+            </h2>
+            <p className="text-lg text-slate-400 mb-8">
+              We do not compromise on security. Every deployment is containerized, encrypted at rest, and monitored in real-time by intelligent threat detection algorithms.
+            </p>
+            
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-6 h-6 text-[#D4AF37] flex-shrink-0" />
+                <span className="text-slate-300">Identity Access Management (IAM) built-in.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-6 h-6 text-[#D4AF37] flex-shrink-0" />
+                <span className="text-slate-300">End-to-end 256-bit AES encryption protocols.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-6 h-6 text-[#D4AF37] flex-shrink-0" />
+                <span className="text-slate-300">Continuous vulnerability scanning and automated patching.</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Visual representation of workflow/security */}
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-8 relative overflow-hidden">
+             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-50"></div>
+             
+             <div className="space-y-6 relative z-10">
+                {/* Mock UI Element */}
+                <div className="bg-[#010614] border border-white/10 p-4 rounded-lg flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <Database className="w-5 h-5 text-slate-400" />
+                    <span className="font-mono text-sm text-slate-300">Production_DB_Cluster</span>
+                  </div>
+                  <span className="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Encrypted</span>
+                </div>
+                
+                {/* Connecting Line */}
+                <div className="w-0.5 h-8 bg-white/20 mx-auto"></div>
+
+                {/* Mock UI Element */}
+                <div className="bg-[#010614] border border-white/10 p-4 rounded-lg flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <Workflow className="w-5 h-5 text-slate-400" />
+                    <span className="font-mono text-sm text-slate-300">AI_Logic_Node</span>
+                  </div>
+                  <span className="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Processing</span>
+                </div>
+
+                {/* Connecting Line */}
+                <div className="w-0.5 h-8 bg-white/20 mx-auto"></div>
+
+                {/* Mock UI Element */}
+                <div className="bg-[#010614] border border-[#D4AF37]/50 p-4 rounded-lg flex items-center justify-between shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+                  <div className="flex items-center gap-3">
+                    <Activity className="w-5 h-5 text-[#D4AF37]" />
+                    <span className="font-mono text-sm text-white">Client_Endpoint_API</span>
+                  </div>
+                  <span className="text-xs bg-[#D4AF37]/20 text-[#D4AF37] px-2 py-1 rounded">200 OK</span>
+                </div>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 5: CTA & FOOTER (Dark Mode) */}
+      <section className="border-t border-white/10 bg-[#010614]">
+        {/* Call to Action */}
+        <div className="max-w-4xl mx-auto px-6 py-24 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6">
+            Ready to upgrade your infrastructure?
+          </h2>
+          <p className="text-xl text-slate-400 mb-10">
+            Join the teams building scalable, secure, and intelligent systems with LEB Systems.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <button className="w-full sm:w-auto px-8 py-4 bg-[#D4AF37] text-[#010614] font-bold text-base rounded-md hover:bg-[#FFDF00] transition-colors">
+              Start Building Now
+            </button>
+            <button className="w-full sm:w-auto px-8 py-4 bg-white/5 border border-white/10 text-white font-bold text-base rounded-md hover:bg-white/10 transition-colors">
+              Talk to Engineering
+            </button>
+          </div>
+        </div>
+
+        {/* Real Footer Structure */}
+        <footer className="max-w-7xl mx-auto px-6 py-12 border-t border-white/10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+            <div>
+              <h4 className="font-bold text-white mb-4">Product</h4>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-sm text-slate-400 hover:text-[#D4AF37]">Architecture</a></li>
+                <li><a href="#" className="text-sm text-slate-400 hover:text-[#D4AF37]">Security</a></li>
+                <li><a href="#" className="text-sm text-slate-400 hover:text-[#D4AF37]">AI Workflows</a></li>
+                <li><a href="#" className="text-sm text-slate-400 hover:text-[#D4AF37]">Integrations</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold text-white mb-4">Resources</h4>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-sm text-slate-400 hover:text-[#D4AF37]">Documentation</a></li>
+                <li><a href="#" className="text-sm text-slate-400 hover:text-[#D4AF37]">API Reference</a></li>
+                <li><a href="#" className="text-sm text-slate-400 hover:text-[#D4AF37]">Blog</a></li>
+                <li><a href="#" className="text-sm text-slate-400 hover:text-[#D4AF37]">Community</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold text-white mb-4">Company</h4>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-sm text-slate-400 hover:text-[#D4AF37]">About Us</a></li>
+                <li><a href="#" className="text-sm text-slate-400 hover:text-[#D4AF37]">Careers</a></li>
+                <li><a href="#" className="text-sm text-slate-400 hover:text-[#D4AF37]">Contact Sales</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold text-white mb-4">Legal</h4>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-sm text-slate-400 hover:text-[#D4AF37]">Privacy Policy</a></li>
+                <li><a href="#" className="text-sm text-slate-400 hover:text-[#D4AF37]">Terms of Service</a></li>
+                <li><a href="#" className="text-sm text-slate-400 hover:text-[#D4AF37]">Security Status</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/5">
+            <div className="flex items-center gap-2 mb-4 md:mb-0">
+              <div className="w-5 h-5 text-[#D4AF37]">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g stroke="currentColor" strokeWidth="2">
+                    <circle cx="50" cy="50" r="16" />
+                    <circle cx="50" cy="34" r="16" />
+                    <circle cx="63.8" cy="42" r="16" />
+                    <circle cx="63.8" cy="58" r="16" />
+                    <circle cx="50" cy="66" r="16" />
+                    <circle cx="36.2" cy="58" r="16" />
+                    <circle cx="36.2" cy="42" r="16" />
+                  </g>
+                </svg>
+              </div>
+              <span className="text-sm font-bold text-white">LEB Systems</span>
+            </div>
+            <p className="text-sm text-slate-500">
+              © {new Date().getFullYear()} LEB Systems. All rights reserved.
+            </p>
+          </div>
+        </footer>
+      </section>
     </main>
   );
 }
