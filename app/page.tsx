@@ -5,7 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Shield, Server, Code2, BrainCircuit, ArrowRight, Activity } from "lucide-react";
 import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, Float, ContactShadows, Sparkles } from "@react-three/drei";
+import { Environment, Float, ContactShadows, Sparkles, MeshTransmissionMaterial } from "@react-three/drei";
+import { EffectComposer, Bloom, Noise } from "@react-three/postprocessing";
+import { BlendFunction } from "postprocessing";
 
 // ==========================================
 // CONSTANTS & PALETTE
@@ -20,7 +22,7 @@ const COLORS = {
 };
 
 // ==========================================
-// 1. 3D HOLOGRAM ENGINE (FLOWER OF LIFE)
+// 1. 3D HOLOGRAM ENGINE (CINEMATIC UPGRADE)
 // ==========================================
 const getFlowerOfLifePositions = (radius: number) => {
   const positions: [number, number, number][] = [[0, 0, 0]]; 
@@ -45,80 +47,88 @@ const FLOWER_POSITIONS = getFlowerOfLifePositions(1.2);
 
 const Flower3DModel = ({ isHovered, isSynapsing }: { isHovered: boolean, isSynapsing: boolean }) => {
   const groupRef = useRef<THREE.Group>(null);
-  const materialRef = useRef<THREE.MeshPhysicalMaterial>(null);
   const coreRef = useRef<THREE.Mesh>(null);
+  const instancedMeshRef = useRef<THREE.InstancedMesh>(null);
 
-  // Extremely refined, microscopic scale
-  const [mobileScale, setMobileScale] = useState(0.22);
+  // Escala mucho más pequeña (Micro-Singularity)
+  const [mobileScale, setMobileScale] = useState(0.15);
 
   useEffect(() => {
     const checkMobile = () => {
-      // 0.14 for mobile, 0.22 for desktop
-      setMobileScale(window.innerWidth < 768 ? 0.14 : 0.22);
+      setMobileScale(window.innerWidth < 768 ? 0.10 : 0.15);
     };
     checkMobile(); 
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  useEffect(() => {
+    if (!instancedMeshRef.current) return;
+    const dummy = new THREE.Object3D();
+    FLOWER_POSITIONS.forEach((pos, idx) => {
+      dummy.position.set(pos[0], pos[1], pos[2]);
+      dummy.updateMatrix();
+      instancedMeshRef.current!.setMatrixAt(idx, dummy.matrix);
+    });
+    instancedMeshRef.current.instanceMatrix.needsUpdate = true;
+  }, []);
+
   useFrame((state, delta) => {
-    if (!groupRef.current || !materialRef.current || !coreRef.current) return;
+    if (!groupRef.current || !coreRef.current) return;
+
+    // Mouse Parallax Calculation
+    const targetX = (state.pointer.x * Math.PI) / 4;
+    const targetY = (state.pointer.y * Math.PI) / 4;
 
     if (!isSynapsing) {
-      groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, Math.sin(state.clock.elapsedTime * 0.3) * 0.15, 0.05);
-      groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, state.clock.elapsedTime * 0.15, 0.05);
+      // Rotación orgánica combinada con el movimiento del mouse (Parallax)
+      groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, targetY + Math.sin(state.clock.elapsedTime * 0.2) * 0.15, 0.05);
+      groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetX + state.clock.elapsedTime * 0.15, 0.05);
     } else {
-      groupRef.current.rotation.y += delta * 20;
-      groupRef.current.rotation.x += delta * 8;
-      // Because the base is so small, we multiply by 4.0 during the click transition
-      const targetScale = mobileScale * 4.0; 
-      groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
+      // Hiper-velocidad durante el click
+      groupRef.current.rotation.y += delta * 25;
+      groupRef.current.rotation.x += delta * 12;
+      const targetScale = mobileScale * 8.0; 
+      groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.08);
     }
 
-    const pulse = 1 + Math.sin(state.clock.elapsedTime * 4) * 0.2;
+    // El núcleo central late
+    const pulse = 1 + Math.sin(state.clock.elapsedTime * 4) * 0.3;
     coreRef.current.scale.set(pulse, pulse, pulse);
-
-    const targetEmissive = isSynapsing ? new THREE.Color("#FFFFFF") : isHovered ? new THREE.Color("#FFDF00") : new THREE.Color("#000000");
-    const targetIntensity = isSynapsing ? 10.0 : isHovered ? 2.0 : 0.0;
-    
-    materialRef.current.emissive.lerp(targetEmissive, 0.1);
-    materialRef.current.emissiveIntensity = THREE.MathUtils.lerp(materialRef.current.emissiveIntensity, targetIntensity, 0.1);
   });
 
   return (
     <group ref={groupRef} rotation={[Math.PI / 6, 0, 0]} scale={[mobileScale, mobileScale, mobileScale]}>
-      {FLOWER_POSITIONS.map((pos, idx) => (
-        <mesh key={idx} position={pos}>
-          {/* Maintained torus thickness so it doesn't vanish at small scales */}
-          <torusGeometry args={[1.2, 0.04, 32, 100]} />
-          <meshPhysicalMaterial 
-            ref={idx === 0 ? materialRef : undefined} 
-            color="#D4AF37"
-            metalness={0.9}
-            roughness={0.05}
-            transmission={0.8}
-            thickness={0.5}
-            ior={1.5}
-            clearcoat={1}
-            clearcoatRoughness={0.1}
-            emissive={new THREE.Color("#D4AF37")}
-            emissiveIntensity={0}
-          />
-        </mesh>
-      ))}
+      
+      {/* Geometría instanciada con el nuevo material de Cristal de Refracción */}
+      <instancedMesh ref={instancedMeshRef} args={[null as any, null as any, 19]}>
+        <torusGeometry args={[1.2, 0.04, 16, 64]} />
+        <MeshTransmissionMaterial 
+          background={new THREE.Color(COLORS.obsidian)}
+          color={isSynapsing || isHovered ? COLORS.goldGlow : COLORS.goldBase}
+          transmission={0.95} // 95% de transparencia de cristal
+          thickness={0.5}     // Grosor del cristal para doblar la luz
+          roughness={0.05}
+          chromaticAberration={isSynapsing ? 0.2 : 0.04} // Distorsión de colores en los bordes
+          anisotropy={0.1}
+          distortion={0.0}
+          resolution={256}    // Resolución optimizada para mobile
+        />
+      </instancedMesh>
 
+      {/* Núcleo emisor puro (dispara el Bloom) */}
       <mesh ref={coreRef} position={[0, 0, 0]}>
-        <sphereGeometry args={[0.15, 32, 32]} />
-        <meshBasicMaterial color="#FFDF00" />
+        <sphereGeometry args={[0.15, 16, 16]} />
+        <meshBasicMaterial color={isSynapsing || isHovered ? "#FFFFFF" : COLORS.goldGlow} />
       </mesh>
 
-      <Sparkles count={300} scale={6} size={1.5} speed={0.4} opacity={0.6} color="#D4AF37" />
+      <Sparkles count={200} scale={6} size={2} speed={0.4} opacity={0.6} color={COLORS.goldBase} />
     </group>
   );
 };
 
 // ==========================================
-// 2. ENTRY PORTAL
+// 2. ENTRY PORTAL (WITH POST-PROCESSING)
 // ==========================================
 const EntryPortal = ({ onEnter }: { onEnter: () => void }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -139,16 +149,25 @@ const EntryPortal = ({ onEnter }: { onEnter: () => void }) => {
       <div className="absolute inset-0 z-0 bg-[#010614] pointer-events-none" />
 
       <div className="absolute inset-0 z-10 pointer-events-none">
-        <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+        <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 5], fov: 45 }}>
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 5]} intensity={2} color={COLORS.textLight} />
           <directionalLight position={[-10, -10, -5]} intensity={0.5} color={COLORS.goldBase} />
           <Environment preset="city" />
+          
           <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
             <Flower3DModel isHovered={isHovered} isSynapsing={isSynapsing} />
           </Float>
-          {/* Shadow adjusted for micro scale */}
-          <ContactShadows position={[0, -1.0, 0]} opacity={0.25} scale={8} blur={2} far={4} color={COLORS.goldBase} />
+          
+          <ContactShadows resolution={256} position={[0, -1.0, 0]} opacity={0.25} scale={8} blur={2} far={4} color={COLORS.goldBase} />
+          
+          {/* CINEAMATIC POST-PROCESSING PIPELINE */}
+          <EffectComposer disableNormalPass multisampling={4}>
+            {/* El bloom hace que el núcleo y el cristal brillen ópticamente */}
+            <Bloom luminanceThreshold={0.5} mipmapBlur intensity={isSynapsing ? 5.0 : 1.5} />
+            {/* El ruido le saca el aspecto "plástico" al render */}
+            <Noise opacity={0.025} blendFunction={BlendFunction.OVERLAY} />
+          </EffectComposer>
         </Canvas>
       </div>
 
@@ -166,21 +185,20 @@ const EntryPortal = ({ onEnter }: { onEnter: () => void }) => {
           onMouseLeave={() => setIsHovered(false)}
           onTouchStart={() => setIsHovered(true)} 
           onTouchEnd={() => setIsHovered(false)}
-          // Hitbox is now extremely tight around the new small symbol
           className="relative w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center group focus:outline-none cursor-pointer"
           animate={{ scale: isSynapsing ? 0 : 1 }}
           transition={{ duration: 0.5, ease: APPLE_EASE }}
           style={{ WebkitTapHighlightColor: "transparent" }}
         >
-          <div className="relative z-10 w-1.5 h-1.5 md:w-2 md:h-2 bg-[#D4AF37] rounded-full group-hover:bg-[#FFDF00] group-hover:scale-[2.5] transition-all duration-500 shadow-[0_0_8px_rgba(212,175,55,0.6)] group-hover:shadow-[0_0_20px_rgba(255,223,0,1)]"></div>
+          <div className="relative z-10 w-1 h-1 md:w-1.5 md:h-1.5 bg-[#D4AF37] rounded-full group-hover:bg-[#FFDF00] group-hover:scale-[3] transition-all duration-500 shadow-[0_0_8px_rgba(212,175,55,0.6)] group-hover:shadow-[0_0_20px_rgba(255,223,0,1)]"></div>
           
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: isHovered && !isSynapsing ? 1 : 0, y: isHovered && !isSynapsing ? 0 : 10 }}
             transition={{ duration: 0.4, ease: APPLE_EASE }}
-            className="absolute bottom-[-20px] md:bottom-[-25px] whitespace-nowrap pointer-events-none"
+            className="absolute bottom-[-15px] md:bottom-[-20px] whitespace-nowrap pointer-events-none"
           >
-            <span className="text-[#94A3B8] text-[7px] md:text-[8px] font-bold tracking-[0.4em] uppercase">
+            <span className="text-[#94A3B8] text-[6px] md:text-[7px] font-bold tracking-[0.4em] uppercase">
               Initialize
             </span>
           </motion.div>
@@ -220,9 +238,9 @@ const TopNavigation = () => (
       <a href="#intelligence" className="hover:text-[#F0F0F0] transition-colors duration-300">Intelligence</a>
     </div>
 
-    <button className="px-5 md:px-8 py-2 md:py-3 bg-transparent border border-[#D4AF37]/50 text-[#D4AF37] font-bold text-[8px] md:text-[10px] uppercase tracking-[0.2em] hover:bg-[#D4AF37] hover:text-[#010614] transition-colors duration-500">
+    <a href="/portal" className="px-5 md:px-8 py-2 md:py-3 bg-transparent border border-[#D4AF37]/50 text-[#D4AF37] font-bold text-[8px] md:text-[10px] uppercase tracking-[0.2em] hover:bg-[#D4AF37] hover:text-[#010614] transition-colors duration-500">
       Access Portal
-    </button>
+    </a>
   </nav>
 );
 
@@ -361,7 +379,7 @@ const MainSite = () => {
 };
 
 // ==========================================
-// 4. MASTER ORCHESTRATOR (DEFAULT EXPORT)
+// 4. MASTER ORCHESTRATOR
 // ==========================================
 export default function Home() {
   const [hasEntered, setHasEntered] = useState(false);
