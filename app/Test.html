@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEB Systems - Flor de la Vida</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #05000a; /* Fondo negro con un levísimo tono púrpura */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .text-container {
+            position: absolute;
+            bottom: 15%;
+            z-index: 2;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2.5rem;
+            letter-spacing: 1rem;
+            margin: 0;
+            font-weight: 300;
+            text-transform: uppercase;
+            text-shadow: 
+                0 0 5px rgba(181, 23, 255, 0.5),
+                0 0 15px rgba(181, 23, 255, 0.8),
+                0 0 30px rgba(181, 23, 255, 1);
+            animation: textPulse 3s infinite alternate;
+        }
+
+        @keyframes textPulse {
+            0% { text-shadow: 0 0 5px rgba(181, 23, 255, 0.5), 0 0 15px rgba(181, 23, 255, 0.6), 0 0 25px rgba(181, 23, 255, 0.8); }
+            100% { text-shadow: 0 0 10px rgba(181, 23, 255, 0.8), 0 0 25px rgba(181, 23, 255, 1), 0 0 45px rgba(181, 23, 255, 1); }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas"></canvas>
+    
+    <div class="text-container">
+        <h1>LEB Systems</h1>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+
+        // Configuración de la Flor de la Vida
+        const radius = 40; 
+        const circles = [];
+
+        // Sistema de partículas
+        const particles = [];
+        const particleCount = 100;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            calculateFlowerOfLife();
+        }
+
+        function calculateFlowerOfLife() {
+            circles.length = 0; // Limpiar array
+            const cx = width / 2;
+            const cy = height / 2 - 50; // Desplazado ligeramente hacia arriba para dar espacio al texto
+
+            // Centro
+            circles.push({ x: cx, y: cy });
+
+            // Anillo 1 (6 círculos)
+            for (let i = 0; i < 6; i++) {
+                const angle = i * Math.PI / 3;
+                circles.push({
+                    x: cx + radius * Math.cos(angle),
+                    y: cy + radius * Math.sin(angle)
+                });
+            }
+
+            // Anillo 2 (12 círculos)
+            for (let i = 0; i < 6; i++) {
+                // Círculos en los vértices del hexágono (distancia 2*radius)
+                const angle1 = i * Math.PI / 3;
+                circles.push({
+                    x: cx + 2 * radius * Math.cos(angle1),
+                    y: cy + 2 * radius * Math.sin(angle1)
+                });
+
+                // Círculos entre los vértices (distancia radius * sqrt(3))
+                const angle2 = angle1 + Math.PI / 6;
+                const dist = radius * Math.sqrt(3);
+                circles.push({
+                    x: cx + dist * Math.cos(angle2),
+                    y: cy + dist * Math.sin(angle2)
+                });
+            }
+        }
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                const cx = width / 2;
+                const cy = height / 2 - 50;
+                
+                // Distribuir partículas en un área elíptica alrededor de la flor
+                const angle = Math.random() * Math.PI * 2;
+                const r = Math.random() * 250;
+                
+                this.x = cx + r * Math.cos(angle) * 1.5;
+                this.y = cy + r * Math.sin(angle) * 0.5;
+                
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.life = 0;
+                this.maxLife = Math.random() * 150 + 50;
+                this.opacity = 0;
+                // Colores entre púrpura, azulado y blanco
+                const colors = ['#b517ff', '#6a00ff', '#ffffff', '#ff99ff'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.life++;
+
+                if (this.life < this.maxLife / 2) {
+                    this.opacity = this.life / (this.maxLife / 2);
+                } else {
+                    this.opacity = 1 - ((this.life - this.maxLife / 2) / (this.maxLife / 2));
+                }
+
+                if (this.life >= this.maxLife) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+                ctx.globalAlpha = 1; // Restaurar alpha
+            }
+        }
+
+        function initParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function drawGlowEffect(time) {
+            const cx = width / 2;
+            const cy = height / 2 - 50;
+
+            // Halo elíptico de fondo
+            const pulse = Math.sin(time * 0.002) * 0.2 + 0.8;
+            
+            const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, 300);
+            gradient.addColorStop(0, `rgba(181, 23, 255, ${0.15 * pulse})`);
+            gradient.addColorStop(0.5, `rgba(80, 0, 200, ${0.05 * pulse})`);
+            gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+
+            // Línea horizontal estilo lente
+            ctx.beginPath();
+            ctx.ellipse(cx, cy, width * 0.4, 3, 0, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(181, 23, 255, ${0.3 * pulse})`;
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = '#b517ff';
+            ctx.fill();
+        }
+
+        function drawFlower(time) {
+            const pulse = Math.sin(time * 0.003) * 0.3 + 0.7; // Brillo oscilante
+
+            ctx.lineWidth = 1.5;
+            ctx.strokeStyle = `rgba(224, 170, 255, ${0.8 * pulse})`;
+            ctx.shadowBlur = 20 * pulse;
+            ctx.shadowColor = '#b517ff';
+
+            ctx.globalCompositeOperation = 'screen';
+
+            // Dibujar los 19 círculos de la Flor de la Vida
+            circles.forEach(circle => {
+                ctx.beginPath();
+                ctx.arc(circle.x, circle.y, radius, 0, Math.PI * 2);
+                ctx.stroke();
+            });
+
+            // Dibujar el círculo exterior grande que encierra el patrón
+            ctx.beginPath();
+            ctx.arc(width / 2, height / 2 - 50, radius * 3, 0, Math.PI * 2);
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = `rgba(181, 23, 255, ${0.9 * pulse})`;
+            ctx.stroke();
+
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.shadowBlur = 0;
+        }
+
+        function animate(time) {
+            ctx.clearRect(0, 0, width, height);
+
+            drawGlowEffect(time);
+            drawFlower(time);
+
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        // Inicializar
+        window.addEventListener('resize', resize);
+        resize();
+        initParticles();
+        requestAnimationFrame(animate);
+
+    </script>
+</body>
+</html>
