@@ -158,14 +158,14 @@ export default function FlowerOfLife() {
           className="flex flex-col sm:flex-row items-center gap-4"
         >
           <a
-            href="#"
+            href="/contact"
             className="flex items-center gap-2 px-7 py-3.5 bg-[#FF4F27] hover:bg-[#FF6B00] text-white font-semibold rounded-lg transition-all shadow-[0_0_30px_rgba(255,79,39,0.45)] hover:shadow-[0_0_45px_rgba(255,79,39,0.6)] group"
           >
             Start your project
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
           <a
-            href="#"
+            href="/services"
             className="flex items-center gap-2 px-7 py-3.5 border border-white/15 hover:border-white/30 text-white font-medium rounded-lg transition-all hover:bg-white/5 group"
           >
             <Play className="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" />

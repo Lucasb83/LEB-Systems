@@ -68,7 +68,7 @@ export default function MoveFastSection() {
           </div>
 
           <a
-            href="#"
+            href="/ai-automation#automation"
             className="inline-flex items-center gap-2 px-6 py-3 bg-[#23242D] border border-white/10 hover:border-[#9333EA]/50 text-white text-sm font-medium rounded-lg transition-colors group"
           >
             Explore automation solutions

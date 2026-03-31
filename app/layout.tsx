@@ -6,8 +6,17 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "LEB Systems | Enterprise IT Infrastructure",
-  description: "Advanced engineering, zero-trust security, and cognitive AI deployments.",
+  title: {
+    default: "LEB Systems — Infrastructure, AI & Custom Software",
+    template: "%s | LEB Systems",
+  },
+  description: "We design, build, and automate the digital stack that lets your business scale — from enterprise infrastructure to intelligent AI agents and custom applications.",
+  keywords: ["infrastructure development", "web design", "AI implementation", "process automation", "custom applications", "LEB Systems"],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "LEB Systems",
+  },
 };
 
 export default function RootLayout({
@@ -17,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} bg-[#010614] text-slate-200 antialiased overflow-x-hidden`}>
+      <body className={`${inter.className} bg-[#0e0918] text-slate-200 antialiased overflow-x-hidden`}>
         {children}
       </body>
     </html>

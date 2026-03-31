@@ -46,7 +46,7 @@ export default function BentoGrid() {
               Multi-region, cloud-native or on-prem — we architect resilient systems with Kubernetes,
               Docker, zero-trust networking, and full CI/CD pipelines. No lock-in, full control.
             </p>
-            <a href="#" className="inline-flex items-center gap-2 text-sm text-white font-medium px-5 py-2.5 bg-[#23242D] border border-white/10 group-hover:border-[#FF4F27]/40 rounded-lg transition-colors w-fit">
+            <a href="/services#infrastructure" className="inline-flex items-center gap-2 text-sm text-white font-medium px-5 py-2.5 bg-[#23242D] border border-white/10 group-hover:border-[#FF4F27]/40 rounded-lg transition-colors w-fit">
               Explore Infrastructure <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>

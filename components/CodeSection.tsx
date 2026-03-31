@@ -54,7 +54,7 @@ export default function CodeSection() {
             ))}
           </ul>
           <a
-            href="#"
+            href="/ai-automation"
             className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF4F27] hover:bg-[#FF6B00] text-white font-semibold rounded-lg transition-all shadow-[0_0_25px_rgba(255,79,39,0.4)] group"
           >
             Explore AI solutions <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

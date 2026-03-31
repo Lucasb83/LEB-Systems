@@ -2,168 +2,150 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Lock, User, KeyRound, Terminal, ShieldAlert, ArrowLeft } from "lucide-react";
+import { Lock, User, KeyRound, ShieldAlert, ArrowLeft, Eye, EyeOff } from "lucide-react";
 
-// ==========================================
-// CONSTANTS & PALETTE
-// ==========================================
-const APPLE_EASE = [0.22, 1, 0.36, 1] as const;
+const EASE = [0.22, 1, 0.36, 1] as const;
 
-export default function AccessPortal() {
+export default function PortalPage() {
   const [authId, setAuthId] = useState("");
   const [authKey, setAuthKey] = useState("");
+  const [showKey, setShowKey] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [authStep, setAuthStep] = useState(0);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (!authId || !authKey) return;
-    
     setIsAuthenticating(true);
-    
-    // Simulate cryptographic verification sequence
-    setTimeout(() => setAuthStep(1), 800);
-    setTimeout(() => setAuthStep(2), 1600);
-    setTimeout(() => setAuthStep(3), 2800);
-    setTimeout(() => {
-      // Here is where you would integrate NextAuth, Supabase, or your backend
-      window.location.href = "/"; // Redirect back home for now
-    }, 3500);
+    setTimeout(() => setAuthStep(1), 700);
+    setTimeout(() => setAuthStep(2), 1400);
+    setTimeout(() => setAuthStep(3), 2400);
+    setTimeout(() => { window.location.href = "/"; }, 3000);
   };
 
   return (
-    <main className="min-h-screen bg-[#010614] text-[#F0F0F0] font-sans selection:bg-[#D4AF37]/30 flex flex-col relative overflow-hidden">
-      
-      {/* Deep Tech Background Noise */}
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_top_right,rgba(212,175,55,0.03)_0%,transparent_60%)] pointer-events-none" />
-      <div className="absolute inset-0 z-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] mix-blend-overlay pointer-events-none" />
+    <main className="min-h-screen bg-[#0e0918] text-slate-200 font-sans flex flex-col relative overflow-hidden">
 
-      {/* Top Navigation Minimal */}
-      <nav className="relative z-10 w-full flex items-center justify-between px-6 md:px-12 py-8">
-        <a href="/" className="flex items-center gap-3 text-[#94A3B8] hover:text-[#D4AF37] transition-colors duration-300 group">
+      {/* Background dot grid */}
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+
+      {/* Glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-[#FF4F27] blur-[200px] opacity-8 pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[250px] rounded-full bg-[#9333EA] blur-[150px] opacity-10 pointer-events-none" />
+
+      {/* Nav */}
+      <nav className="relative z-10 w-full flex items-center justify-between px-6 md:px-12 py-7">
+        <a href="/" className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group">
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          <span className="text-[10px] font-bold tracking-[0.2em] uppercase">Abort & Return</span>
+          <span className="text-xs font-medium tracking-wide">Back to site</span>
         </a>
-        
-        <div className="flex items-center gap-3">
-          <div className="w-6 h-6 text-[#D4AF37]">
-            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g stroke="currentColor" strokeWidth="1.5">
-                <circle cx="50" cy="50" r="16" />
-                <circle cx="50" cy="34" r="16" />
-                <circle cx="63.8" cy="42" r="16" />
-                <circle cx="63.8" cy="58" r="16" />
-                <circle cx="50" cy="66" r="16" />
-                <circle cx="36.2" cy="58" r="16" />
-                <circle cx="36.2" cy="42" r="16" />
-              </g>
-            </svg>
+        <a href="/" className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#FF4F27] to-[#FF6B00] flex items-center justify-center shadow-[0_0_14px_rgba(255,79,39,0.5)]">
+            <span className="text-white font-bold text-xs">L</span>
           </div>
-          <span className="text-sm font-black tracking-[0.2em] text-[#F0F0F0] uppercase">LEB <span className="text-[#D4AF37]">SYS</span></span>
-        </div>
+          <span className="text-white font-semibold text-sm tracking-tight">LEB Systems</span>
+        </a>
       </nav>
 
-      {/* Login Interface */}
+      {/* Form area */}
       <div className="flex-1 flex items-center justify-center p-6 relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: APPLE_EASE }}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: EASE }}
           className="w-full max-w-md"
         >
-          {/* Header */}
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#D4AF37]/5 border border-[#D4AF37]/20 mb-6 relative">
-              <Lock className="w-6 h-6 text-[#D4AF37]" />
-              {isAuthenticating && (
-                <motion.div 
-                  className="absolute inset-0 rounded-full border border-[#D4AF37]"
-                  animate={{ scale: [1, 1.5], opacity: [1, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
-                />
-              )}
-            </div>
-            <h1 className="text-2xl md:text-3xl font-black tracking-tighter uppercase mb-2 text-white">
-              Restricted <span className="text-[#D4AF37]">Area</span>
-            </h1>
-            <p className="text-[#94A3B8] text-[10px] md:text-xs tracking-[0.2em] uppercase font-bold">
-              Level 5 Clearance Required
-            </p>
-          </div>
+          {/* Card */}
+          <div className="bg-[#14151A] border border-white/8 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-[#FF4F27]/40 to-transparent" />
 
-          {/* Form */}
-          <form onSubmit={handleLogin} className="space-y-6">
-            <div className="space-y-4">
+            {/* Header */}
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#FF4F27]/10 border border-[#FF4F27]/20 mb-5 relative">
+                <Lock className="w-6 h-6 text-[#FF4F27]" />
+                {isAuthenticating && (
+                  <motion.div className="absolute inset-0 rounded-2xl border border-[#FF4F27]"
+                    animate={{ scale: [1, 1.4], opacity: [0.8, 0] }}
+                    transition={{ duration: 1.2, repeat: Infinity, ease: "easeOut" }} />
+                )}
+              </div>
+              <h1 className="text-2xl font-bold text-white tracking-tight mb-1.5">Client Portal</h1>
+              <p className="text-slate-500 text-sm font-light">Sign in to access your project dashboard</p>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleLogin} className="space-y-4">
               <div className="relative group">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
-                  <User className="w-4 h-4 text-[#94A3B8] group-focus-within:text-[#D4AF37] transition-colors" />
-                </div>
-                <input 
-                  type="text" 
-                  disabled={isAuthenticating}
-                  value={authId}
-                  onChange={(e) => setAuthId(e.target.value)}
-                  className="w-full bg-[#010614] border border-white/10 text-white text-sm focus:ring-1 focus:ring-[#D4AF37] focus:border-[#D4AF37] block pl-12 p-4 transition-all duration-300 outline-none placeholder-[#94A3B8]/50 disabled:opacity-50 font-mono tracking-widest" 
-                  placeholder="AUTHORIZATION ID" 
-                  required 
+                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600 group-focus-within:text-[#FF4F27] transition-colors" />
+                <input
+                  type="text" required disabled={isAuthenticating}
+                  value={authId} onChange={(e) => setAuthId(e.target.value)}
+                  placeholder="Email address"
+                  className="w-full bg-[#0e0918] border border-white/8 text-white text-sm rounded-xl pl-11 pr-4 py-3.5 outline-none focus:border-[#FF4F27]/60 focus:shadow-[0_0_0_3px_rgba(255,79,39,0.1)] transition-all placeholder:text-slate-600 disabled:opacity-50"
                 />
               </div>
 
               <div className="relative group">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
-                  <KeyRound className="w-4 h-4 text-[#94A3B8] group-focus-within:text-[#D4AF37] transition-colors" />
-                </div>
-                <input 
-                  type="password" 
-                  disabled={isAuthenticating}
-                  value={authKey}
-                  onChange={(e) => setAuthKey(e.target.value)}
-                  className="w-full bg-[#010614] border border-white/10 text-white text-sm focus:ring-1 focus:ring-[#D4AF37] focus:border-[#D4AF37] block pl-12 p-4 transition-all duration-300 outline-none placeholder-[#94A3B8]/50 disabled:opacity-50 font-mono tracking-widest" 
-                  placeholder="CRYPTOGRAPHIC KEY" 
-                  required 
+                <KeyRound className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600 group-focus-within:text-[#FF4F27] transition-colors" />
+                <input
+                  type={showKey ? "text" : "password"} required disabled={isAuthenticating}
+                  value={authKey} onChange={(e) => setAuthKey(e.target.value)}
+                  placeholder="Password"
+                  className="w-full bg-[#0e0918] border border-white/8 text-white text-sm rounded-xl pl-11 pr-11 py-3.5 outline-none focus:border-[#FF4F27]/60 focus:shadow-[0_0_0_3px_rgba(255,79,39,0.1)] transition-all placeholder:text-slate-600 disabled:opacity-50"
                 />
+                <button type="button" onClick={() => setShowKey(!showKey)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-600 hover:text-slate-400 transition-colors">
+                  {showKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
               </div>
-            </div>
 
-            <button 
-              type="submit" 
-              disabled={isAuthenticating}
-              className="w-full relative px-6 py-4 bg-[#F0F0F0] text-[#010614] font-black text-[10px] md:text-xs tracking-[0.2em] uppercase hover:bg-[#D4AF37] transition-colors duration-500 disabled:bg-white/5 disabled:text-[#94A3B8] overflow-hidden group"
-            >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                {isAuthenticating ? "Authenticating..." : "Initialize Handshake"}
-              </span>
-            </button>
-          </form>
+              <div className="flex items-center justify-between text-xs">
+                <label className="flex items-center gap-2 text-slate-500 cursor-pointer">
+                  <input type="checkbox" className="accent-[#FF4F27] w-3.5 h-3.5" />
+                  Remember me
+                </label>
+                <a href="#" className="text-[#FF4F27] hover:text-[#FF6B00] transition-colors font-medium">Forgot password?</a>
+              </div>
 
-          {/* Terminal Output Sequence */}
-          <div className="mt-8 h-32 bg-black/50 border border-white/5 p-4 font-mono text-[9px] md:text-[10px] text-[#94A3B8] overflow-hidden flex flex-col justify-end">
-            <div className="space-y-1">
-              {!isAuthenticating && (
-                <p>&gt; Awaiting credentials...</p>
-              )}
+              <button type="submit" disabled={isAuthenticating}
+                className="w-full flex items-center justify-center gap-2 py-3.5 bg-[#FF4F27] hover:bg-[#FF6B00] disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold text-sm rounded-xl transition-all shadow-[0_0_20px_rgba(255,79,39,0.35)] mt-2">
+                {isAuthenticating ? (
+                  <>
+                    <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full" />
+                    Authenticating...
+                  </>
+                ) : "Sign in to portal"}
+              </button>
+            </form>
+
+            {/* Terminal */}
+            <div className="mt-6 bg-[#0e0918] border border-white/5 rounded-xl p-4 font-mono text-[10px] text-slate-500 h-20 flex flex-col justify-end overflow-hidden">
+              {!isAuthenticating && <p>&gt; Awaiting authentication...</p>}
               {isAuthenticating && (
                 <>
-                  <p className="text-[#F0F0F0]">&gt; Requesting secure handshake...</p>
-                  {authStep >= 1 && <p>&gt; Verifying Authorization ID...</p>}
-                  {authStep >= 2 && <p>&gt; Decrypting key packets... <span className="text-[#D4AF37]">[OK]</span></p>}
-                  {authStep >= 3 && <p className="text-[#D4AF37]">&gt; ACCESS GRANTED. Routing...</p>}
-                  <motion.div 
-                    animate={{ opacity: [1, 0] }} 
-                    transition={{ repeat: Infinity, duration: 0.8 }}
-                    className="w-2 h-3 bg-[#D4AF37] mt-1"
-                  />
+                  <p className="text-slate-300">&gt; Initialising secure session...</p>
+                  {authStep >= 1 && <p>&gt; Verifying credentials...</p>}
+                  {authStep >= 2 && <p className="text-emerald-400">&gt; Session token issued. <span className="text-emerald-500">[OK]</span></p>}
+                  {authStep >= 3 && <p className="text-[#FF4F27]">&gt; Redirecting to dashboard...</p>}
+                  <motion.div animate={{ opacity: [1, 0] }} transition={{ repeat: Infinity, duration: 0.8 }}
+                    className="w-2 h-3 bg-[#FF4F27] mt-1" />
                 </>
               )}
             </div>
+
+            <p className="text-center text-xs text-slate-600 mt-5">
+              Not a client yet?{" "}
+              <a href="/contact" className="text-[#FF4F27] hover:text-[#FF6B00] transition-colors font-medium">Start a project</a>
+            </p>
           </div>
         </motion.div>
       </div>
 
-      {/* Footer Banner */}
-      <div className="relative z-10 w-full bg-[#D4AF37]/5 border-t border-[#D4AF37]/20 py-3 flex items-center justify-center gap-2 text-[8px] md:text-[9px] font-bold tracking-[0.3em] uppercase text-[#D4AF37]">
+      {/* Footer bar */}
+      <div className="relative z-10 w-full bg-[#FF4F27]/5 border-t border-[#FF4F27]/10 py-3 flex items-center justify-center gap-2 text-[9px] font-medium tracking-widest uppercase text-[#FF4F27]/70">
         <ShieldAlert className="w-3 h-3" />
-        <span>Unauthorized access is strictly prohibited and logged</span>
+        <span>Unauthorised access is strictly prohibited and logged</span>
       </div>
     </main>
   );

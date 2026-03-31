@@ -1,0 +1,264 @@
+"use client";
+
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Mail, MapPin, Clock, ArrowRight, Check,
+  MessageSquare, User, Building2, ChevronDown,
+} from "lucide-react";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: (d = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay: d * 0.1, ease: [0.16, 1, 0.3, 1] as const } }),
+};
+
+const services = [
+  "Infrastructure Development",
+  "Web Design",
+  "AI Implementation",
+  "Process Automation",
+  "Custom Application",
+  "Not sure yet — help me decide",
+];
+
+const budgets = [
+  "< $5,000",
+  "$5,000 – $15,000",
+  "$15,000 – $50,000",
+  "$50,000 – $150,000",
+  "$150,000+",
+];
+
+const contactInfo = [
+  { icon: <Mail className="w-5 h-5 text-[#FF4F27]" />, label: "Email", value: "hello@lebsystems.com" },
+  { icon: <Clock className="w-5 h-5 text-[#9333EA]" />, label: "Response time", value: "Within 24 hours" },
+  { icon: <MapPin className="w-5 h-5 text-[#EC4899]" />, label: "Operating", value: "LATAM & Europe" },
+];
+
+export default function ContactPage() {
+  const [form, setForm] = useState({ name: "", email: "", company: "", service: "", budget: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setTimeout(() => { setLoading(false); setSubmitted(true); }, 1500);
+  };
+
+  const handleChange = (field: string, value: string) => setForm((p) => ({ ...p, [field]: value }));
+
+  const inputBase = "w-full bg-[#14151A] border border-white/8 text-white text-sm rounded-xl px-4 py-3.5 outline-none focus:border-[#FF4F27]/60 focus:shadow-[0_0_0_3px_rgba(255,79,39,0.1)] transition-all placeholder:text-slate-600 appearance-none";
+
+  return (
+    <main className="min-h-screen bg-[#0e0918] text-slate-300 overflow-x-hidden">
+      <Navbar />
+
+      {/* Hero */}
+      <section className="relative pt-36 pb-16 px-6 flex flex-col items-center text-center overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "32px 32px", maskImage: "radial-gradient(ellipse 80% 50% at 50% 40%, black 40%, transparent 100%)" }} />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] rounded-full bg-[#FF4F27] blur-[160px] opacity-8 pointer-events-none" />
+
+        <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible"
+          className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300 font-medium">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#FF4F27] shadow-[0_0_6px_#FF4F27]" />
+          Get in touch
+        </motion.div>
+
+        <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="visible"
+          className="text-5xl md:text-6xl font-bold text-white tracking-tight mb-5 leading-tight">
+          Let's build something{" "}
+          <span className="bg-gradient-to-r from-[#FF4F27] via-[#FF9B26] to-[#FF4F27] bg-clip-text text-transparent">
+            great together.
+          </span>
+        </motion.h1>
+
+        <motion.p custom={2} variants={fadeUp} initial="hidden" animate="visible"
+          className="text-lg text-slate-400 font-light max-w-xl leading-relaxed">
+          Tell us about your project. We'll get back to you within 24 hours with a clear path forward.
+        </motion.p>
+      </section>
+
+      {/* Main content */}
+      <section className="py-8 px-6 relative z-10 pb-20">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-5 gap-10">
+
+          {/* Left info panel */}
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
+            className="lg:col-span-2 flex flex-col gap-6">
+
+            {/* Contact info */}
+            <div className="bg-[#14151A] border border-white/5 rounded-3xl p-8">
+              <h3 className="text-white font-bold text-lg mb-6">Contact information</h3>
+              <div className="space-y-5">
+                {contactInfo.map((item) => (
+                  <div key={item.label} className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/8 flex items-center justify-center flex-shrink-0">
+                      {item.icon}
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-500 font-medium">{item.label}</p>
+                      <p className="text-white text-sm font-medium">{item.value}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* What to expect */}
+            <div className="bg-[#14151A] border border-white/5 rounded-3xl p-8">
+              <h3 className="text-white font-bold text-lg mb-6">What happens next?</h3>
+              <div className="space-y-5">
+                {[
+                  { step: "1", title: "We review your request", desc: "Within 24h we read every detail and prepare questions." },
+                  { step: "2", title: "Discovery call", desc: "30 minutes — we listen, ask, and align on the goal." },
+                  { step: "3", title: "Tailored proposal", desc: "A clear scope, timeline, and fixed price. No surprises." },
+                ].map((item) => (
+                  <div key={item.step} className="flex gap-4">
+                    <div className="w-7 h-7 rounded-full bg-[#FF4F27]/15 border border-[#FF4F27]/25 flex items-center justify-center text-xs font-bold text-[#FF4F27] flex-shrink-0">
+                      {item.step}
+                    </div>
+                    <div>
+                      <p className="text-white text-sm font-semibold mb-0.5">{item.title}</p>
+                      <p className="text-slate-400 text-xs font-light">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Social proof */}
+            <div className="bg-gradient-to-br from-[#FF4F27]/10 to-[#14151A] border border-[#FF4F27]/15 rounded-3xl p-8 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-[#FF4F27]/10 blur-[60px] pointer-events-none rounded-full" />
+              <p className="text-slate-300 text-sm italic font-light leading-relaxed mb-5 relative z-10">
+                "LEB Systems took our fragmented tech stack and turned it into a coherent system that actually scales. The level of technical depth and communication throughout was unlike any vendor we've worked with."
+              </p>
+              <div className="flex items-center gap-3 relative z-10">
+                <div className="w-8 h-8 rounded-full bg-[#FF4F27]/20 border border-[#FF4F27]/30 flex items-center justify-center text-xs font-bold text-[#FF4F27]">M</div>
+                <div>
+                  <p className="text-white text-xs font-semibold">Marco V.</p>
+                  <p className="text-slate-500 text-xs">CTO, FinTech Startup</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right form panel */}
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
+            className="lg:col-span-3">
+            <div className="bg-[#14151A] border border-white/5 rounded-3xl p-8 md:p-10">
+              {submitted ? (
+                <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
+                  className="flex flex-col items-center text-center py-12">
+                  <div className="w-16 h-16 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mb-6">
+                    <Check className="w-7 h-7 text-emerald-400" />
+                  </div>
+                  <h3 className="text-white font-bold text-2xl mb-3">Message received!</h3>
+                  <p className="text-slate-400 font-light leading-relaxed max-w-sm">
+                    Thanks for reaching out. We'll review your project details and get back to you within 24 hours.
+                  </p>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <h3 className="text-white font-bold text-xl mb-6">Tell us about your project</h3>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className="text-xs text-slate-400 font-medium mb-2 block">Your name *</label>
+                      <div className="relative">
+                        <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600" />
+                        <input type="text" required placeholder="John Smith" value={form.name}
+                          onChange={(e) => handleChange("name", e.target.value)}
+                          className={`${inputBase} pl-10`} />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="text-xs text-slate-400 font-medium mb-2 block">Work email *</label>
+                      <div className="relative">
+                        <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600" />
+                        <input type="email" required placeholder="john@company.com" value={form.email}
+                          onChange={(e) => handleChange("email", e.target.value)}
+                          className={`${inputBase} pl-10`} />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-xs text-slate-400 font-medium mb-2 block">Company</label>
+                    <div className="relative">
+                      <Building2 className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600" />
+                      <input type="text" placeholder="Your company name" value={form.company}
+                        onChange={(e) => handleChange("company", e.target.value)}
+                        className={`${inputBase} pl-10`} />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className="text-xs text-slate-400 font-medium mb-2 block">Service needed *</label>
+                      <div className="relative">
+                        <select required value={form.service}
+                          onChange={(e) => handleChange("service", e.target.value)}
+                          className={`${inputBase} cursor-pointer`}>
+                          <option value="" disabled>Select a service</option>
+                          {services.map((s) => <option key={s} value={s}>{s}</option>)}
+                        </select>
+                        <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600 pointer-events-none" />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="text-xs text-slate-400 font-medium mb-2 block">Budget range</label>
+                      <div className="relative">
+                        <select value={form.budget}
+                          onChange={(e) => handleChange("budget", e.target.value)}
+                          className={`${inputBase} cursor-pointer`}>
+                          <option value="">Select budget</option>
+                          {budgets.map((b) => <option key={b} value={b}>{b}</option>)}
+                        </select>
+                        <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600 pointer-events-none" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-xs text-slate-400 font-medium mb-2 block">Tell us about your project *</label>
+                    <div className="relative">
+                      <MessageSquare className="absolute left-3.5 top-3.5 w-4 h-4 text-slate-600" />
+                      <textarea required rows={5} value={form.message}
+                        onChange={(e) => handleChange("message", e.target.value)}
+                        placeholder="Describe what you're trying to build or solve. The more context, the better we can help."
+                        className={`${inputBase} pl-10 resize-none`} />
+                    </div>
+                  </div>
+
+                  <button type="submit" disabled={loading}
+                    className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-[#FF4F27] hover:bg-[#FF6B00] disabled:opacity-70 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all shadow-[0_0_25px_rgba(255,79,39,0.35)] hover:shadow-[0_0_40px_rgba(255,79,39,0.5)] group">
+                    {loading ? (
+                      <>
+                        <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                          className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        Send message <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
+                  </button>
+
+                  <p className="text-xs text-slate-500 text-center font-light">
+                    By submitting this form you agree to our Privacy Policy. We never share your data.
+                  </p>
+                </form>
+              )}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <Footer />
+    </main>
+  );
+}

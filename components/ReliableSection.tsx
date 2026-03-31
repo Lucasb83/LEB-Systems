@@ -49,14 +49,14 @@ export default function ReliableSection() {
 
           <div className="flex flex-wrap gap-4 mb-12">
             <a
-              href="#"
+              href="/solutions"
               className="flex items-center gap-2 px-6 py-3 bg-[#23242D] border border-white/10 hover:border-[#FF4F27]/40 text-white text-sm font-medium rounded-lg transition-colors group"
             >
               Explore enterprise plans
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </a>
             <a
-              href="#"
+              href="/contact"
               className="flex items-center gap-2 px-6 py-3 text-slate-300 hover:text-white text-sm font-medium rounded-lg transition-colors border border-transparent hover:border-white/10"
             >
               Talk to us
