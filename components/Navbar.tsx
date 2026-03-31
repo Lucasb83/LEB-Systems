@@ -3,6 +3,53 @@
 import React, { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+
+const miniCircles = [
+  { id: "c", cx: 0, cy: 0 },
+  { id: "r1", cx: 27, cy: 0 },
+  { id: "r2", cx: 13.5, cy: 23.383 },
+  { id: "r3", cx: -13.5, cy: 23.383 },
+  { id: "r4", cx: -27, cy: 0 },
+  { id: "r5", cx: -13.5, cy: -23.383 },
+  { id: "r6", cx: 13.5, cy: -23.383 },
+];
+
+function FlowerLogo({ size = 32 }: { size?: number }) {
+  const inner = size * 0.75;
+  return (
+    <div
+      className="rounded-full bg-[#0d0b1a] flex items-center justify-center overflow-hidden"
+      style={{ width: size, height: size, boxShadow: "0 0 14px rgba(147,51,234,0.55)" }}
+    >
+      <svg
+        viewBox="-55 -55 110 110"
+        style={{ width: inner, height: inner, filter: "drop-shadow(0px 0px 4px rgba(168,85,247,0.9)) drop-shadow(0px 0px 10px rgba(147,51,234,0.5))" }}
+      >
+        {miniCircles.map((c, i) => (
+          <motion.circle
+            key={c.id}
+            cx={c.cx}
+            cy={c.cy}
+            r="27"
+            fill="none"
+            stroke="#e9d5ff"
+            strokeWidth="1.8"
+            initial={{ opacity: 0.15 }}
+            animate={{ opacity: [0.15, 0.9, 0.15] }}
+            transition={{ duration: 3.5, repeat: Infinity, delay: i * 0.1, ease: "easeInOut" }}
+          />
+        ))}
+        <motion.circle
+          cx="0" cy="0" r="50"
+          fill="none" stroke="#d8b4fe" strokeWidth="1.5"
+          animate={{ opacity: [0.3, 0.75, 0.3] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </svg>
+    </div>
+  );
+}
 
 const services = [
   { label: "Infrastructure Development", desc: "Cloud, on-prem, Kubernetes & Docker", href: "/services#infrastructure" },
@@ -76,8 +123,8 @@ export default function Navbar() {
 
           {/* Logo */}
           <a href="/" className="flex items-center gap-3 group flex-shrink-0">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#FF4F27] to-[#FF6B00] flex items-center justify-center shadow-[0_0_18px_rgba(255,79,39,0.45)] group-hover:scale-105 transition-transform">
-              <span className="text-white font-bold text-xs">L</span>
+            <div className="group-hover:scale-105 transition-transform">
+              <FlowerLogo size={32} />
             </div>
             <span className="text-white font-semibold text-base tracking-tight">LEB Systems</span>
           </a>
@@ -171,9 +218,7 @@ export default function Navbar() {
           {/* Panel header */}
           <div className="flex items-center justify-between px-6 py-5 border-b border-white/5">
             <a href="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#FF4F27] to-[#FF6B00] flex items-center justify-center">
-                <span className="text-white font-bold text-xs">L</span>
-              </div>
+              <FlowerLogo size={28} />
               <span className="text-white font-semibold text-sm">LEB Systems</span>
             </a>
             <button onClick={() => setMobileOpen(false)} className="text-slate-400 hover:text-white p-1">

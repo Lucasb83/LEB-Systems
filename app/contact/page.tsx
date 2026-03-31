@@ -32,9 +32,9 @@ const budgets = [
 ];
 
 const contactInfo = [
-  { icon: <Mail className="w-5 h-5 text-[#FF4F27]" />, label: "Email", value: "hello@lebsystems.com" },
+  { icon: <Mail className="w-5 h-5 text-[#FF4F27]" />, label: "Email", value: "lebsystems.flow@gmail.com" },
   { icon: <Clock className="w-5 h-5 text-[#9333EA]" />, label: "Response time", value: "Within 24 hours" },
-  { icon: <MapPin className="w-5 h-5 text-[#EC4899]" />, label: "Operating", value: "LATAM & Europe" },
+  { icon: <MapPin className="w-5 h-5 text-[#EC4899]" />, label: "Operating", value: "Pacific & Europe" },
 ];
 
 export default function ContactPage() {
