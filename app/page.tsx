@@ -2,7 +2,7 @@
 
 import React from "react";
 import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
+import FlowerOfLife from "../components/FlowerOfLife";
 import Marquee from "../components/Marquee";
 import BentoGrid from "../components/BentoGrid";
 import CodeSection from "../components/CodeSection";
@@ -12,9 +12,9 @@ import Footer from "../components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0B0B10] text-slate-300 font-sans selection:bg-[#F472B6]/30 overflow-x-hidden">
+    <main className="min-h-screen bg-[#0e0918] text-slate-300 font-sans selection:bg-[#FF4F27]/20 overflow-x-hidden">
       <Navbar />
-      <Hero />
+      <FlowerOfLife />
       <Marquee />
       <BentoGrid />
       <CodeSection />
