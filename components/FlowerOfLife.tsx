@@ -1,45 +1,28 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 
+/*
+  Hero logo geometry — viewBox="0 0 200 200", centre=(100,100).
+  L bounding box: x 68→145, y 50→148  (optical centre ≈ 102,99).
+  All primary nodes (r=6) stay within r≈68 from centre → clear of
+  the orbit rings (r=76 inner, r=90 outer).
+*/
+const PRIMARY_NODES = [
+  { cx: 68,  cy: 50  }, // top
+  { cx: 68,  cy: 148 }, // corner
+  { cx: 145, cy: 148 }, // end
+];
+
+const BRANCH_NODES = [
+  { cx: 68, cy: 85,  ex: 98,  ey: 85,  delay: 0.8  }, // upper tap
+  { cx: 68, cy: 118, ex: 100, ey: 118, delay: 1.0  }, // lower tap
+  { cx: 107, cy: 148, ex: 107, ey: 126, delay: 1.1 }, // upward tap on H
+];
+
 export default function FlowerOfLife() {
-  const circles = [
-    { id: "center", cx: 0, cy: 0 },
-    { id: "r1-1", cx: 40, cy: 0 },
-    { id: "r1-2", cx: 20, cy: 34.641 },
-    { id: "r1-3", cx: -20, cy: 34.641 },
-    { id: "r1-4", cx: -40, cy: 0 },
-    { id: "r1-5", cx: -20, cy: -34.641 },
-    { id: "r1-6", cx: 20, cy: -34.641 },
-    { id: "r2-1", cx: 80, cy: 0 },
-    { id: "r2-2", cx: 60, cy: 34.641 },
-    { id: "r2-3", cx: 40, cy: 69.282 },
-    { id: "r2-4", cx: 0, cy: 69.282 },
-    { id: "r2-5", cx: -40, cy: 69.282 },
-    { id: "r2-6", cx: -60, cy: 34.641 },
-    { id: "r2-7", cx: -80, cy: 0 },
-    { id: "r2-8", cx: -60, cy: -34.641 },
-    { id: "r2-9", cx: -40, cy: -69.282 },
-    { id: "r2-10", cx: 0, cy: -69.282 },
-    { id: "r2-11", cx: 40, cy: -69.282 },
-    { id: "r2-12", cx: 60, cy: -34.641 },
-  ];
-
-  const sparkles = useMemo(
-    () =>
-      Array.from({ length: 50 }).map((_, i) => ({
-        id: i,
-        x: (Math.random() - 0.5) * 900,
-        y: (Math.random() - 0.5) * 600,
-        size: Math.random() * 2 + 0.5,
-        duration: Math.random() * 2.5 + 1.5,
-        delay: Math.random() * 4,
-      })),
-    []
-  );
-
   const fadeUp = {
     hidden: { opacity: 0, y: 24 },
     visible: (d: number) => ({
@@ -62,62 +45,94 @@ export default function FlowerOfLife() {
         }}
       />
 
-      {/* Purple glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#9333EA] blur-[200px] opacity-15 pointer-events-none" />
+      {/* Orange glow centre */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#FF4F27] blur-[200px] opacity-10 pointer-events-none" />
+      {/* Soft purple accent glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] rounded-full bg-[#9333EA] blur-[140px] opacity-8 pointer-events-none" />
 
-      {/* Orange glow bottom */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[250px] rounded-full bg-[#FF4F27] blur-[120px] opacity-10 pointer-events-none" />
-
-      {/* Sparkles */}
-      {sparkles.map((s) => (
+      {/* ── Circuit-board L logo ── */}
+      <motion.div
+        className="relative z-10 mb-6"
+        initial={{ opacity: 0, scale: 0.85 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+      >
+        {/* Outer halo ring */}
         <motion.div
-          key={s.id}
-          className="absolute rounded-full bg-purple-200"
-          style={{
-            left: `calc(50% + ${s.x}px)`,
-            top: `calc(45% + ${s.y}px)`,
-            width: s.size,
-            height: s.size,
-            boxShadow: "0 0 8px 2px rgba(168,85,247,0.5)",
-          }}
-          animate={{ opacity: [0, 1, 0], scale: [0.5, 1.4, 0.5] }}
-          transition={{ duration: s.duration, repeat: Infinity, delay: s.delay, ease: "easeInOut" }}
+          className="absolute inset-0 rounded-full pointer-events-none"
+          style={{ boxShadow: "0 0 80px 20px rgba(255,79,39,0.18)" }}
+          animate={{ opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         />
-      ))}
 
-      {/* Flower of Life SVG */}
-      <div className="relative z-10 w-full max-w-[380px] aspect-square flex items-center justify-center mb-2">
         <svg
-          viewBox="-200 -200 400 400"
-          className="w-full h-full overflow-visible"
-          style={{
-            filter:
-              "drop-shadow(0px 0px 14px rgba(168,85,247,0.85)) drop-shadow(0px 0px 35px rgba(147,51,234,0.45))",
-          }}
+          viewBox="0 0 200 200"
+          width="280"
+          height="280"
+          style={{ filter: "drop-shadow(0px 0px 18px rgba(255,79,39,0.7)) drop-shadow(0px 0px 45px rgba(255,107,0,0.35))" }}
         >
-          {circles.map((circle, index) => (
-            <motion.circle
-              key={circle.id}
-              cx={circle.cx}
-              cy={circle.cy}
-              r="40"
-              fill="none"
-              stroke="#e9d5ff"
-              strokeWidth="1.1"
-              initial={{ opacity: 0.15 }}
-              animate={{ opacity: [0.15, 0.9, 0.15] }}
-              transition={{ duration: 3.5, repeat: Infinity, delay: index * 0.08, ease: "easeInOut" }}
+          {/* ── Orbit rings (centred at 100,100; L stays well inside r=76) ── */}
+          <motion.circle cx="100" cy="100" r="90"
+            fill="none" stroke="#FF4F27" strokeWidth="1" strokeDasharray="6 10" opacity={0.2}
+            animate={{ rotate: 360 }} transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+            style={{ transformOrigin: "100px 100px" }}
+          />
+          <motion.circle cx="100" cy="100" r="76"
+            fill="none" stroke="#FF6B00" strokeWidth="0.8" strokeDasharray="4 14" opacity={0.15}
+            animate={{ rotate: -360 }} transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
+            style={{ transformOrigin: "100px 100px" }}
+          />
+
+          {/* ── Main L — vertical bar: x=68, y 50→148 ── */}
+          <motion.line
+            x1="68" y1="50" x2="68" y2="148"
+            stroke="#FF4F27" strokeWidth="5" strokeLinecap="round"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+          />
+          {/* ── Main L — horizontal bar: y=148, x 68→145 ── */}
+          <motion.line
+            x1="68" y1="148" x2="145" y2="148"
+            stroke="#FF4F27" strokeWidth="5" strokeLinecap="round"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          />
+
+          {/* ── Branch lines ── */}
+          {BRANCH_NODES.map(({ cx, cy, ex, ey, delay }, i) => (
+            <motion.line key={i}
+              x1={cx} y1={cy} x2={ex} y2={ey}
+              stroke="#FF6B00" strokeWidth="2.5" strokeLinecap="round"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 0.9 }}
+              transition={{ duration: 0.45, delay, ease: "easeOut" }}
             />
           ))}
-          <motion.circle cx="0" cy="0" r="120" fill="none" stroke="#d8b4fe" strokeWidth="1.5"
-            animate={{ opacity: [0.3, 0.75, 0.3] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} />
-          <motion.circle cx="0" cy="0" r="125" fill="none" stroke="#c084fc" strokeWidth="2"
-            animate={{ opacity: [0.2, 0.55, 0.2] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.6 }} />
+
+          {/* ── Primary nodes ── */}
+          {PRIMARY_NODES.map(({ cx, cy }, i) => (
+            <motion.circle key={i} cx={cx} cy={cy} r="6" fill="#FF4F27"
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: [1, 1.35, 1], opacity: [0.85, 1, 0.85] }}
+              transition={{ duration: 2.5, repeat: Infinity, delay: 1.2 + i * 0.3, ease: "easeInOut" }}
+            />
+          ))}
+
+          {/* ── Branch endpoint nodes ── */}
+          {BRANCH_NODES.map(({ ex, ey, delay }, i) => (
+            <motion.circle key={i} cx={ex} cy={ey} r="4" fill="#FF9B26"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: [0.6, 1, 0.6], scale: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity, delay: 1.4 + delay, ease: "easeInOut" }}
+            />
+          ))}
         </svg>
-      </div>
+      </motion.div>
 
       {/* Copy */}
-      <div className="relative z-20 flex flex-col items-center text-center px-6 max-w-4xl mx-auto mt-[-20px]">
+      <div className="relative z-20 flex flex-col items-center text-center px-6 max-w-4xl mx-auto">
 
         {/* Eyebrow */}
         <motion.div
@@ -125,7 +140,7 @@ export default function FlowerOfLife() {
           className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300 font-medium backdrop-blur-sm"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#FF4F27] shadow-[0_0_6px_#FF4F27]" />
-          Trusted by growing teams worldwide
+          Auckland-based · NZ Privacy Act Compliant · GST Ready
         </motion.div>
 
         {/* H1 */}
@@ -134,13 +149,13 @@ export default function FlowerOfLife() {
           className="text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-6"
           style={{ textShadow: "0 0 40px rgba(168,85,247,0.3)" }}
         >
-          Infrastructure.{" "}
-          <span className="bg-gradient-to-r from-[#FF4F27] via-[#FF9B26] to-[#FF4F27] bg-clip-text text-transparent">
-            Design.
-          </span>{" "}
-          AI.{" "}
+          Custom No-Code Apps{" "}
           <br className="hidden md:block" />
-          All in one place.
+          for{" "}
+          <span className="bg-gradient-to-r from-[#FF4F27] via-[#FF9B26] to-[#FF4F27] bg-clip-text text-transparent">
+            Auckland
+          </span>{" "}
+          Small Businesses
         </motion.h1>
 
         {/* Subtitle */}
@@ -148,8 +163,8 @@ export default function FlowerOfLife() {
           custom={2} variants={fadeUp} initial="hidden" animate="visible"
           className="text-lg md:text-xl text-slate-300 font-light leading-relaxed max-w-2xl mb-10"
         >
-          We design, build, and automate the digital stack that lets your business scale —
-          from enterprise infrastructure to intelligent AI agents and custom applications.
+          Simple, affordable apps that save you time and make you money —
+          built in 1–2 weeks, fully yours. No lock-in. No agency markup.
         </motion.p>
 
         {/* CTAs */}
@@ -158,18 +173,18 @@ export default function FlowerOfLife() {
           className="flex flex-col sm:flex-row items-center gap-4"
         >
           <a
-            href="/contact"
+            href="/pricing"
             className="flex items-center gap-2 px-7 py-3.5 bg-[#FF4F27] hover:bg-[#FF6B00] text-white font-semibold rounded-lg transition-all shadow-[0_0_30px_rgba(255,79,39,0.45)] hover:shadow-[0_0_45px_rgba(255,79,39,0.6)] group"
           >
-            Start your project
+            See Pricing
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
           <a
-            href="/services"
+            href="/contact"
             className="flex items-center gap-2 px-7 py-3.5 border border-white/15 hover:border-white/30 text-white font-medium rounded-lg transition-all hover:bg-white/5 group"
           >
             <Play className="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" />
-            Explore services
+            Get a free consultation
           </a>
         </motion.div>
 
@@ -180,9 +195,9 @@ export default function FlowerOfLife() {
         >
           {[
             { value: "50+", label: "Projects delivered" },
-            { value: "99.9%", label: "Uptime SLA" },
-            { value: "5×", label: "Average efficiency gain" },
-            { value: "24/7", label: "Monitoring & support" },
+            { value: "7–14", label: "Days to deliver" },
+            { value: "100%", label: "Client ownership" },
+            { value: "Auckland", label: "Based in NZ" },
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col items-center gap-1">
               <span className="text-2xl font-bold text-white">{stat.value}</span>

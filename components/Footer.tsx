@@ -33,23 +33,23 @@ const MiniLogo: React.FC = () => {
 
 const links: Record<string, { label: string; href: string }[]> = {
   Services: [
-    { label: "Infrastructure Dev", href: "/services#infrastructure" },
-    { label: "Web Design", href: "/services#web-design" },
-    { label: "AI Implementation", href: "/ai-automation" },
-    { label: "Process Automation", href: "/ai-automation#automation" },
-    { label: "Custom Applications", href: "/services#custom-apps" },
+    { label: "Booking & Reservations", href: "/services#booking" },
+    { label: "Order & Menu App", href: "/services#orders" },
+    { label: "Client Portal & CRM", href: "/services#crm" },
+    { label: "Inventory Dashboard", href: "/services#inventory" },
+    { label: "WhatsApp Automation", href: "/services#whatsapp" },
   ],
   Company: [
-    { label: "About", href: "/about" },
-    { label: "Careers", href: "/contact" },
+    { label: "About Lucas", href: "/about" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "Case Studies", href: "/case-studies" },
     { label: "Contact", href: "/contact" },
-    { label: "Partners", href: "/contact" },
   ],
   Resources: [
-    { label: "Case Studies", href: "/solutions" },
     { label: "Blog", href: "#" },
-    { label: "Documentation", href: "#" },
-    { label: "Events", href: "#" },
+    { label: "Free Consultation", href: "/contact" },
+    { label: "NZ Privacy Act Info", href: "#" },
+    { label: "GST & Invoicing", href: "#" },
   ],
 };
 
@@ -73,24 +73,24 @@ export default function Footer() {
       {/* Pre-footer CTA */}
       <div className="relative z-20 max-w-3xl mx-auto text-center mb-24">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight leading-tight">
-          Ready to transform<br />your business?
+          Ready to get your<br />Auckland business an app?
         </h2>
         <p className="text-slate-300 mb-10 text-lg font-light">
-          Let's build your next-generation digital infrastructure together.
+          Book a free 15-min call with Lucas. No pitch, no pressure — just a honest conversation about what you need.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="/contact"
+            href="/pricing"
             className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#FF4F27] hover:bg-[#FF6B00] text-white font-semibold rounded-lg transition-all shadow-[0_0_30px_rgba(255,79,39,0.45)] hover:shadow-[0_0_50px_rgba(255,79,39,0.6)] group"
           >
-            Start your project
+            See Pricing
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
           <a
             href="/contact"
             className="inline-flex items-center justify-center px-8 py-3.5 border border-white/15 hover:border-white/30 text-white font-medium rounded-lg transition-all hover:bg-white/5"
           >
-            Book a free discovery call
+            Book a free consultation
           </a>
         </div>
       </div>
@@ -106,9 +106,10 @@ export default function Footer() {
               <MiniLogo />
               <span className="text-white font-semibold text-xl tracking-tight">LEB Systems</span>
             </a>
-            <p className="text-slate-400 text-sm font-light mb-6 leading-relaxed">
-              We build the digital foundation your business needs to scale — infrastructure, design, AI, and automation under one roof.
+            <p className="text-slate-400 text-sm font-light mb-3 leading-relaxed">
+              Custom no-code apps for Auckland small businesses. Built fast, priced fairly, owned by you.
             </p>
+            <p className="text-xs text-slate-500 mb-6">🇳🇿 Proudly based in Auckland, New Zealand</p>
             <div className="flex items-center gap-4 text-slate-400">
               {/* X / Twitter */}
               <a href="https://x.com/lebsystems" target="_blank" rel="noopener noreferrer" aria-label="LEB Systems on X" className="hover:text-[#FF4F27] transition-colors p-1">

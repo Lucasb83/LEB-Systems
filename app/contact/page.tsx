@@ -15,30 +15,30 @@ const fadeUp = {
 };
 
 const services = [
-  "Infrastructure Development",
-  "Web Design",
-  "AI Implementation",
-  "Process Automation",
-  "Custom Application",
+  "Booking & Reservations App",
+  "Order & Menu App",
+  "Client Portal & CRM",
+  "Inventory & Sales Dashboard",
+  "WhatsApp / Instagram Automation",
   "Not sure yet — help me decide",
 ];
 
-const budgets = [
-  "< $5,000",
-  "$5,000 – $15,000",
-  "$15,000 – $50,000",
-  "$50,000 – $150,000",
-  "$150,000+",
+const packages = [
+  "Starter App – $1,800 NZD (simple MVP in 14–21 days)",
+  "Growth App – $3,500 NZD (most popular — full features + integrations)",
+  "Custom Solution – from $5,500 NZD (advanced with AI/automation)",
+  "Not sure yet",
 ];
 
 const contactInfo = [
   { icon: <Mail className="w-5 h-5 text-[#FF4F27]" />, label: "Email", value: "lebsystems.flow@gmail.com" },
   { icon: <Clock className="w-5 h-5 text-[#9333EA]" />, label: "Response time", value: "Within 24 hours" },
-  { icon: <MapPin className="w-5 h-5 text-[#EC4899]" />, label: "Operating", value: "Pacific & Europe" },
+  { icon: <MapPin className="w-5 h-5 text-[#EC4899]" />, label: "Location", value: "Auckland, New Zealand" },
 ];
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", company: "", service: "", budget: "", message: "" });
+  // budget field stores the selected package
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -69,15 +69,15 @@ export default function ContactPage() {
 
         <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="visible"
           className="text-5xl md:text-6xl font-bold text-white tracking-tight mb-5 leading-tight">
-          Let's build something{" "}
+          Let&apos;s get your{" "}
           <span className="bg-gradient-to-r from-[#FF4F27] via-[#FF9B26] to-[#FF4F27] bg-clip-text text-transparent">
-            great together.
+            Auckland business an app.
           </span>
         </motion.h1>
 
         <motion.p custom={2} variants={fadeUp} initial="hidden" animate="visible"
           className="text-lg text-slate-400 font-light max-w-xl leading-relaxed">
-          Tell us about your project. We'll get back to you within 24 hours with a clear path forward.
+          Fill in the form and Lucas will get back to you within 24 hours with a clear scope and fixed price.
         </motion.p>
       </section>
 
@@ -133,13 +133,13 @@ export default function ContactPage() {
             <div className="bg-gradient-to-br from-[#FF4F27]/10 to-[#14151A] border border-[#FF4F27]/15 rounded-3xl p-8 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-40 h-40 bg-[#FF4F27]/10 blur-[60px] pointer-events-none rounded-full" />
               <p className="text-slate-300 text-sm italic font-light leading-relaxed mb-5 relative z-10">
-                "LEB Systems took our fragmented tech stack and turned it into a coherent system that actually scales. The level of technical depth and communication throughout was unlike any vendor we've worked with."
+                &ldquo;Lucas built our booking system in under 2 weeks. Our no-shows dropped by 60% and we save 10+ hours a week on admin. Best money we&rsquo;ve spent on the business.&rdquo;
               </p>
               <div className="flex items-center gap-3 relative z-10">
-                <div className="w-8 h-8 rounded-full bg-[#FF4F27]/20 border border-[#FF4F27]/30 flex items-center justify-center text-xs font-bold text-[#FF4F27]">M</div>
+                <div className="w-8 h-8 rounded-full bg-[#FF4F27]/20 border border-[#FF4F27]/30 flex items-center justify-center text-xs font-bold text-[#FF4F27]">S</div>
                 <div>
-                  <p className="text-white text-xs font-semibold">Marco V.</p>
-                  <p className="text-slate-500 text-xs">CTO, FinTech Startup</p>
+                  <p className="text-white text-xs font-semibold">Sarah M.</p>
+                  <p className="text-slate-500 text-xs">Gym owner, Auckland</p>
                 </div>
               </div>
             </div>
@@ -162,7 +162,7 @@ export default function ContactPage() {
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
-                  <h3 className="text-white font-bold text-xl mb-6">Tell us about your project</h3>
+                  <h3 className="text-white font-bold text-xl mb-6">Tell Lucas about your business</h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
@@ -197,7 +197,7 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="text-xs text-slate-400 font-medium mb-2 block">Service needed *</label>
+                      <label className="text-xs text-slate-400 font-medium mb-2 block">App type needed *</label>
                       <div className="relative">
                         <select required value={form.service}
                           onChange={(e) => handleChange("service", e.target.value)}
@@ -209,13 +209,13 @@ export default function ContactPage() {
                       </div>
                     </div>
                     <div>
-                      <label className="text-xs text-slate-400 font-medium mb-2 block">Budget range</label>
+                      <label className="text-xs text-slate-400 font-medium mb-2 block">Package (optional)</label>
                       <div className="relative">
                         <select value={form.budget}
                           onChange={(e) => handleChange("budget", e.target.value)}
                           className={`${inputBase} cursor-pointer`}>
-                          <option value="">Select budget</option>
-                          {budgets.map((b) => <option key={b} value={b}>{b}</option>)}
+                          <option value="">Select a package</option>
+                          {packages.map((p) => <option key={p} value={p}>{p}</option>)}
                         </select>
                         <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600 pointer-events-none" />
                       </div>
@@ -228,7 +228,7 @@ export default function ContactPage() {
                       <MessageSquare className="absolute left-3.5 top-3.5 w-4 h-4 text-slate-600" />
                       <textarea required rows={5} value={form.message}
                         onChange={(e) => handleChange("message", e.target.value)}
-                        placeholder="Describe what you're trying to build or solve. The more context, the better we can help."
+                        placeholder="Tell me about your business and what problem you want to solve. E.g. 'I run a hair salon in Ponsonby and I need an online booking system with payment.'"
                         className={`${inputBase} pl-10 resize-none`} />
                     </div>
                   </div>

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Bot, Check, ArrowRight } from "lucide-react";
+import { Layers, Check, ArrowRight } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -11,12 +11,12 @@ const fadeUp = {
 
 const features = [
   {
-    title: "Fine-tuned language models",
-    desc: "We train LLMs on your proprietary data so the AI speaks your language — not a generic chatbot.",
+    title: "No-code speed, custom code when it matters",
+    desc: "We use Bubble, Glide, and FlutterFlow to build fast — and add custom code for anything the tools can't handle.",
   },
   {
-    title: "RAG knowledge pipelines",
-    desc: "Connect your documents, databases, and knowledge bases so AI answers are always accurate and up to date.",
+    title: "You own everything, forever",
+    desc: "Full source code, database, and hosting access delivered at handover. No subscriptions to us, no lock-in.",
   },
 ];
 
@@ -33,15 +33,15 @@ export default function CodeSection() {
 
         <div className="flex-1 z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#FF4F27]/10 border border-[#FF4F27]/20 rounded-full mb-6">
-            <Bot className="w-3.5 h-3.5 text-[#FF4F27]" />
-            <span className="text-xs text-[#FF9B26] font-medium">AI Implementation</span>
+            <Layers className="w-3.5 h-3.5 text-[#FF4F27]" />
+            <span className="text-xs text-[#FF9B26] font-medium">How we build</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6 leading-tight">
-            AI that works the way<br />your business does
+            From idea to live app<br />in 7–14 days
           </h2>
           <p className="text-slate-300 mb-10 text-base leading-relaxed max-w-lg font-light">
-            We don't deploy generic models. We integrate intelligence that understands your workflows,
-            your customers, and your data — delivering measurable ROI from day one.
+            We combine the speed of no-code tools with real development experience —
+            so you get a professional app without the agency price tag or the 3-month wait.
           </p>
           <ul className="space-y-7 mb-10">
             {features.map((f) => (
@@ -54,22 +54,22 @@ export default function CodeSection() {
             ))}
           </ul>
           <a
-            href="/ai-automation"
+            href="/services"
             className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF4F27] hover:bg-[#FF6B00] text-white font-semibold rounded-lg transition-all shadow-[0_0_25px_rgba(255,79,39,0.4)] group"
           >
-            Explore AI solutions <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            See all services <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
         </div>
 
-        {/* Visual: AI pipeline flow */}
+        {/* Visual: App build pipeline */}
         <div className="flex-1 z-10 w-full flex justify-center lg:justify-end">
           <div className="bg-[#0e0918] border border-white/5 rounded-3xl p-8 flex flex-col gap-4 shadow-2xl w-full max-w-sm">
-            <div className="text-xs text-slate-500 font-mono mb-2">AI Pipeline — running</div>
+            <div className="text-xs text-slate-500 font-mono mb-2">Build pipeline — your app</div>
             {[
-              { label: "Data Ingestion", color: "emerald", status: "complete" },
-              { label: "Vector Embedding", color: "purple", status: "complete" },
-              { label: "LLM Processing", color: "orange", status: "active" },
-              { label: "Response Delivery", color: "slate", status: "pending" },
+              { label: "Free Consultation", color: "emerald", status: "complete" },
+              { label: "Design & Wireframe", color: "emerald", status: "complete" },
+              { label: "Build & Integrate", color: "orange", status: "active" },
+              { label: "Deploy & Train You", color: "slate", status: "pending" },
             ].map((step, i) => (
               <div
                 key={step.label}
@@ -104,6 +104,10 @@ export default function CodeSection() {
                 {step.status === "complete" && <Check className="w-3.5 h-3.5 text-emerald-500" />}
               </div>
             ))}
+            <div className="mt-2 pt-4 border-t border-white/5 flex items-center justify-between text-xs text-slate-500">
+              <span>Estimated delivery</span>
+              <span className="text-[#FF4F27] font-semibold">7–14 days</span>
+            </div>
           </div>
         </div>
       </motion.div>

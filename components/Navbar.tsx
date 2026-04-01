@@ -3,65 +3,47 @@
 import React, { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X, ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
 
-const miniCircles = [
-  { id: "c", cx: 0, cy: 0 },
-  { id: "r1", cx: 27, cy: 0 },
-  { id: "r2", cx: 13.5, cy: 23.383 },
-  { id: "r3", cx: -13.5, cy: 23.383 },
-  { id: "r4", cx: -27, cy: 0 },
-  { id: "r5", cx: -13.5, cy: -23.383 },
-  { id: "r6", cx: 13.5, cy: -23.383 },
-];
-
-function FlowerLogo({ size = 32 }: { size?: number }) {
-  const inner = size * 0.75;
+/* ── Tech logo: circuit-board L-shape, centred inside a circle ── */
+function TechLogo({ size = 32 }: { size?: number }) {
   return (
     <div
-      className="rounded-full bg-[#0d0b1a] flex items-center justify-center overflow-hidden"
-      style={{ width: size, height: size, boxShadow: "0 0 14px rgba(147,51,234,0.55)" }}
+      className="rounded-full bg-[#0d0b1a] flex items-center justify-center flex-shrink-0"
+      style={{ width: size, height: size, boxShadow: "0 0 12px rgba(255,79,39,0.35)" }}
     >
-      <svg
-        viewBox="-55 -55 110 110"
-        style={{ width: inner, height: inner, filter: "drop-shadow(0px 0px 4px rgba(168,85,247,0.9)) drop-shadow(0px 0px 10px rgba(147,51,234,0.5))" }}
-      >
-        {miniCircles.map((c, i) => (
-          <motion.circle
-            key={c.id}
-            cx={c.cx}
-            cy={c.cy}
-            r="27"
-            fill="none"
-            stroke="#e9d5ff"
-            strokeWidth="1.8"
-            initial={{ opacity: 0.15 }}
-            animate={{ opacity: [0.15, 0.9, 0.15] }}
-            transition={{ duration: 3.5, repeat: Infinity, delay: i * 0.1, ease: "easeInOut" }}
-          />
-        ))}
-        <motion.circle
-          cx="0" cy="0" r="50"
-          fill="none" stroke="#d8b4fe" strokeWidth="1.5"
-          animate={{ opacity: [0.3, 0.75, 0.3] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        />
+      {/*
+        viewBox="0 0 30 30" gives 3 px padding on every side.
+        L lives in x:6→22, y:4→22 — all nodes stay ≥3 px from every edge,
+        comfortably inside the circular clip.
+      */}
+      <svg viewBox="0 0 30 30" style={{ width: size * 0.54, height: size * 0.54 }}>
+        {/* Vertical bar */}
+        <line x1="7" y1="4" x2="7" y2="22" stroke="#FF4F27" strokeWidth="2.2" strokeLinecap="round" />
+        {/* Horizontal bar */}
+        <line x1="7" y1="22" x2="22" y2="22" stroke="#FF4F27" strokeWidth="2.2" strokeLinecap="round" />
+        {/* Primary nodes */}
+        <circle cx="7"  cy="4"  r="2.2" fill="#FF4F27" />
+        <circle cx="7"  cy="22" r="2.2" fill="#FF4F27" />
+        <circle cx="22" cy="22" r="2.2" fill="#FF6B00" />
+        {/* Mid-point node + side tap */}
+        <circle cx="7"  cy="12" r="1.6" fill="#FF6B00" />
+        <line   x1="7" y1="12" x2="13" y2="12" stroke="#FF9B26" strokeWidth="1.4" strokeLinecap="round" />
+        <circle cx="13" cy="12" r="1.3" fill="#FF9B26" />
       </svg>
     </div>
   );
 }
 
 const services = [
-  { label: "Infrastructure Development", desc: "Cloud, on-prem, Kubernetes & Docker", href: "/services#infrastructure" },
-  { label: "Web Design", desc: "Fast, modern, conversion-ready sites", href: "/services#web-design" },
-  { label: "AI Implementation", desc: "LLMs, RAG pipelines & AI agents", href: "/ai-automation" },
-  { label: "Process Automation", desc: "Connect tools, eliminate manual work", href: "/ai-automation#automation" },
-  { label: "Custom Applications", desc: "Bespoke software for your business", href: "/services#custom-apps" },
+  { label: "Booking & Reservations", desc: "Online calendar + payments for salons, gyms & tutors", href: "/services#booking" },
+  { label: "Order & Menu App", desc: "Digital menu + table ordering for cafés & food trucks", href: "/services#orders" },
+  { label: "Client Portal & CRM", desc: "Track clients, invoices & follow-ups in one place", href: "/services#crm" },
+  { label: "Inventory & Sales Dashboard", desc: "Real-time stock & sales reports for retail", href: "/services#inventory" },
+  { label: "WhatsApp Automation", desc: "Auto-replies, appointment booking & marketing flows", href: "/services#whatsapp" },
 ];
 
 const mainLinks = [
-  { label: "Solutions", href: "/solutions" },
-  { label: "AI & Automation", href: "/ai-automation" },
+  { label: "Case Studies", href: "/case-studies" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
@@ -79,13 +61,11 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMobileOpen(false);
     setServicesOpen(false);
   }, [pathname]);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -96,7 +76,6 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -124,7 +103,7 @@ export default function Navbar() {
           {/* Logo */}
           <a href="/" className="flex items-center gap-3 group flex-shrink-0">
             <div className="group-hover:scale-105 transition-transform">
-              <FlowerLogo size={32} />
+              <TechLogo size={32} />
             </div>
             <span className="text-white font-semibold text-base tracking-tight">LEB Systems</span>
           </a>
@@ -147,7 +126,6 @@ export default function Navbar() {
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`} />
               </button>
 
-              {/* Dropdown */}
               <div
                 className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 w-72 transition-all duration-200 ${
                   servicesOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"
@@ -178,14 +156,14 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-4 text-sm font-medium">
-            <a href="/portal" className={`transition-colors ${isActive("/portal") ? "text-white" : "text-slate-300 hover:text-white"}`}>
-              Sign in
+            <a href="/contact" className="text-slate-300 hover:text-white transition-colors">
+              Free consultation
             </a>
             <a
               href="/contact"
               className="flex items-center gap-1.5 px-5 py-2.5 bg-[#FF4F27] hover:bg-[#FF6B00] text-white rounded-lg font-medium transition-all shadow-[0_0_20px_rgba(255,79,39,0.3)] hover:shadow-[0_0_30px_rgba(255,79,39,0.5)]"
             >
-              Get Started <ArrowRight className="w-3.5 h-3.5" />
+              Get a Quote <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
 
@@ -200,25 +178,22 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile menu — full-screen overlay */}
+      {/* Mobile menu */}
       <div
         className={`fixed inset-0 z-40 lg:hidden transition-all duration-300 ${
           mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        {/* Backdrop */}
         <div className="absolute inset-0 bg-[#0e0918]/95 backdrop-blur-xl" onClick={() => setMobileOpen(false)} />
 
-        {/* Menu panel */}
         <div
           className={`absolute top-0 right-0 h-full w-full max-w-sm bg-[#14151A] border-l border-white/5 flex flex-col transition-transform duration-300 ${
             mobileOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          {/* Panel header */}
           <div className="flex items-center justify-between px-6 py-5 border-b border-white/5">
             <a href="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-2.5">
-              <FlowerLogo size={28} />
+              <TechLogo size={28} />
               <span className="text-white font-semibold text-sm">LEB Systems</span>
             </a>
             <button onClick={() => setMobileOpen(false)} className="text-slate-400 hover:text-white p-1">
@@ -226,7 +201,6 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Panel links */}
           <div className="flex-1 overflow-y-auto px-6 py-6 flex flex-col gap-1">
             <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Services</p>
             {services.map((s) => (
@@ -257,21 +231,20 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Panel footer CTA */}
           <div className="px-6 py-6 border-t border-white/5 flex flex-col gap-3">
             <a
               href="/contact"
               onClick={() => setMobileOpen(false)}
               className="flex items-center justify-center gap-2 py-3.5 bg-[#FF4F27] hover:bg-[#FF6B00] text-white font-semibold rounded-xl transition-all shadow-[0_0_20px_rgba(255,79,39,0.35)]"
             >
-              Get Started <ArrowRight className="w-4 h-4" />
+              Get a Quote <ArrowRight className="w-4 h-4" />
             </a>
             <a
-              href="/portal"
+              href="/contact"
               onClick={() => setMobileOpen(false)}
               className="flex items-center justify-center py-3 text-slate-400 hover:text-white text-sm transition-colors"
             >
-              Sign in to portal
+              Book a free consultation
             </a>
           </div>
         </div>

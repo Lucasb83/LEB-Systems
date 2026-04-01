@@ -3,34 +3,34 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
-  Cloud, Server, Network, Code2, Terminal, Cpu,
-  Shield, Database, Activity, GitBranch, Bot, Layers,
-  Globe, Lock, Zap,
+  Network, Code2, Cpu, Database, Activity, GitBranch, Bot, Layers,
+  Globe, Zap, MessageCircle, ShoppingBag, Clock, CreditCard,
 } from "lucide-react";
+import { Calendar } from "lucide-react";
 
 const items = [
-  { icon: <Cloud className="w-5 h-5 text-orange-400" />, name: "AWS" },
-  { icon: <Server className="w-5 h-5 text-blue-500" />, name: "Docker" },
-  { icon: <Network className="w-5 h-5 text-indigo-400" />, name: "Kubernetes" },
-  { icon: <Code2 className="w-5 h-5 text-yellow-400" />, name: "Python" },
-  { icon: <Terminal className="w-5 h-5 text-sky-400" />, name: "TypeScript" },
-  { icon: <Cpu className="w-5 h-5 text-violet-400" />, name: "React" },
-  { icon: <Globe className="w-5 h-5 text-cyan-400" />, name: "Next.js" },
-  { icon: <Shield className="w-5 h-5 text-orange-500" />, name: "Cloudflare" },
-  { icon: <Lock className="w-5 h-5 text-red-400" />, name: "Zero-Trust" },
-  { icon: <Database className="w-5 h-5 text-blue-300" />, name: "PostgreSQL" },
-  { icon: <Activity className="w-5 h-5 text-purple-400" />, name: "Datadog" },
-  { icon: <Bot className="w-5 h-5 text-emerald-400" />, name: "OpenAI" },
-  { icon: <Layers className="w-5 h-5 text-pink-400" />, name: "Vercel" },
-  { icon: <GitBranch className="w-5 h-5 text-gray-300" />, name: "Terraform" },
-  { icon: <Zap className="w-5 h-5 text-yellow-300" />, name: "Node.js" },
+  { icon: <Layers className="w-5 h-5 text-violet-400" />, name: "Bubble.io" },
+  { icon: <Cpu className="w-5 h-5 text-sky-400" />, name: "Glide" },
+  { icon: <Globe className="w-5 h-5 text-cyan-400" />, name: "FlutterFlow" },
+  { icon: <Zap className="w-5 h-5 text-orange-400" />, name: "n8n" },
+  { icon: <GitBranch className="w-5 h-5 text-purple-400" />, name: "Make" },
+  { icon: <Activity className="w-5 h-5 text-yellow-400" />, name: "Zapier" },
+  { icon: <CreditCard className="w-5 h-5 text-emerald-400" />, name: "Stripe" },
+  { icon: <MessageCircle className="w-5 h-5 text-green-400" />, name: "WhatsApp API" },
+  { icon: <Calendar className="w-5 h-5 text-blue-400" />, name: "Google Calendar" },
+  { icon: <Database className="w-5 h-5 text-blue-300" />, name: "Xero" },
+  { icon: <ShoppingBag className="w-5 h-5 text-pink-400" />, name: "Shopify" },
+  { icon: <Clock className="w-5 h-5 text-slate-300" />, name: "Calendly" },
+  { icon: <Bot className="w-5 h-5 text-orange-300" />, name: "OpenAI" },
+  { icon: <Code2 className="w-5 h-5 text-cyan-300" />, name: "Airtable" },
+  { icon: <Network className="w-5 h-5 text-indigo-400" />, name: "Notion" },
 ];
 
 export default function Marquee() {
   return (
     <div className="w-full overflow-hidden flex flex-col items-center py-16 relative z-10 border-b border-white/5">
       <p className="text-slate-400 text-sm font-medium mb-10 tracking-wide uppercase">
-        Built on the stack your enterprise already trusts
+        Built with the best no-code &amp; automation tools
       </p>
       <div className="w-full relative flex overflow-x-hidden">
         {/* Fade edges */}

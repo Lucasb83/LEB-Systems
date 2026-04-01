@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Check, ArrowRight, Zap } from "lucide-react";
+import { Check, ArrowRight, Rocket } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -10,16 +10,16 @@ const fadeUp = {
 };
 
 const features = [
-  { title: "No-code workflow builder", desc: "Deploy automations without writing a single line" },
-  { title: "400+ integrations ready", desc: "Connect your entire tool stack instantly" },
-  { title: "Realtime & scheduled triggers", desc: "React to events or run on a fixed cadence" },
-  { title: "Live performance dashboards", desc: "Monitor every automation with full observability" },
+  { title: "Free 15-min consultation", desc: "We scope your app together — no obligation" },
+  { title: "Working prototype in days", desc: "See something real before you commit fully" },
+  { title: "Integrates with your tools", desc: "Xero, Google, Stripe, WhatsApp, Calendly + more" },
+  { title: "Training included, always", desc: "You and your team learn to run it yourselves" },
 ];
 
 const stats = [
-  { value: "400+", label: "Integrations" },
-  { value: "3×", label: "Faster deployment" },
-  { value: "80%", label: "Less manual work" },
+  { value: "7–14", label: "Days to build" },
+  { value: "From $1,200", label: "NZD pricing" },
+  { value: "100%", label: "Yours to keep" },
 ];
 
 export default function MoveFastSection() {
@@ -44,15 +44,15 @@ export default function MoveFastSection() {
 
         <div className="flex-1 z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#9333EA]/10 border border-[#9333EA]/20 rounded-full mb-6">
-            <Zap className="w-3.5 h-3.5 text-[#9333EA]" />
-            <span className="text-xs text-purple-300 font-medium">Process Automation</span>
+            <Rocket className="w-3.5 h-3.5 text-[#9333EA]" />
+            <span className="text-xs text-purple-300 font-medium">Fast delivery</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-5">
-            Automate. Accelerate.<br />Dominate.
+            Stop waiting months.<br />Go live in weeks.
           </h2>
           <p className="text-slate-400 mb-10 text-base leading-relaxed font-light max-w-md">
-            Replace manual bottlenecks with intelligent workflows that run 24/7 — so your team
-            focuses on strategy, not repetition.
+            Big agencies charge $20k and take 6 months. We deliver a real, working app
+            for your Auckland business in 7–14 days — starting from $1,200 NZD.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8 mb-12">
@@ -68,10 +68,10 @@ export default function MoveFastSection() {
           </div>
 
           <a
-            href="/ai-automation#automation"
+            href="/pricing"
             className="inline-flex items-center gap-2 px-6 py-3 bg-[#23242D] border border-white/10 hover:border-[#9333EA]/50 text-white text-sm font-medium rounded-lg transition-colors group"
           >
-            Explore automation solutions
+            View pricing packages
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </a>
         </div>
@@ -85,25 +85,23 @@ export default function MoveFastSection() {
               <div className="absolute inset-5 border border-slate-600/50 rounded-full" />
               <div className="absolute inset-10 border-2 border-[#9333EA]/30 rounded-full shadow-[0_0_30px_rgba(147,51,234,0.3)]" />
               <div className="absolute inset-14 bg-gradient-to-br from-[#1A1A2E] to-[#14151A] rounded-full shadow-2xl flex items-center justify-center z-10 border border-white/10">
-                <Zap className="w-8 h-8 text-[#9333EA]" />
+                <Rocket className="w-8 h-8 text-[#9333EA]" />
               </div>
-              {/* Orbiting dot */}
               <motion.div
                 className="absolute w-3 h-3 rounded-full bg-[#FF4F27] shadow-[0_0_10px_#FF4F27]"
                 style={{ top: "50%", left: "50%", marginTop: "-6px", marginLeft: "-6px", originX: "6px", originY: "6px" }}
                 animate={{ rotate: 360 }}
                 transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-                // position it on the orbit ring radius ~90px
               >
                 <div style={{ position: "absolute", top: "-84px", left: "-4.5px", width: "12px", height: "12px", borderRadius: "50%" }} />
               </motion.div>
             </div>
 
             {/* Stats pills */}
-            <div className="flex gap-4">
+            <div className="flex gap-3 flex-wrap justify-center">
               {stats.map((s) => (
-                <div key={s.label} className="flex flex-col items-center bg-[#1A1A1E] border border-white/5 rounded-2xl px-5 py-4">
-                  <span className="text-2xl font-bold text-white">{s.value}</span>
+                <div key={s.label} className="flex flex-col items-center bg-[#1A1A1E] border border-white/5 rounded-2xl px-4 py-4">
+                  <span className="text-lg font-bold text-white">{s.value}</span>
                   <span className="text-xs text-slate-500 mt-0.5">{s.label}</span>
                 </div>
               ))}

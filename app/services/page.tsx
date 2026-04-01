@@ -3,9 +3,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Server, Globe, Bot, Zap, Code2, Check, ArrowRight,
-  Cloud, Shield, Network, Database, Cpu, GitBranch,
-  Smartphone, ShoppingCart, BarChart3, ChevronDown,
+  CalendarDays, UtensilsCrossed, Users, BarChart3, MessageCircle,
+  Check, ArrowRight, ChevronDown, Clock, Zap,
 } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -15,135 +14,123 @@ const fadeUp = {
   visible: (d = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay: d * 0.1, ease: [0.16, 1, 0.3, 1] as const } }),
 };
 
-/* ─────────────────────────────────────────── SERVICES DATA */
 const services = [
   {
-    id: "infrastructure",
-    icon: <Server className="w-6 h-6" />,
+    id: "booking",
+    icon: <CalendarDays className="w-6 h-6" />,
     color: "#FF4F27",
     colorBg: "rgba(255,79,39,0.1)",
     colorBorder: "rgba(255,79,39,0.2)",
-    tag: "Infrastructure Development",
-    headline: "The backbone your business runs on",
-    body: "We design and deploy resilient, cloud-native infrastructure that scales from a single server to a global multi-region cluster. Whether you need Kubernetes orchestration, zero-trust networking, or a fully automated CI/CD pipeline — we build it right the first time.",
+    tag: "Booking & Reservations",
+    shortDesc: "Online calendar and payments for salons, gyms, tutors and service businesses.",
+    headline: "Never miss a booking again",
+    body: "Your clients can book 24/7, pay instantly, and receive automatic reminders — all without you lifting a finger. Perfect for hair salons, gyms, tutors, and any service-based business in Auckland.",
     features: [
-      "Multi-cloud & hybrid architecture (AWS, GCP, Azure)",
-      "Kubernetes & Docker container orchestration",
-      "Zero-trust networking & identity management",
-      "Automated CI/CD pipelines & GitOps workflows",
-      "Disaster recovery & multi-region failover",
-      "24/7 infrastructure monitoring & incident response",
+      "Online calendar with real-time availability",
+      "Secure payments via Stripe or Paystation",
+      "Automatic WhatsApp/Email/SMS reminders",
+      "Reduce no-shows by up to 70%",
     ],
-    tech: ["AWS", "GCP", "Kubernetes", "Terraform", "Docker", "Cloudflare"],
-    metric: { value: "99.9%", label: "Uptime SLA" },
+    tools: ["Bubble.io", "Stripe", "WhatsApp API", "Google Calendar"],
+    delivery: "14–21 days",
+    from: "$1,800",
   },
   {
-    id: "web-design",
-    icon: <Globe className="w-6 h-6" />,
+    id: "orders",
+    icon: <UtensilsCrossed className="w-6 h-6" />,
     color: "#9333EA",
     colorBg: "rgba(147,51,234,0.1)",
     colorBorder: "rgba(147,51,234,0.2)",
-    tag: "Web Design",
-    headline: "Websites that convert visitors into clients",
-    body: "We craft digital experiences that are fast, beautiful, and built to perform. From marketing landing pages to complex web portals — every pixel is designed with purpose, and every line of code is optimised for Core Web Vitals and SEO.",
+    tag: "Order & Menu App",
+    shortDesc: "Digital menu and table ordering for cafés, restaurants and food trucks.",
+    headline: "Faster service. Happier customers.",
+    body: "Turn your menu digital and let customers order from their phone. Less waiting, fewer mistakes, happier staff. Ideal for busy Auckland cafés, restaurants, and food trucks.",
     features: [
-      "Custom UI/UX design (Figma → production)",
-      "Next.js & React high-performance development",
-      "Mobile-first, fully responsive layouts",
-      "Core Web Vitals & Lighthouse 95+ scores",
-      "Headless CMS integration (Sanity, Contentful, Strapi)",
-      "A/B testing & conversion rate optimisation",
+      "Digital menu with photos and prices",
+      "Table-side or takeaway ordering via QR code",
+      "Kitchen display system",
+      "Integration with EFTPOS and payments",
     ],
-    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Figma", "Vercel"],
-    metric: { value: "95+", label: "Lighthouse Score" },
+    tools: ["Glide", "Stripe", "Square", "Google Sheets"],
+    delivery: "10–14 days",
+    from: "$1,800",
   },
   {
-    id: "ai",
-    icon: <Bot className="w-6 h-6" />,
+    id: "crm",
+    icon: <Users className="w-6 h-6" />,
     color: "#EC4899",
     colorBg: "rgba(236,72,153,0.1)",
     colorBorder: "rgba(236,72,153,0.2)",
-    tag: "AI Implementation",
-    headline: "Intelligence trained on your business",
-    body: "We integrate LLMs, build RAG knowledge pipelines, and deploy custom AI agents that understand your data, your customers, and your processes. Not off-the-shelf demos — real production AI that delivers measurable ROI from day one.",
+    tag: "Client Portal & CRM",
+    shortDesc: "One place to manage clients, invoices and follow-ups.",
+    headline: "Stop juggling spreadsheets and emails",
+    body: "Give your clients a professional portal and keep everything organised — from first enquiry to final invoice. Great for coaches, consultants, trainers, and retail shops.",
     features: [
-      "LLM integration (OpenAI, Anthropic, Mistral, local models)",
-      "RAG knowledge bases with real-time document sync",
-      "Custom AI agents & multi-agent orchestration",
-      "Fine-tuning & embeddings on proprietary datasets",
-      "AI-powered dashboards & analytics",
-      "Responsible AI — safety, guardrails, audit trails",
+      "Client login area with documents and invoices",
+      "Simple CRM to track leads and follow-ups",
+      "Automated reminders and notifications",
+      "All data stored securely in New Zealand",
     ],
-    tech: ["OpenAI", "LangChain", "Pinecone", "Python", "FastAPI", "PostgreSQL"],
-    metric: { value: "5×", label: "Productivity gain" },
+    tools: ["Bubble.io", "Xero", "n8n", "Calendly"],
+    delivery: "14–21 days",
+    from: "$2,200",
   },
   {
-    id: "automation",
-    icon: <Zap className="w-6 h-6" />,
+    id: "inventory",
+    icon: <BarChart3 className="w-6 h-6" />,
     color: "#FF9B26",
     colorBg: "rgba(255,155,38,0.1)",
     colorBorder: "rgba(255,155,38,0.2)",
-    tag: "Process Automation",
-    headline: "Eliminate every manual bottleneck",
-    body: "We map, digitise, and automate your operational workflows. From email routing and invoice processing to full ERP integration — if it's repetitive, we automate it. Our solutions run 24/7 without human intervention and scale as your business grows.",
+    tag: "Inventory & Sales Dashboard",
+    shortDesc: "Real-time stock and sales reports for retail and small shops.",
+    headline: "Know exactly what's selling — and when to restock",
+    body: "No more complicated software or guesswork. A simple, clean dashboard on your phone or computer shows live stock levels, daily sales, and automatic low-stock alerts.",
     features: [
-      "End-to-end workflow design & implementation",
-      "400+ native integrations (Slack, Salesforce, SAP, HubSpot…)",
-      "RPA bots for legacy system automation",
-      "Real-time event triggers & webhooks",
-      "Error handling, retries & SLA monitoring",
-      "Human-in-the-loop approval workflows",
+      "Live stock levels and low-stock alerts",
+      "Daily/weekly sales reports",
+      "Simple dashboard on phone or computer",
+      "Export to Excel or PDF",
     ],
-    tech: ["n8n", "Python", "Node.js", "REST APIs", "Webhooks", "Datadog"],
-    metric: { value: "80%", label: "Less manual work" },
+    tools: ["Glide", "Airtable", "n8n", "WhatsApp API"],
+    delivery: "10–14 days",
+    from: "$1,800",
   },
   {
-    id: "custom-apps",
-    icon: <Code2 className="w-6 h-6" />,
+    id: "whatsapp",
+    icon: <MessageCircle className="w-6 h-6" />,
     color: "#9333EA",
     colorBg: "rgba(147,51,234,0.1)",
     colorBorder: "rgba(147,51,234,0.2)",
-    tag: "Custom Applications",
-    headline: "Software built exactly for your business",
-    body: "No templates. No compromise. We engineer full-stack applications from the ground up — tailored to your exact workflows, users, and scale requirements. From MVPs shipped in weeks to enterprise platforms built to last.",
+    tag: "WhatsApp & Instagram Automation",
+    shortDesc: "Auto-replies, booking and marketing flows for your business.",
+    headline: "Save 10+ hours a week on repetitive messages",
+    body: "Automate customer conversations so you spend less time replying and more time running your business. Works 24/7 through WhatsApp and Instagram DMs — even while you sleep.",
     features: [
-      "Full-stack web applications (React + Node.js / Python)",
-      "Mobile apps — iOS & Android (React Native)",
-      "Internal tools, admin panels & dashboards",
-      "SaaS platforms with multi-tenant architecture",
-      "E-commerce & marketplace solutions",
-      "API design, development & documentation",
+      "Automatic replies and appointment booking via WhatsApp",
+      "Marketing message sequences",
+      "Integration with your calendar and payments",
+      "Track conversations in one place",
     ],
-    tech: ["React", "Node.js", "Python", "React Native", "PostgreSQL", "Redis"],
-    metric: { value: "3×", label: "Faster time to market" },
+    tools: ["n8n", "WhatsApp Business API", "Google Calendar", "Make"],
+    delivery: "7–14 days",
+    from: "$1,800",
   },
 ];
 
-/* ─────────────────────────────────────────── HOW WE WORK */
-const steps = [
-  { num: "01", title: "Discovery", desc: "We start with a deep-dive into your business goals, current pain points, and technical landscape. No assumptions." },
-  { num: "02", title: "Architecture", desc: "We design a tailored solution, present the technical plan, and align on scope, timeline, and success metrics." },
-  { num: "03", title: "Build & iterate", desc: "Agile sprints with frequent demos. You see progress weekly, not just at the end." },
-  { num: "04", title: "Deploy & support", desc: "Production launch with full documentation, monitoring setup, and ongoing support available on all plans." },
-];
-
-/* ─────────────────────────────────────────── FAQ */
 const faqs = [
-  { q: "Do you work with startups or only enterprises?", a: "Both. We offer flexible engagement models: from MVPs for early-stage startups to long-term platform engineering for enterprise teams. We adapt our process and pricing to your stage." },
-  { q: "Can you take over an existing codebase?", a: "Yes. We conduct a thorough technical audit before starting, identify risks, and establish a clear migration plan. We don't force rewrites — only what's necessary." },
-  { q: "What does a typical engagement look like?", a: "Most projects start with a 2-week discovery sprint, followed by a detailed proposal. Active builds typically run 6–16 weeks depending on scope. We maintain ongoing retainers for support and iteration." },
-  { q: "Do you provide post-launch support?", a: "All projects include 30 days of free post-launch support. Long-term support and maintenance retainers are available at transparent monthly rates." },
-  { q: "Do you sign NDAs?", a: "Absolutely. We sign NDAs before any discovery call and treat all client information with strict confidentiality." },
+  { q: "Do I need technical knowledge to use the apps you build?", a: "Not at all. Every app I build comes with a full training session for you and your team. I explain everything in plain language — no tech jargon. If you can use a smartphone, you can use your new app." },
+  { q: "Who owns the app after it's built?", a: "You do — 100%. You get the source code, the database, and all login credentials at handover. There are no ongoing fees payable to me (only any third-party tool subscriptions, which I'll explain upfront)." },
+  { q: "How long does it really take?", a: "Most apps are delivered in 7–21 days depending on the package. We start with a free consultation to scope your app, and I'll give you an exact timeline before we begin." },
+  { q: "Are the apps compliant with NZ Privacy Act 2020?", a: "Yes. All apps I build store data in NZ-based or compliant cloud infrastructure, handle user data responsibly, and follow NZ Privacy Act 2020 requirements. I can provide documentation if needed." },
+  { q: "What if I need changes after the app is launched?", a: "All packages include a 30-day post-launch support period for fixes and small adjustments. For ongoing changes, I offer flexible monthly maintenance plans." },
+  { q: "Can I start with a small package and upgrade later?", a: "Absolutely. Many clients start with the Starter App and add features as they grow. I build everything with expansion in mind." },
 ];
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="border-b border-white/5">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between py-5 text-left group"
-      >
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-5 text-left group">
         <span className="text-white font-medium text-sm pr-4 group-hover:text-[#FF4F27] transition-colors">{q}</span>
         <ChevronDown className={`w-4 h-4 text-slate-400 flex-shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
       </button>
@@ -164,40 +151,40 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-/* ─────────────────────────────────────────── PAGE */
 export default function ServicesPage() {
   return (
     <main className="min-h-screen bg-[#0e0918] text-slate-300 overflow-x-hidden">
       <Navbar />
 
       {/* Hero */}
-      <section className="relative pt-36 pb-24 px-6 flex flex-col items-center text-center overflow-hidden">
+      <section className="relative pt-36 pb-20 px-6 flex flex-col items-center text-center overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "32px 32px", maskImage: "radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%)" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-[#9333EA] blur-[160px] opacity-12 pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-[#FF4F27] blur-[160px] opacity-8 pointer-events-none" />
 
         <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible"
           className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300 font-medium">
           <span className="w-1.5 h-1.5 rounded-full bg-[#FF4F27] shadow-[0_0_6px_#FF4F27]" />
-          What we do
+          Auckland-based · Built in 7–21 days · From $1,800 NZD
         </motion.div>
 
         <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="visible"
           className="text-5xl md:text-6xl font-bold text-white tracking-tight mb-6 max-w-4xl leading-tight">
-          Five pillars.{" "}
+          Apps for Auckland{" "}
           <span className="bg-gradient-to-r from-[#FF4F27] via-[#FF9B26] to-[#FF4F27] bg-clip-text text-transparent">
-            One trusted partner.
+            Small Businesses
           </span>
         </motion.h1>
 
         <motion.p custom={2} variants={fadeUp} initial="hidden" animate="visible"
           className="text-lg text-slate-400 font-light max-w-2xl mb-10 leading-relaxed">
-          From the servers your apps run on to the AI that powers them — LEB Systems delivers every layer of your digital stack with the same obsessive focus on quality.
+          Simple custom apps built fast with no-code tools and my development experience.
+          Save time, reduce manual work, and grow your business — without the big-agency price tag.
         </motion.p>
 
         <motion.div custom={3} variants={fadeUp} initial="hidden" animate="visible" className="flex flex-wrap gap-3 justify-center">
           {services.map((s) => (
             <a key={s.id} href={`#${s.id}`}
-              className="px-4 py-2 text-xs font-medium rounded-lg border border-white/10 text-slate-300 hover:text-white hover:border-white/20 transition-all bg-white/3 hover:bg-white/6">
+              className="px-4 py-2 text-xs font-medium rounded-lg border border-white/10 text-slate-300 hover:text-white hover:border-[#FF4F27]/40 transition-all bg-white/3">
               {s.tag}
             </a>
           ))}
@@ -206,16 +193,17 @@ export default function ServicesPage() {
 
       {/* Service sections */}
       {services.map((svc, idx) => (
-        <section key={svc.id} id={svc.id} className="py-16 px-6 relative z-10">
+        <section key={svc.id} id={svc.id} className="py-14 px-6 relative z-10">
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-            className={`max-w-[1200px] mx-auto flex flex-col ${idx % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} items-center gap-16`}>
+            className={`max-w-[1200px] mx-auto flex flex-col ${idx % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} items-center gap-14`}>
 
             {/* Copy side */}
             <div className="flex-1">
-              <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full mb-6 text-xs font-medium border"
+              <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full mb-5 text-xs font-medium border"
                 style={{ background: svc.colorBg, borderColor: svc.colorBorder, color: svc.color }}>
                 {svc.icon} {svc.tag}
               </div>
+              <p className="text-slate-500 text-sm mb-3 font-light">{svc.shortDesc}</p>
               <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4 leading-tight">{svc.headline}</h2>
               <p className="text-slate-400 mb-8 leading-relaxed font-light">{svc.body}</p>
 
@@ -223,42 +211,65 @@ export default function ServicesPage() {
                 {svc.features.map((f) => (
                   <li key={f} className="flex items-start gap-3 text-sm text-slate-300">
                     <Check className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: svc.color }} />
-                    {f}
+                    <strong className="font-medium text-white">{f}</strong>
                   </li>
                 ))}
               </ul>
 
-              <a href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 text-white text-sm font-semibold rounded-lg transition-all group"
-                style={{ background: svc.color, boxShadow: `0 0 25px ${svc.color}55` }}>
-                Start this project <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
+              {/* Delivery + price badge */}
+              <div className="flex flex-wrap items-center gap-3 mb-8">
+                <div className="flex items-center gap-2 px-4 py-2 bg-[#1A1A1E] border border-white/8 rounded-xl text-xs text-slate-300">
+                  <Clock className="w-3.5 h-3.5 text-[#FF4F27]" /> Built in {svc.delivery}
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 bg-[#1A1A1E] border border-white/8 rounded-xl text-xs text-slate-300">
+                  <Zap className="w-3.5 h-3.5 text-[#FF4F27]" /> From {svc.from} NZD
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-3">
+                <a href="/contact"
+                  className="inline-flex items-center gap-2 px-6 py-3 text-white text-sm font-semibold rounded-lg transition-all group"
+                  style={{ background: svc.color, boxShadow: `0 0 25px ${svc.color}55` }}>
+                  Get a quote <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+                <a href="/contact"
+                  className="inline-flex items-center gap-2 px-6 py-3 text-slate-300 hover:text-white text-sm font-medium rounded-lg border border-white/10 hover:border-white/20 transition-all">
+                  See Pricing &amp; Packages
+                </a>
+              </div>
             </div>
 
             {/* Card side */}
             <div className="flex-1 w-full flex justify-center">
               <div className="w-full max-w-md bg-[#14151A] border border-white/5 rounded-3xl p-8 relative overflow-hidden group hover:border-white/10 transition-all">
-                <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] pointer-events-none"
-                  style={{ background: `${svc.color}15` }} />
+                <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] pointer-events-none opacity-15 group-hover:opacity-25 transition-opacity"
+                  style={{ background: svc.color }} />
 
-                {/* Stat badge */}
                 <div className="flex items-center gap-3 mb-8 z-10 relative">
                   <div className="w-12 h-12 rounded-2xl flex items-center justify-center" style={{ background: svc.colorBg, border: `1px solid ${svc.colorBorder}` }}>
                     <span style={{ color: svc.color }}>{svc.icon}</span>
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-white">{svc.metric.value}</div>
-                    <div className="text-xs text-slate-500">{svc.metric.label}</div>
+                    <div className="text-white font-bold">{svc.tag}</div>
+                    <div className="text-xs text-slate-500">Fully yours after delivery</div>
                   </div>
                 </div>
 
-                {/* Tech pills */}
                 <div className="z-10 relative">
-                  <p className="text-xs text-slate-500 font-medium mb-3 uppercase tracking-wide">Technologies</p>
-                  <div className="flex flex-wrap gap-2">
-                    {svc.tech.map((t) => (
+                  <p className="text-xs text-slate-500 font-medium mb-3 uppercase tracking-wide">Built with</p>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {svc.tools.map((t) => (
                       <span key={t} className="px-3 py-1 text-xs text-slate-300 bg-[#1A1A1E] border border-white/5 rounded-lg">{t}</span>
                     ))}
+                  </div>
+                  <div className="h-px bg-white/5 mb-5" />
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-slate-400">Delivery time</span>
+                    <span className="text-white font-semibold">{svc.delivery}</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm mt-3">
+                    <span className="text-slate-400">Starting from</span>
+                    <span style={{ color: svc.color }} className="font-bold text-lg">{svc.from} NZD</span>
                   </div>
                 </div>
               </div>
@@ -271,20 +282,23 @@ export default function ServicesPage() {
       <section className="py-24 px-6 relative z-10">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
           className="max-w-[1200px] mx-auto text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">How we work</h2>
-          <p className="text-slate-400 font-light text-lg">A clear, predictable process from first call to launch day.</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">How it works</h2>
+          <p className="text-slate-400 font-light text-lg">Simple, clear, no surprises.</p>
         </motion.div>
 
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((step, i) => (
+          {[
+            { num: "01", title: "Free consultation", desc: "15 minutes on a call — you explain your problem, I explain what I can build and for how much. No obligation." },
+            { num: "02", title: "Proposal & price", desc: "You get a clear written proposal: exactly what will be built, when it'll be done, and the fixed NZD price." },
+            { num: "03", title: "Build & show you", desc: "I build your app and show you progress weekly. You can give feedback at every step." },
+            { num: "04", title: "Launch & train you", desc: "We go live together. I train you and your team, hand over all credentials, and stay available for 30 days." },
+          ].map((step, i) => (
             <motion.div key={step.num} custom={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
               className="bg-[#14151A] border border-white/5 rounded-2xl p-7 relative group hover:border-white/10 transition-all">
               <div className="text-5xl font-black text-white/5 mb-4 font-mono">{step.num}</div>
               <h3 className="text-white font-bold mb-2">{step.title}</h3>
               <p className="text-slate-400 text-sm leading-relaxed font-light">{step.desc}</p>
-              {i < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-px bg-white/10" />
-              )}
+              {i < 3 && <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-px bg-white/10" />}
             </motion.div>
           ))}
         </div>
@@ -294,8 +308,8 @@ export default function ServicesPage() {
       <section className="py-20 px-6 relative z-10">
         <div className="max-w-[800px] mx-auto">
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mb-14">
-            <h2 className="text-4xl font-bold text-white tracking-tight mb-4">Frequently asked questions</h2>
-            <p className="text-slate-400 font-light">Straight answers. No sales pitch.</p>
+            <h2 className="text-4xl font-bold text-white tracking-tight mb-4">Common questions</h2>
+            <p className="text-slate-400 font-light">Straight answers from Lucas.</p>
           </motion.div>
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             {faqs.map((faq) => <FaqItem key={faq.q} q={faq.q} a={faq.a} />)}
@@ -308,14 +322,22 @@ export default function ServicesPage() {
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
           className="max-w-[1200px] mx-auto bg-gradient-to-br from-[#FF4F27]/15 via-[#14151A] to-[#1A1A1E] border border-[#FF4F27]/15 rounded-3xl p-12 md:p-20 text-center relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#FF4F27]/10 to-transparent blur-[100px] pointer-events-none" />
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-5 relative z-10">Not sure where to start?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-5 relative z-10">
+            Not sure which app you need?
+          </h2>
           <p className="text-slate-300 mb-10 text-lg font-light relative z-10 max-w-xl mx-auto">
-            Book a free 30-minute discovery call. We'll listen, ask the right questions, and tell you exactly what we'd recommend.
+            Book a free 15-minute call with Lucas. He&apos;ll listen to your business challenges and tell you exactly what would help — with a clear price.
           </p>
-          <a href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-[#FF4F27] hover:bg-[#FF6B00] text-white font-semibold rounded-lg transition-all shadow-[0_0_30px_rgba(255,79,39,0.45)] relative z-10 group">
-            Book a free call <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+            <a href="/contact"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#FF4F27] hover:bg-[#FF6B00] text-white font-semibold rounded-lg transition-all shadow-[0_0_30px_rgba(255,79,39,0.45)] group">
+              Book a free call <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+            <a href="/contact"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/15 hover:border-white/30 text-white font-medium rounded-lg transition-all hover:bg-white/5">
+              See Pricing &amp; Packages
+            </a>
+          </div>
         </motion.div>
       </section>
 
