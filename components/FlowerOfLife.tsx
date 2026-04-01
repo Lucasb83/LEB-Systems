@@ -46,7 +46,7 @@ export default function FlowerOfLife() {
       />
 
       {/* Orange glow centre */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#FF4F27] blur-[200px] opacity-10 pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#06B6D4] blur-[200px] opacity-10 pointer-events-none" />
       {/* Soft purple accent glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] rounded-full bg-[#9333EA] blur-[140px] opacity-8 pointer-events-none" />
 
@@ -60,7 +60,7 @@ export default function FlowerOfLife() {
         {/* Outer halo ring */}
         <motion.div
           className="absolute inset-0 rounded-full pointer-events-none"
-          style={{ boxShadow: "0 0 80px 20px rgba(255,79,39,0.18)" }}
+          style={{ boxShadow: "0 0 80px 20px rgba(6,182,212,0.18)" }}
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -69,16 +69,16 @@ export default function FlowerOfLife() {
           viewBox="0 0 200 200"
           width="280"
           height="280"
-          style={{ filter: "drop-shadow(0px 0px 18px rgba(255,79,39,0.7)) drop-shadow(0px 0px 45px rgba(255,107,0,0.35))" }}
+          style={{ filter: "drop-shadow(0px 0px 18px rgba(6,182,212,0.7)) drop-shadow(0px 0px 45px rgba(8,145,178,0.35))" }}
         >
           {/* ── Orbit rings (centred at 100,100; L stays well inside r=76) ── */}
           <motion.circle cx="100" cy="100" r="90"
-            fill="none" stroke="#FF4F27" strokeWidth="1" strokeDasharray="6 10" opacity={0.2}
+            fill="none" stroke="#06B6D4" strokeWidth="1" strokeDasharray="6 10" opacity={0.2}
             animate={{ rotate: 360 }} transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
             style={{ transformOrigin: "100px 100px" }}
           />
           <motion.circle cx="100" cy="100" r="76"
-            fill="none" stroke="#FF6B00" strokeWidth="0.8" strokeDasharray="4 14" opacity={0.15}
+            fill="none" stroke="#0891B2" strokeWidth="0.8" strokeDasharray="4 14" opacity={0.15}
             animate={{ rotate: -360 }} transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
             style={{ transformOrigin: "100px 100px" }}
           />
@@ -86,7 +86,7 @@ export default function FlowerOfLife() {
           {/* ── Main L — vertical bar: x=68, y 50→148 ── */}
           <motion.line
             x1="68" y1="50" x2="68" y2="148"
-            stroke="#FF4F27" strokeWidth="5" strokeLinecap="round"
+            stroke="#06B6D4" strokeWidth="5" strokeLinecap="round"
             initial={{ pathLength: 0, opacity: 0 }}
             animate={{ pathLength: 1, opacity: 1 }}
             transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
@@ -94,7 +94,7 @@ export default function FlowerOfLife() {
           {/* ── Main L — horizontal bar: y=148, x 68→145 ── */}
           <motion.line
             x1="68" y1="148" x2="145" y2="148"
-            stroke="#FF4F27" strokeWidth="5" strokeLinecap="round"
+            stroke="#06B6D4" strokeWidth="5" strokeLinecap="round"
             initial={{ pathLength: 0, opacity: 0 }}
             animate={{ pathLength: 1, opacity: 1 }}
             transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -104,7 +104,7 @@ export default function FlowerOfLife() {
           {BRANCH_NODES.map(({ cx, cy, ex, ey, delay }, i) => (
             <motion.line key={i}
               x1={cx} y1={cy} x2={ex} y2={ey}
-              stroke="#FF6B00" strokeWidth="2.5" strokeLinecap="round"
+              stroke="#0891B2" strokeWidth="2.5" strokeLinecap="round"
               initial={{ pathLength: 0, opacity: 0 }}
               animate={{ pathLength: 1, opacity: 0.9 }}
               transition={{ duration: 0.45, delay, ease: "easeOut" }}
@@ -113,7 +113,7 @@ export default function FlowerOfLife() {
 
           {/* ── Primary nodes ── */}
           {PRIMARY_NODES.map(({ cx, cy }, i) => (
-            <motion.circle key={i} cx={cx} cy={cy} r="6" fill="#FF4F27"
+            <motion.circle key={i} cx={cx} cy={cy} r="6" fill="#06B6D4"
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: [1, 1.35, 1], opacity: [0.85, 1, 0.85] }}
               transition={{ duration: 2.5, repeat: Infinity, delay: 1.2 + i * 0.3, ease: "easeInOut" }}
@@ -122,7 +122,7 @@ export default function FlowerOfLife() {
 
           {/* ── Branch endpoint nodes ── */}
           {BRANCH_NODES.map(({ ex, ey, delay }, i) => (
-            <motion.circle key={i} cx={ex} cy={ey} r="4" fill="#FF9B26"
+            <motion.circle key={i} cx={ex} cy={ey} r="4" fill="#10B981"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: [0.6, 1, 0.6], scale: [1, 1.2, 1] }}
               transition={{ duration: 2, repeat: Infinity, delay: 1.4 + delay, ease: "easeInOut" }}
@@ -139,7 +139,7 @@ export default function FlowerOfLife() {
           custom={0} variants={fadeUp} initial="hidden" animate="visible"
           className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300 font-medium backdrop-blur-sm"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#FF4F27] shadow-[0_0_6px_#FF4F27]" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] shadow-[0_0_6px_#06B6D4]" />
           Auckland-based · NZ Privacy Act Compliant · GST Ready
         </motion.div>
 
@@ -152,7 +152,7 @@ export default function FlowerOfLife() {
           Custom No-Code Apps{" "}
           <br className="hidden md:block" />
           for{" "}
-          <span className="bg-gradient-to-r from-[#FF4F27] via-[#FF9B26] to-[#FF4F27] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#06B6D4] via-[#10B981] to-[#06B6D4] bg-clip-text text-transparent">
             Auckland
           </span>{" "}
           Small Businesses
@@ -174,7 +174,7 @@ export default function FlowerOfLife() {
         >
           <a
             href="/pricing"
-            className="flex items-center gap-2 px-7 py-3.5 bg-[#FF4F27] hover:bg-[#FF6B00] text-white font-semibold rounded-lg transition-all shadow-[0_0_30px_rgba(255,79,39,0.45)] hover:shadow-[0_0_45px_rgba(255,79,39,0.6)] group"
+            className="flex items-center gap-2 px-7 py-3.5 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-lg transition-all shadow-[0_0_30px_rgba(6,182,212,0.45)] hover:shadow-[0_0_45px_rgba(6,182,212,0.6)] group"
           >
             See Pricing
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

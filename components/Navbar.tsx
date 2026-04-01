@@ -8,8 +8,8 @@ import { ChevronDown, Menu, X, ArrowRight } from "lucide-react";
 function TechLogo({ size = 32 }: { size?: number }) {
   return (
     <div
-      className="rounded-full bg-[#0d0b1a] flex items-center justify-center flex-shrink-0"
-      style={{ width: size, height: size, boxShadow: "0 0 12px rgba(255,79,39,0.35)" }}
+      className="rounded-full bg-[#071424] flex items-center justify-center flex-shrink-0"
+      style={{ width: size, height: size, boxShadow: "0 0 12px rgba(6,182,212,0.35)" }}
     >
       {/*
         viewBox="0 0 30 30" gives 3 px padding on every side.
@@ -18,17 +18,17 @@ function TechLogo({ size = 32 }: { size?: number }) {
       */}
       <svg viewBox="0 0 30 30" style={{ width: size * 0.54, height: size * 0.54 }}>
         {/* Vertical bar */}
-        <line x1="7" y1="4" x2="7" y2="22" stroke="#FF4F27" strokeWidth="2.2" strokeLinecap="round" />
+        <line x1="7" y1="4" x2="7" y2="22" stroke="#06B6D4" strokeWidth="2.2" strokeLinecap="round" />
         {/* Horizontal bar */}
-        <line x1="7" y1="22" x2="22" y2="22" stroke="#FF4F27" strokeWidth="2.2" strokeLinecap="round" />
+        <line x1="7" y1="22" x2="22" y2="22" stroke="#06B6D4" strokeWidth="2.2" strokeLinecap="round" />
         {/* Primary nodes */}
-        <circle cx="7"  cy="4"  r="2.2" fill="#FF4F27" />
-        <circle cx="7"  cy="22" r="2.2" fill="#FF4F27" />
-        <circle cx="22" cy="22" r="2.2" fill="#FF6B00" />
+        <circle cx="7"  cy="4"  r="2.2" fill="#06B6D4" />
+        <circle cx="7"  cy="22" r="2.2" fill="#06B6D4" />
+        <circle cx="22" cy="22" r="2.2" fill="#0891B2" />
         {/* Mid-point node + side tap */}
-        <circle cx="7"  cy="12" r="1.6" fill="#FF6B00" />
-        <line   x1="7" y1="12" x2="13" y2="12" stroke="#FF9B26" strokeWidth="1.4" strokeLinecap="round" />
-        <circle cx="13" cy="12" r="1.3" fill="#FF9B26" />
+        <circle cx="7"  cy="12" r="1.6" fill="#0891B2" />
+        <line   x1="7" y1="12" x2="13" y2="12" stroke="#10B981" strokeWidth="1.4" strokeLinecap="round" />
+        <circle cx="13" cy="12" r="1.3" fill="#10B981" />
       </svg>
     </div>
   );
@@ -94,7 +94,7 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-[#0e0918]/90 backdrop-blur-xl border-b border-white/5 py-3"
+            ? "bg-[#0F172A]/90 backdrop-blur-xl border-b border-white/5 py-3"
             : "bg-transparent py-5"
         }`}
       >
@@ -131,7 +131,7 @@ export default function Navbar() {
                   servicesOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"
                 }`}
               >
-                <div className="bg-[#1A1A1E]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-2 shadow-2xl">
+                <div className="bg-[#243347]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-2 shadow-2xl">
                   {services.map((s) => (
                     <a
                       key={s.label}
@@ -139,7 +139,7 @@ export default function Navbar() {
                       className="flex flex-col px-4 py-3 rounded-xl hover:bg-white/5 transition-colors group/item"
                       onClick={() => setServicesOpen(false)}
                     >
-                      <span className="text-white text-sm font-medium group-hover/item:text-[#FF4F27] transition-colors">{s.label}</span>
+                      <span className="text-white text-sm font-medium group-hover/item:text-[#06B6D4] transition-colors">{s.label}</span>
                       <span className="text-slate-500 text-xs mt-0.5">{s.desc}</span>
                     </a>
                   ))}
@@ -161,7 +161,7 @@ export default function Navbar() {
             </a>
             <a
               href="/contact"
-              className="flex items-center gap-1.5 px-5 py-2.5 bg-[#FF4F27] hover:bg-[#FF6B00] text-white rounded-lg font-medium transition-all shadow-[0_0_20px_rgba(255,79,39,0.3)] hover:shadow-[0_0_30px_rgba(255,79,39,0.5)]"
+              className="flex items-center gap-1.5 px-5 py-2.5 bg-[#06B6D4] hover:bg-[#0891B2] text-white rounded-lg font-medium transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)]"
             >
               Get a Quote <ArrowRight className="w-3.5 h-3.5" />
             </a>
@@ -184,10 +184,10 @@ export default function Navbar() {
           mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="absolute inset-0 bg-[#0e0918]/95 backdrop-blur-xl" onClick={() => setMobileOpen(false)} />
+        <div className="absolute inset-0 bg-[#0F172A]/95 backdrop-blur-xl" onClick={() => setMobileOpen(false)} />
 
         <div
-          className={`absolute top-0 right-0 h-full w-full max-w-sm bg-[#14151A] border-l border-white/5 flex flex-col transition-transform duration-300 ${
+          className={`absolute top-0 right-0 h-full w-full max-w-sm bg-[#1E293B] border-l border-white/5 flex flex-col transition-transform duration-300 ${
             mobileOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
@@ -210,7 +210,7 @@ export default function Navbar() {
                 onClick={() => setMobileOpen(false)}
                 className={`flex flex-col py-3 px-3 rounded-xl hover:bg-white/5 transition-colors ${isActive(s.href) ? "bg-white/5" : ""}`}
               >
-                <span className={`text-sm font-medium ${isActive(s.href) ? "text-[#FF4F27]" : "text-slate-200"}`}>{s.label}</span>
+                <span className={`text-sm font-medium ${isActive(s.href) ? "text-[#06B6D4]" : "text-slate-200"}`}>{s.label}</span>
                 <span className="text-xs text-slate-500 mt-0.5">{s.desc}</span>
               </a>
             ))}
@@ -223,7 +223,7 @@ export default function Navbar() {
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
                 className={`py-3 px-3 rounded-xl text-sm font-medium hover:bg-white/5 transition-colors ${
-                  isActive(link.href) ? "text-[#FF4F27] bg-white/5" : "text-slate-200"
+                  isActive(link.href) ? "text-[#06B6D4] bg-white/5" : "text-slate-200"
                 }`}
               >
                 {link.label}
@@ -235,7 +235,7 @@ export default function Navbar() {
             <a
               href="/contact"
               onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center gap-2 py-3.5 bg-[#FF4F27] hover:bg-[#FF6B00] text-white font-semibold rounded-xl transition-all shadow-[0_0_20px_rgba(255,79,39,0.35)]"
+              className="flex items-center justify-center gap-2 py-3.5 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.35)]"
             >
               Get a Quote <ArrowRight className="w-4 h-4" />
             </a>

@@ -100,16 +100,16 @@ export default function Hero() {
 
         <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-semibold text-white tracking-tight leading-[1.05] mb-8">
           IT Infrastructure <br className="hidden md:block" />
-          you can <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C084FC] via-[#F472B6] to-[#FF4F27]">trust and scale</span>
+          you can <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C084FC] via-[#F472B6] to-[#06B6D4]">trust and scale</span>
         </h1>
         <p className="text-lg md:text-xl text-slate-400 max-w-3xl mb-10 leading-relaxed font-light">
           Build visually, go deep with code, connect to anything. Every step of your architecture's reasoning, traceable on the canvas. Deploy on your infrastructure or ours.
         </p>
         <div className="flex flex-col sm:flex-row items-center gap-4">
-          <a href="/portal" className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#9333EA] via-[#EC4899] to-[#FF4F27] hover:opacity-90 text-white font-medium rounded-md transition-opacity shadow-[0_0_30px_rgba(236,72,153,0.3)]">
+          <a href="/portal" className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#9333EA] via-[#EC4899] to-[#06B6D4] hover:opacity-90 text-white font-medium rounded-md transition-opacity shadow-[0_0_30px_rgba(236,72,153,0.3)]">
             Get started for free
           </a>
-          <a href="#sales" className="w-full sm:w-auto px-8 py-3.5 bg-[#1A1A1E] border border-white/10 text-white font-medium rounded-md hover:bg-[#23242D] transition-colors">
+          <a href="#sales" className="w-full sm:w-auto px-8 py-3.5 bg-[#243347] border border-white/10 text-white font-medium rounded-md hover:bg-[#1E293B] transition-colors">
             Talk to sales
           </a>
         </div>

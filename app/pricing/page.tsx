@@ -42,7 +42,7 @@ const plans = [
     price: "$3,500",
     currency: "NZD",
     badge: "Most Popular",
-    icon: <Star className="w-5 h-5 text-[#FF4F27]" />,
+    icon: <Star className="w-5 h-5 text-[#06B6D4]" />,
     tagline: "The complete solution for growing businesses",
     delivery: "14 days",
     features: [
@@ -96,13 +96,13 @@ const allIncluded = [
 
 export default function PricingPage() {
   return (
-    <main className="min-h-screen bg-[#0e0918] text-slate-300 font-sans overflow-x-hidden">
+    <main className="min-h-screen bg-[#0F172A] text-slate-300 font-sans overflow-x-hidden">
       <Navbar />
 
       <section className="relative pt-40 pb-24 px-6 overflow-hidden">
         {/* Background glows */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full bg-[#9333EA] blur-[200px] opacity-10 pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[500px] h-[300px] rounded-full bg-[#FF4F27] blur-[150px] opacity-8 pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[500px] h-[300px] rounded-full bg-[#06B6D4] blur-[150px] opacity-8 pointer-events-none" />
 
         <div className="max-w-[1200px] mx-auto">
           {/* Header */}
@@ -111,12 +111,12 @@ export default function PricingPage() {
             className="text-center mb-20"
           >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300 font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF4F27] shadow-[0_0_6px_#FF4F27]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] shadow-[0_0_6px_#06B6D4]" />
               Simple, transparent pricing — no surprises
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-white tracking-tight mb-6">
               Simple Pricing for<br />
-              <span className="bg-gradient-to-r from-[#FF4F27] via-[#FF9B26] to-[#FF4F27] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#06B6D4] via-[#10B981] to-[#06B6D4] bg-clip-text text-transparent">
                 Real Results
               </span>
             </h1>
@@ -134,18 +134,18 @@ export default function PricingPage() {
                 custom={i + 1} variants={fadeUp} initial="hidden" animate="visible"
                 className={`relative rounded-3xl p-8 flex flex-col border transition-all duration-500 ${
                   plan.highlight
-                    ? "bg-gradient-to-b from-[#FF4F27]/15 to-[#14151A] border-[#FF4F27]/30 shadow-[0_0_60px_rgba(255,79,39,0.2)]"
-                    : "bg-[#14151A] border-white/5 hover:border-white/10"
+                    ? "bg-gradient-to-b from-[#06B6D4]/15 to-[#1E293B] border-[#06B6D4]/30 shadow-[0_0_60px_rgba(6,182,212,0.2)]"
+                    : "bg-[#1E293B] border-white/5 hover:border-white/10"
                 }`}
               >
                 {plan.badge && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#FF4F27] text-white text-xs font-bold rounded-full shadow-[0_0_20px_rgba(255,79,39,0.5)]">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#06B6D4] text-white text-xs font-bold rounded-full shadow-[0_0_20px_rgba(6,182,212,0.5)]">
                     {plan.badge}
                   </div>
                 )}
 
                 <div className="flex items-center gap-3 mb-4">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${plan.highlight ? "bg-[#FF4F27]/15 border border-[#FF4F27]/30" : "bg-white/5 border border-white/10"}`}>
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${plan.highlight ? "bg-[#06B6D4]/15 border border-[#06B6D4]/30" : "bg-white/5 border border-white/10"}`}>
                     {plan.icon}
                   </div>
                   <h2 className="text-white font-bold text-xl">{plan.name}</h2>
@@ -158,7 +158,7 @@ export default function PricingPage() {
                   <span className="text-slate-400 text-sm ml-2">{plan.currency} + GST</span>
                 </div>
                 <div className="text-xs text-slate-500 mb-8 flex items-center gap-1.5">
-                  <Zap className="w-3 h-3 text-[#FF4F27]" />
+                  <Zap className="w-3 h-3 text-[#06B6D4]" />
                   Delivered in {plan.delivery}
                 </div>
 
@@ -166,8 +166,8 @@ export default function PricingPage() {
                   href={plan.href}
                   className={`flex items-center justify-center gap-2 py-3.5 rounded-xl font-semibold text-sm mb-8 transition-all group ${
                     plan.highlight
-                      ? "bg-[#FF4F27] hover:bg-[#FF6B00] text-white shadow-[0_0_25px_rgba(255,79,39,0.4)]"
-                      : "bg-[#23242D] border border-white/10 hover:border-white/20 text-white"
+                      ? "bg-[#06B6D4] hover:bg-[#0891B2] text-white shadow-[0_0_25px_rgba(6,182,212,0.4)]"
+                      : "bg-[#1E293B] border border-white/10 hover:border-white/20 text-white"
                   }`}
                 >
                   {plan.cta} <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -201,13 +201,13 @@ export default function PricingPage() {
           {/* All plans include */}
           <motion.div
             custom={5} variants={fadeUp} initial="hidden" animate="visible"
-            className="bg-[#14151A] border border-white/5 rounded-3xl p-10 mb-16"
+            className="bg-[#1E293B] border border-white/5 rounded-3xl p-10 mb-16"
           >
             <h3 className="text-white font-bold text-xl mb-8 text-center">Every package includes</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
               {allIncluded.map((item) => (
                 <div key={item} className="flex items-center gap-3 text-sm text-slate-300">
-                  <Check className="w-4 h-4 text-[#FF4F27] flex-shrink-0" />
+                  <Check className="w-4 h-4 text-[#06B6D4] flex-shrink-0" />
                   {item}
                 </div>
               ))}
@@ -224,7 +224,7 @@ export default function PricingPage() {
             </p>
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[#FF4F27] hover:bg-[#FF6B00] text-white font-semibold rounded-xl transition-all shadow-[0_0_30px_rgba(255,79,39,0.4)] hover:shadow-[0_0_50px_rgba(255,79,39,0.6)] group"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-xl transition-all shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:shadow-[0_0_50px_rgba(6,182,212,0.6)] group"
             >
               Book your free consultation
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

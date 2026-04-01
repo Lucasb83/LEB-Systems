@@ -18,9 +18,9 @@ const services = [
   {
     id: "booking",
     icon: <CalendarDays className="w-6 h-6" />,
-    color: "#FF4F27",
-    colorBg: "rgba(255,79,39,0.1)",
-    colorBorder: "rgba(255,79,39,0.2)",
+    color: "#06B6D4",
+    colorBg: "rgba(6,182,212,0.1)",
+    colorBorder: "rgba(6,182,212,0.2)",
     tag: "Booking & Reservations",
     shortDesc: "Online calendar and payments for salons, gyms, tutors and service businesses.",
     headline: "Never miss a booking again",
@@ -78,9 +78,9 @@ const services = [
   {
     id: "inventory",
     icon: <BarChart3 className="w-6 h-6" />,
-    color: "#FF9B26",
-    colorBg: "rgba(255,155,38,0.1)",
-    colorBorder: "rgba(255,155,38,0.2)",
+    color: "#10B981",
+    colorBg: "rgba(16,185,129,0.1)",
+    colorBorder: "rgba(16,185,129,0.2)",
     tag: "Inventory & Sales Dashboard",
     shortDesc: "Real-time stock and sales reports for retail and small shops.",
     headline: "Know exactly what's selling — and when to restock",
@@ -131,7 +131,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   return (
     <div className="border-b border-white/5">
       <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-5 text-left group">
-        <span className="text-white font-medium text-sm pr-4 group-hover:text-[#FF4F27] transition-colors">{q}</span>
+        <span className="text-white font-medium text-sm pr-4 group-hover:text-[#06B6D4] transition-colors">{q}</span>
         <ChevronDown className={`w-4 h-4 text-slate-400 flex-shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
       </button>
       <AnimatePresence>
@@ -153,24 +153,24 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 export default function ServicesPage() {
   return (
-    <main className="min-h-screen bg-[#0e0918] text-slate-300 overflow-x-hidden">
+    <main className="min-h-screen bg-[#0F172A] text-slate-300 overflow-x-hidden">
       <Navbar />
 
       {/* Hero */}
       <section className="relative pt-36 pb-20 px-6 flex flex-col items-center text-center overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "32px 32px", maskImage: "radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%)" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-[#FF4F27] blur-[160px] opacity-8 pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-[#06B6D4] blur-[160px] opacity-8 pointer-events-none" />
 
         <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible"
           className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300 font-medium">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#FF4F27] shadow-[0_0_6px_#FF4F27]" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] shadow-[0_0_6px_#06B6D4]" />
           Auckland-based · Built in 7–21 days · From $1,800 NZD
         </motion.div>
 
         <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="visible"
           className="text-5xl md:text-6xl font-bold text-white tracking-tight mb-6 max-w-4xl leading-tight">
           Apps for Auckland{" "}
-          <span className="bg-gradient-to-r from-[#FF4F27] via-[#FF9B26] to-[#FF4F27] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#06B6D4] via-[#10B981] to-[#06B6D4] bg-clip-text text-transparent">
             Small Businesses
           </span>
         </motion.h1>
@@ -184,7 +184,7 @@ export default function ServicesPage() {
         <motion.div custom={3} variants={fadeUp} initial="hidden" animate="visible" className="flex flex-wrap gap-3 justify-center">
           {services.map((s) => (
             <a key={s.id} href={`#${s.id}`}
-              className="px-4 py-2 text-xs font-medium rounded-lg border border-white/10 text-slate-300 hover:text-white hover:border-[#FF4F27]/40 transition-all bg-white/3">
+              className="px-4 py-2 text-xs font-medium rounded-lg border border-white/10 text-slate-300 hover:text-white hover:border-[#06B6D4]/40 transition-all bg-white/3">
               {s.tag}
             </a>
           ))}
@@ -218,11 +218,11 @@ export default function ServicesPage() {
 
               {/* Delivery + price badge */}
               <div className="flex flex-wrap items-center gap-3 mb-8">
-                <div className="flex items-center gap-2 px-4 py-2 bg-[#1A1A1E] border border-white/8 rounded-xl text-xs text-slate-300">
-                  <Clock className="w-3.5 h-3.5 text-[#FF4F27]" /> Built in {svc.delivery}
+                <div className="flex items-center gap-2 px-4 py-2 bg-[#243347] border border-white/8 rounded-xl text-xs text-slate-300">
+                  <Clock className="w-3.5 h-3.5 text-[#06B6D4]" /> Built in {svc.delivery}
                 </div>
-                <div className="flex items-center gap-2 px-4 py-2 bg-[#1A1A1E] border border-white/8 rounded-xl text-xs text-slate-300">
-                  <Zap className="w-3.5 h-3.5 text-[#FF4F27]" /> From {svc.from} NZD
+                <div className="flex items-center gap-2 px-4 py-2 bg-[#243347] border border-white/8 rounded-xl text-xs text-slate-300">
+                  <Zap className="w-3.5 h-3.5 text-[#06B6D4]" /> From {svc.from} NZD
                 </div>
               </div>
 
@@ -241,7 +241,7 @@ export default function ServicesPage() {
 
             {/* Card side */}
             <div className="flex-1 w-full flex justify-center">
-              <div className="w-full max-w-md bg-[#14151A] border border-white/5 rounded-3xl p-8 relative overflow-hidden group hover:border-white/10 transition-all">
+              <div className="w-full max-w-md bg-[#1E293B] border border-white/5 rounded-3xl p-8 relative overflow-hidden group hover:border-white/10 transition-all">
                 <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] pointer-events-none opacity-15 group-hover:opacity-25 transition-opacity"
                   style={{ background: svc.color }} />
 
@@ -259,7 +259,7 @@ export default function ServicesPage() {
                   <p className="text-xs text-slate-500 font-medium mb-3 uppercase tracking-wide">Built with</p>
                   <div className="flex flex-wrap gap-2 mb-6">
                     {svc.tools.map((t) => (
-                      <span key={t} className="px-3 py-1 text-xs text-slate-300 bg-[#1A1A1E] border border-white/5 rounded-lg">{t}</span>
+                      <span key={t} className="px-3 py-1 text-xs text-slate-300 bg-[#243347] border border-white/5 rounded-lg">{t}</span>
                     ))}
                   </div>
                   <div className="h-px bg-white/5 mb-5" />
@@ -294,7 +294,7 @@ export default function ServicesPage() {
             { num: "04", title: "Launch & train you", desc: "We go live together. I train you and your team, hand over all credentials, and stay available for 30 days." },
           ].map((step, i) => (
             <motion.div key={step.num} custom={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              className="bg-[#14151A] border border-white/5 rounded-2xl p-7 relative group hover:border-white/10 transition-all">
+              className="bg-[#1E293B] border border-white/5 rounded-2xl p-7 relative group hover:border-white/10 transition-all">
               <div className="text-5xl font-black text-white/5 mb-4 font-mono">{step.num}</div>
               <h3 className="text-white font-bold mb-2">{step.title}</h3>
               <p className="text-slate-400 text-sm leading-relaxed font-light">{step.desc}</p>
@@ -320,8 +320,8 @@ export default function ServicesPage() {
       {/* CTA */}
       <section className="py-20 px-6 relative z-10">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-          className="max-w-[1200px] mx-auto bg-gradient-to-br from-[#FF4F27]/15 via-[#14151A] to-[#1A1A1E] border border-[#FF4F27]/15 rounded-3xl p-12 md:p-20 text-center relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#FF4F27]/10 to-transparent blur-[100px] pointer-events-none" />
+          className="max-w-[1200px] mx-auto bg-gradient-to-br from-[#06B6D4]/15 via-[#1E293B] to-[#243347] border border-[#06B6D4]/15 rounded-3xl p-12 md:p-20 text-center relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#06B6D4]/10 to-transparent blur-[100px] pointer-events-none" />
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-5 relative z-10">
             Not sure which app you need?
           </h2>
@@ -330,7 +330,7 @@ export default function ServicesPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
             <a href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#FF4F27] hover:bg-[#FF6B00] text-white font-semibold rounded-lg transition-all shadow-[0_0_30px_rgba(255,79,39,0.45)] group">
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-lg transition-all shadow-[0_0_30px_rgba(6,182,212,0.45)] group">
               Book a free call <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
             <a href="/contact"

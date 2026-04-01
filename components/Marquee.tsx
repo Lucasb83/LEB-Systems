@@ -34,8 +34,8 @@ export default function Marquee() {
       </p>
       <div className="w-full relative flex overflow-x-hidden">
         {/* Fade edges */}
-        <div className="absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-[#0e0918] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-[#0e0918] to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-[#0F172A] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-[#0F172A] to-transparent z-10 pointer-events-none" />
 
         <motion.div
           className="flex gap-4 whitespace-nowrap px-6"
@@ -45,7 +45,7 @@ export default function Marquee() {
           {[...items, ...items, ...items].map((item, i) => (
             <div
               key={i}
-              className="flex items-center gap-2.5 bg-[#14151A] border border-white/5 px-5 py-2.5 rounded-xl shadow-lg hover:border-white/20 hover:bg-[#1A1A1E] transition-all duration-300 cursor-default"
+              className="flex items-center gap-2.5 bg-[#1E293B] border border-white/5 px-5 py-2.5 rounded-xl shadow-lg hover:border-white/20 hover:bg-[#243347] transition-all duration-300 cursor-default"
             >
               {item.icon}
               <span className="text-slate-300 font-medium text-sm">{item.name}</span>

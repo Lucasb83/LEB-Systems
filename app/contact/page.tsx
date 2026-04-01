@@ -31,7 +31,7 @@ const packages = [
 ];
 
 const contactInfo = [
-  { icon: <Mail className="w-5 h-5 text-[#FF4F27]" />, label: "Email", value: "lebsystems.flow@gmail.com" },
+  { icon: <Mail className="w-5 h-5 text-[#06B6D4]" />, label: "Email", value: "lebsystems.flow@gmail.com" },
   { icon: <Clock className="w-5 h-5 text-[#9333EA]" />, label: "Response time", value: "Within 24 hours" },
   { icon: <MapPin className="w-5 h-5 text-[#EC4899]" />, label: "Location", value: "Auckland, New Zealand" },
 ];
@@ -50,27 +50,27 @@ export default function ContactPage() {
 
   const handleChange = (field: string, value: string) => setForm((p) => ({ ...p, [field]: value }));
 
-  const inputBase = "w-full bg-[#14151A] border border-white/8 text-white text-sm rounded-xl px-4 py-3.5 outline-none focus:border-[#FF4F27]/60 focus:shadow-[0_0_0_3px_rgba(255,79,39,0.1)] transition-all placeholder:text-slate-600 appearance-none";
+  const inputBase = "w-full bg-[#1E293B] border border-white/8 text-white text-sm rounded-xl px-4 py-3.5 outline-none focus:border-[#06B6D4]/60 focus:shadow-[0_0_0_3px_rgba(6,182,212,0.1)] transition-all placeholder:text-slate-600 appearance-none";
 
   return (
-    <main className="min-h-screen bg-[#0e0918] text-slate-300 overflow-x-hidden">
+    <main className="min-h-screen bg-[#0F172A] text-slate-300 overflow-x-hidden">
       <Navbar />
 
       {/* Hero */}
       <section className="relative pt-36 pb-16 px-6 flex flex-col items-center text-center overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "32px 32px", maskImage: "radial-gradient(ellipse 80% 50% at 50% 40%, black 40%, transparent 100%)" }} />
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] rounded-full bg-[#FF4F27] blur-[160px] opacity-8 pointer-events-none" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] rounded-full bg-[#06B6D4] blur-[160px] opacity-8 pointer-events-none" />
 
         <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible"
           className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300 font-medium">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#FF4F27] shadow-[0_0_6px_#FF4F27]" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] shadow-[0_0_6px_#06B6D4]" />
           Get in touch
         </motion.div>
 
         <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="visible"
           className="text-5xl md:text-6xl font-bold text-white tracking-tight mb-5 leading-tight">
           Let&apos;s get your{" "}
-          <span className="bg-gradient-to-r from-[#FF4F27] via-[#FF9B26] to-[#FF4F27] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#06B6D4] via-[#10B981] to-[#06B6D4] bg-clip-text text-transparent">
             Auckland business an app.
           </span>
         </motion.h1>
@@ -90,7 +90,7 @@ export default function ContactPage() {
             className="lg:col-span-2 flex flex-col gap-6">
 
             {/* Contact info */}
-            <div className="bg-[#14151A] border border-white/5 rounded-3xl p-8">
+            <div className="bg-[#1E293B] border border-white/5 rounded-3xl p-8">
               <h3 className="text-white font-bold text-lg mb-6">Contact information</h3>
               <div className="space-y-5">
                 {contactInfo.map((item) => (
@@ -108,7 +108,7 @@ export default function ContactPage() {
             </div>
 
             {/* What to expect */}
-            <div className="bg-[#14151A] border border-white/5 rounded-3xl p-8">
+            <div className="bg-[#1E293B] border border-white/5 rounded-3xl p-8">
               <h3 className="text-white font-bold text-lg mb-6">What happens next?</h3>
               <div className="space-y-5">
                 {[
@@ -117,7 +117,7 @@ export default function ContactPage() {
                   { step: "3", title: "Tailored proposal", desc: "A clear scope, timeline, and fixed price. No surprises." },
                 ].map((item) => (
                   <div key={item.step} className="flex gap-4">
-                    <div className="w-7 h-7 rounded-full bg-[#FF4F27]/15 border border-[#FF4F27]/25 flex items-center justify-center text-xs font-bold text-[#FF4F27] flex-shrink-0">
+                    <div className="w-7 h-7 rounded-full bg-[#06B6D4]/15 border border-[#06B6D4]/25 flex items-center justify-center text-xs font-bold text-[#06B6D4] flex-shrink-0">
                       {item.step}
                     </div>
                     <div>
@@ -130,13 +130,13 @@ export default function ContactPage() {
             </div>
 
             {/* Social proof */}
-            <div className="bg-gradient-to-br from-[#FF4F27]/10 to-[#14151A] border border-[#FF4F27]/15 rounded-3xl p-8 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-40 h-40 bg-[#FF4F27]/10 blur-[60px] pointer-events-none rounded-full" />
+            <div className="bg-gradient-to-br from-[#06B6D4]/10 to-[#1E293B] border border-[#06B6D4]/15 rounded-3xl p-8 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-[#06B6D4]/10 blur-[60px] pointer-events-none rounded-full" />
               <p className="text-slate-300 text-sm italic font-light leading-relaxed mb-5 relative z-10">
                 &ldquo;Lucas built our booking system in under 2 weeks. Our no-shows dropped by 60% and we save 10+ hours a week on admin. Best money we&rsquo;ve spent on the business.&rdquo;
               </p>
               <div className="flex items-center gap-3 relative z-10">
-                <div className="w-8 h-8 rounded-full bg-[#FF4F27]/20 border border-[#FF4F27]/30 flex items-center justify-center text-xs font-bold text-[#FF4F27]">S</div>
+                <div className="w-8 h-8 rounded-full bg-[#06B6D4]/20 border border-[#06B6D4]/30 flex items-center justify-center text-xs font-bold text-[#06B6D4]">S</div>
                 <div>
                   <p className="text-white text-xs font-semibold">Sarah M.</p>
                   <p className="text-slate-500 text-xs">Gym owner, Auckland</p>
@@ -148,7 +148,7 @@ export default function ContactPage() {
           {/* Right form panel */}
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
             className="lg:col-span-3">
-            <div className="bg-[#14151A] border border-white/5 rounded-3xl p-8 md:p-10">
+            <div className="bg-[#1E293B] border border-white/5 rounded-3xl p-8 md:p-10">
               {submitted ? (
                 <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
                   className="flex flex-col items-center text-center py-12">
@@ -234,7 +234,7 @@ export default function ContactPage() {
                   </div>
 
                   <button type="submit" disabled={loading}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-[#FF4F27] hover:bg-[#FF6B00] disabled:opacity-70 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all shadow-[0_0_25px_rgba(255,79,39,0.35)] hover:shadow-[0_0_40px_rgba(255,79,39,0.5)] group">
+                    className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-[#06B6D4] hover:bg-[#0891B2] disabled:opacity-70 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all shadow-[0_0_25px_rgba(6,182,212,0.35)] hover:shadow-[0_0_40px_rgba(6,182,212,0.5)] group">
                     {loading ? (
                       <>
                         <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }}

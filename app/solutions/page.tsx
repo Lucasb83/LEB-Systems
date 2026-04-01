@@ -18,7 +18,7 @@ const fadeUp = {
 const industries = [
   {
     icon: <Building2 className="w-6 h-6" />,
-    color: "#FF4F27",
+    color: "#06B6D4",
     name: "Financial Services",
     desc: "Compliance-first infrastructure, real-time transaction pipelines, AI-powered risk scoring, and automation for KYC/AML workflows.",
     challenges: ["Regulatory compliance (SOC2, PCI-DSS)", "Real-time fraud detection", "Legacy system modernisation"],
@@ -42,7 +42,7 @@ const industries = [
   },
   {
     icon: <Factory className="w-6 h-6" />,
-    color: "#FF9B26",
+    color: "#10B981",
     name: "Manufacturing & Logistics",
     desc: "Supply chain visibility, predictive maintenance with AI, automated ERP integrations, and real-time IoT data pipelines.",
     challenges: ["Supply chain visibility", "Equipment downtime", "Manual data entry in ERPs"],
@@ -69,7 +69,7 @@ const industries = [
 /* ─────────────────────────────── DIFFERENTIATORS */
 const differentiators = [
   {
-    icon: <Bot className="w-5 h-5 text-[#FF4F27]" />,
+    icon: <Bot className="w-5 h-5 text-[#06B6D4]" />,
     title: "AI-native from day one",
     desc: "We don't bolt AI on at the end. Every solution is designed with intelligent automation at its core.",
   },
@@ -79,7 +79,7 @@ const differentiators = [
     desc: "Infrastructure, application, AI, and automation — one team that owns the entire stack and eliminates integration risk.",
   },
   {
-    icon: <Zap className="w-5 h-5 text-[#FF9B26]" />,
+    icon: <Zap className="w-5 h-5 text-[#10B981]" />,
     title: "Outcome-driven delivery",
     desc: "We measure success by your KPIs, not deliverables. Every decision traces back to business impact.",
   },
@@ -92,7 +92,7 @@ const caseStudies = [
     headline: "90% reduction in manual compliance reporting",
     body: "We automated a regional bank's KYC and AML workflows, cutting 40 hours per week of manual analyst work and eliminating reporting errors.",
     tags: ["AI", "Automation", "Compliance"],
-    color: "#FF4F27",
+    color: "#06B6D4",
   },
   {
     industry: "E-commerce",
@@ -112,24 +112,24 @@ const caseStudies = [
 
 export default function SolutionsPage() {
   return (
-    <main className="min-h-screen bg-[#0e0918] text-slate-300 overflow-x-hidden">
+    <main className="min-h-screen bg-[#0F172A] text-slate-300 overflow-x-hidden">
       <Navbar />
 
       {/* Hero */}
       <section className="relative pt-36 pb-24 px-6 flex flex-col items-center text-center overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "32px 32px", maskImage: "radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%)" }} />
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-[#FF4F27] blur-[180px] opacity-8 pointer-events-none" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-[#06B6D4] blur-[180px] opacity-8 pointer-events-none" />
 
         <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible"
           className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300 font-medium">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#FF4F27] shadow-[0_0_6px_#FF4F27]" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] shadow-[0_0_6px_#06B6D4]" />
           Solutions by industry
         </motion.div>
 
         <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="visible"
           className="text-5xl md:text-6xl font-bold text-white tracking-tight mb-6 max-w-4xl leading-tight">
           Built for{" "}
-          <span className="bg-gradient-to-r from-[#9333EA] via-[#EC4899] to-[#FF4F27] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#9333EA] via-[#EC4899] to-[#06B6D4] bg-clip-text text-transparent">
             every challenge.
           </span>
         </motion.h1>
@@ -145,7 +145,7 @@ export default function SolutionsPage() {
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {industries.map((ind, i) => (
             <motion.div key={ind.name} custom={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              className="bg-[#14151A] border border-white/5 rounded-3xl p-8 flex flex-col group hover:border-white/10 transition-all duration-500 relative overflow-hidden cursor-default"
+              className="bg-[#1E293B] border border-white/5 rounded-3xl p-8 flex flex-col group hover:border-white/10 transition-all duration-500 relative overflow-hidden cursor-default"
               style={{ "--glow": ind.color } as React.CSSProperties}>
               <div className="absolute top-0 right-0 w-48 h-48 rounded-full blur-[80px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                 style={{ background: `${ind.color}18` }} />
@@ -198,7 +198,7 @@ export default function SolutionsPage() {
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
           {differentiators.map((d, i) => (
             <motion.div key={d.title} custom={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              className="bg-[#14151A] border border-white/5 rounded-2xl p-8">
+              className="bg-[#1E293B] border border-white/5 rounded-2xl p-8">
               <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-5">
                 {d.icon}
               </div>
@@ -219,7 +219,7 @@ export default function SolutionsPage() {
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
           {caseStudies.map((cs, i) => (
             <motion.div key={cs.headline} custom={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              className="bg-[#14151A] border border-white/5 rounded-3xl p-8 flex flex-col group hover:border-white/10 transition-all relative overflow-hidden cursor-default">
+              className="bg-[#1E293B] border border-white/5 rounded-3xl p-8 flex flex-col group hover:border-white/10 transition-all relative overflow-hidden cursor-default">
               <div className="absolute top-0 left-0 w-full h-1 opacity-50 rounded-t-3xl" style={{ background: `linear-gradient(to right, ${cs.color}, transparent)` }} />
               <span className="text-xs font-medium px-3 py-1 rounded-full border mb-5 self-start"
                 style={{ color: cs.color, background: `${cs.color}15`, borderColor: `${cs.color}25` }}>
@@ -240,14 +240,14 @@ export default function SolutionsPage() {
       {/* CTA */}
       <section className="py-20 px-6 relative z-10">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-          className="max-w-[1200px] mx-auto bg-gradient-to-br from-[#9333EA]/15 via-[#14151A] to-[#1A1A1E] border border-[#9333EA]/15 rounded-3xl p-12 md:p-20 text-center relative overflow-hidden">
+          className="max-w-[1200px] mx-auto bg-gradient-to-br from-[#9333EA]/15 via-[#1E293B] to-[#243347] border border-[#9333EA]/15 rounded-3xl p-12 md:p-20 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[#9333EA]/8 to-transparent blur-[100px] pointer-events-none" />
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-5 relative z-10">Your industry. Our expertise.</h2>
           <p className="text-slate-300 mb-10 text-lg font-light relative z-10 max-w-xl mx-auto">
             Tell us about your business. We'll map the exact solution that moves your metrics.
           </p>
           <a href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-[#FF4F27] hover:bg-[#FF6B00] text-white font-semibold rounded-lg transition-all shadow-[0_0_30px_rgba(255,79,39,0.45)] relative z-10 group">
+            className="inline-flex items-center gap-2 px-8 py-4 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-lg transition-all shadow-[0_0_30px_rgba(6,182,212,0.45)] relative z-10 group">
             Book a discovery call <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
         </motion.div>

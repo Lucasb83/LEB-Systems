@@ -19,8 +19,8 @@ const caseStudies = [
   {
     title: "Auckland Gym — Booking & Membership App",
     category: "Booking & Reservations",
-    icon: <CalendarDays className="w-6 h-6 text-[#FF4F27]" />,
-    color: "#FF4F27",
+    icon: <CalendarDays className="w-6 h-6 text-[#06B6D4]" />,
+    color: "#06B6D4",
     description:
       "A 3-location gym in Auckland needed to replace their paper booking sheets and phone call reservations. We built a mobile-first booking app with class schedules, membership tracking, and WhatsApp reminders.",
     results: [
@@ -67,8 +67,8 @@ const caseStudies = [
   {
     title: "Retail Boutique — Inventory Dashboard",
     category: "Inventory & Sales",
-    icon: <BarChart3 className="w-6 h-6 text-[#FF9B26]" />,
-    color: "#FF9B26",
+    icon: <BarChart3 className="w-6 h-6 text-[#10B981]" />,
+    color: "#10B981",
     description:
       "A boutique clothing store with two Auckland locations was managing stock in spreadsheets. We built a real-time inventory dashboard with low-stock alerts and daily sales reporting.",
     results: [
@@ -100,7 +100,7 @@ const caseStudies = [
 
 export default function CaseStudiesPage() {
   return (
-    <main className="min-h-screen bg-[#0e0918] text-slate-300 font-sans overflow-x-hidden">
+    <main className="min-h-screen bg-[#0F172A] text-slate-300 font-sans overflow-x-hidden">
       <Navbar />
 
       <section className="relative pt-40 pb-24 px-6 overflow-hidden">
@@ -114,12 +114,12 @@ export default function CaseStudiesPage() {
             className="text-center mb-20"
           >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300 font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF4F27] shadow-[0_0_6px_#FF4F27]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] shadow-[0_0_6px_#06B6D4]" />
               Real apps. Real Auckland businesses.
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-white tracking-tight mb-6">
               Case Studies &amp;<br />
-              <span className="bg-gradient-to-r from-[#FF4F27] via-[#FF9B26] to-[#FF4F27] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#06B6D4] via-[#10B981] to-[#06B6D4] bg-clip-text text-transparent">
                 Portfolio
               </span>
             </h1>
@@ -135,7 +135,7 @@ export default function CaseStudiesPage() {
                 key={cs.title}
                 custom={i + 1} variants={fadeUp} initial="hidden" whileInView="visible"
                 viewport={{ once: true }}
-                className="bg-[#14151A] border border-white/5 rounded-3xl p-8 flex flex-col group hover:border-white/10 transition-all duration-500 relative overflow-hidden"
+                className="bg-[#1E293B] border border-white/5 rounded-3xl p-8 flex flex-col group hover:border-white/10 transition-all duration-500 relative overflow-hidden"
                 style={{ "--glow-color": cs.color } as React.CSSProperties}
               >
                 <div
@@ -162,7 +162,7 @@ export default function CaseStudiesPage() {
                 <p className="text-slate-400 text-sm leading-relaxed mb-6 font-light z-10">{cs.description}</p>
 
                 {/* Results */}
-                <div className="bg-[#0e0918] border border-white/5 rounded-2xl p-5 mb-5 z-10">
+                <div className="bg-[#0F172A] border border-white/5 rounded-2xl p-5 mb-5 z-10">
                   <p className="text-xs text-slate-500 font-semibold uppercase tracking-widest mb-3">Results</p>
                   <ul className="space-y-2">
                     {cs.results.map((r) => (
@@ -176,7 +176,7 @@ export default function CaseStudiesPage() {
                 {/* Tools used */}
                 <div className="flex flex-wrap gap-2 z-10">
                   {cs.tools.map((tool) => (
-                    <span key={tool} className="text-xs px-3 py-1 bg-[#1A1A1E] border border-white/5 rounded-full text-slate-400">
+                    <span key={tool} className="text-xs px-3 py-1 bg-[#243347] border border-white/5 rounded-full text-slate-400">
                       {tool}
                     </span>
                   ))}
@@ -189,7 +189,7 @@ export default function CaseStudiesPage() {
           <motion.div
             custom={7} variants={fadeUp} initial="hidden" whileInView="visible"
             viewport={{ once: true }}
-            className="text-center bg-[#14151A] border border-white/5 rounded-3xl p-14"
+            className="text-center bg-[#1E293B] border border-white/5 rounded-3xl p-14"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Want results like these for your business?
@@ -200,7 +200,7 @@ export default function CaseStudiesPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#FF4F27] hover:bg-[#FF6B00] text-white font-semibold rounded-xl transition-all shadow-[0_0_30px_rgba(255,79,39,0.4)] hover:shadow-[0_0_50px_rgba(255,79,39,0.6)] group"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-xl transition-all shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:shadow-[0_0_50px_rgba(6,182,212,0.6)] group"
               >
                 Book a free consultation
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

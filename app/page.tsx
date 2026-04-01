@@ -12,7 +12,7 @@ import Footer from "../components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0e0918] text-slate-300 font-sans selection:bg-[#FF4F27]/20 overflow-x-hidden">
+    <main className="min-h-screen bg-[#0F172A] text-slate-300 font-sans selection:bg-[#06B6D4]/20 overflow-x-hidden">
       <Navbar />
       <FlowerOfLife />
       <Marquee />

@@ -6,14 +6,14 @@ import { ArrowLeft, Home, Search } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-[#0e0918] text-slate-300 flex flex-col items-center justify-center px-6 relative overflow-hidden">
+    <main className="min-h-screen bg-[#0F172A] text-slate-300 flex flex-col items-center justify-center px-6 relative overflow-hidden">
 
       {/* Dot grid */}
       <div className="absolute inset-0 pointer-events-none"
         style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
 
       {/* Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] rounded-full bg-[#FF4F27] blur-[200px] opacity-8 pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] rounded-full bg-[#06B6D4] blur-[200px] opacity-8 pointer-events-none" />
       <div className="absolute top-1/3 right-1/4 w-[300px] h-[300px] rounded-full bg-[#9333EA] blur-[150px] opacity-8 pointer-events-none" />
 
       <motion.div
@@ -24,7 +24,7 @@ export default function NotFound() {
       >
         {/* Logo */}
         <a href="/" className="inline-flex items-center gap-2.5 mb-12">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#FF4F27] to-[#FF6B00] flex items-center justify-center shadow-[0_0_18px_rgba(255,79,39,0.5)]">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#06B6D4] to-[#0891B2] flex items-center justify-center shadow-[0_0_18px_rgba(6,182,212,0.5)]">
             <span className="text-white font-bold text-xs">L</span>
           </div>
           <span className="text-white font-semibold text-base">LEB Systems</span>
@@ -43,7 +43,7 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="/"
-            className="flex items-center gap-2 px-7 py-3.5 bg-[#FF4F27] hover:bg-[#FF6B00] text-white font-semibold rounded-lg transition-all shadow-[0_0_25px_rgba(255,79,39,0.4)] group"
+            className="flex items-center gap-2 px-7 py-3.5 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-lg transition-all shadow-[0_0_25px_rgba(6,182,212,0.4)] group"
           >
             <Home className="w-4 h-4" />
             Back to home

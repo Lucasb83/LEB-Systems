@@ -50,14 +50,14 @@ const aiCapabilities = [
 const automationCapabilities = [
   {
     icon: <Zap className="w-5 h-5" />,
-    color: "#FF9B26",
+    color: "#10B981",
     title: "Workflow Automation",
     desc: "Design, build, and deploy end-to-end automated workflows. We replace manual, error-prone processes with reliable, monitored automation.",
     features: ["Visual workflow builder", "Conditional logic & branching", "Error handling & retries", "Execution history & audit logs"],
   },
   {
     icon: <Network className="w-5 h-5" />,
-    color: "#FF4F27",
+    color: "#06B6D4",
     title: "API & Systems Integration",
     desc: "Connect disparate systems that were never meant to talk to each other. We handle 400+ native integrations and can build custom connectors for any REST or SOAP API.",
     features: ["400+ pre-built integrations", "Custom API connectors", "Webhook management", "OAuth & API key handling"],
@@ -83,8 +83,8 @@ const pipelineSteps = [
   { label: "Data Source", sub: "Documents, DB, APIs", color: "#9333EA" },
   { label: "Ingestion", sub: "Parse & chunk", color: "#9333EA" },
   { label: "Embedding", sub: "Vectorise content", color: "#EC4899" },
-  { label: "LLM Layer", sub: "Reason & generate", color: "#FF4F27" },
-  { label: "Delivery", sub: "API / UI / Webhook", color: "#FF9B26" },
+  { label: "LLM Layer", sub: "Reason & generate", color: "#06B6D4" },
+  { label: "Delivery", sub: "API / UI / Webhook", color: "#10B981" },
 ];
 
 /* ─────────────────── INTEGRATIONS */
@@ -104,14 +104,14 @@ const metrics = [
 
 export default function AIAutomationPage() {
   return (
-    <main className="min-h-screen bg-[#0e0918] text-slate-300 overflow-x-hidden">
+    <main className="min-h-screen bg-[#0F172A] text-slate-300 overflow-x-hidden">
       <Navbar />
 
       {/* Hero */}
       <section className="relative pt-36 pb-24 px-6 flex flex-col items-center text-center overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "32px 32px", maskImage: "radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%)" }} />
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-[#EC4899] blur-[180px] opacity-8 pointer-events-none" />
-        <div className="absolute top-1/2 left-1/4 w-[300px] h-[300px] rounded-full bg-[#FF4F27] blur-[150px] opacity-6 pointer-events-none" />
+        <div className="absolute top-1/2 left-1/4 w-[300px] h-[300px] rounded-full bg-[#06B6D4] blur-[150px] opacity-6 pointer-events-none" />
 
         <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible"
           className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300 font-medium">
@@ -133,7 +133,7 @@ export default function AIAutomationPage() {
         </motion.p>
 
         <motion.div custom={3} variants={fadeUp} initial="hidden" animate="visible" className="flex flex-wrap gap-4 justify-center">
-          <a href="/contact" className="flex items-center gap-2 px-7 py-3.5 bg-[#FF4F27] hover:bg-[#FF6B00] text-white font-semibold rounded-lg transition-all shadow-[0_0_25px_rgba(255,79,39,0.4)] group">
+          <a href="/contact" className="flex items-center gap-2 px-7 py-3.5 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-lg transition-all shadow-[0_0_25px_rgba(6,182,212,0.4)] group">
             Start an AI project <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
           <a href="#automation" className="flex items-center gap-2 px-7 py-3.5 border border-white/15 hover:border-white/30 text-white font-medium rounded-lg transition-all hover:bg-white/5">
@@ -147,7 +147,7 @@ export default function AIAutomationPage() {
         <div className="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
           {metrics.map((m, i) => (
             <motion.div key={m.label} custom={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              className="bg-[#14151A] border border-white/5 rounded-2xl p-6 text-center">
+              className="bg-[#1E293B] border border-white/5 rounded-2xl p-6 text-center">
               <div className="text-3xl font-black text-white mb-1">{m.value}</div>
               <div className="text-xs text-slate-500 font-medium">{m.label}</div>
             </motion.div>
@@ -158,7 +158,7 @@ export default function AIAutomationPage() {
       {/* AI Pipeline visual */}
       <section className="py-20 px-6 relative z-10">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-          className="max-w-[1200px] mx-auto bg-gradient-to-br from-[#EC4899]/12 via-[#14151A] to-[#1A1A1E] border border-[#EC4899]/15 rounded-3xl p-10 md:p-14 overflow-hidden relative">
+          className="max-w-[1200px] mx-auto bg-gradient-to-br from-[#EC4899]/12 via-[#1E293B] to-[#243347] border border-[#EC4899]/15 rounded-3xl p-10 md:p-14 overflow-hidden relative">
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#EC4899]/8 blur-[120px] pointer-events-none rounded-full" />
 
           <h2 className="text-3xl font-bold text-white mb-3">How a RAG pipeline works</h2>
@@ -209,7 +209,7 @@ export default function AIAutomationPage() {
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
           {aiCapabilities.map((cap, i) => (
             <motion.div key={cap.title} custom={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              className="bg-[#14151A] border border-white/5 rounded-3xl p-8 group hover:border-white/10 transition-all relative overflow-hidden">
+              className="bg-[#1E293B] border border-white/5 rounded-3xl p-8 group hover:border-white/10 transition-all relative overflow-hidden">
               <div className="absolute top-0 right-0 w-48 h-48 rounded-full blur-[70px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                 style={{ background: `${cap.color}18` }} />
               <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 border"
@@ -241,7 +241,7 @@ export default function AIAutomationPage() {
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
           {automationCapabilities.map((cap, i) => (
             <motion.div key={cap.title} custom={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              className="bg-[#14151A] border border-white/5 rounded-3xl p-8 group hover:border-white/10 transition-all relative overflow-hidden">
+              className="bg-[#1E293B] border border-white/5 rounded-3xl p-8 group hover:border-white/10 transition-all relative overflow-hidden">
               <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full blur-[70px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                 style={{ background: `${cap.color}18` }} />
               <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 border"
@@ -273,11 +273,11 @@ export default function AIAutomationPage() {
         <div className="max-w-[900px] mx-auto flex flex-wrap gap-3 justify-center">
           {integrations.map((tool, i) => (
             <motion.span key={tool} custom={i * 0.05} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              className="px-4 py-2 text-sm text-slate-300 bg-[#14151A] border border-white/5 rounded-xl hover:border-white/20 hover:text-white transition-all cursor-default">
+              className="px-4 py-2 text-sm text-slate-300 bg-[#1E293B] border border-white/5 rounded-xl hover:border-white/20 hover:text-white transition-all cursor-default">
               {tool}
             </motion.span>
           ))}
-          <span className="px-4 py-2 text-sm text-[#FF4F27] bg-[#FF4F27]/10 border border-[#FF4F27]/20 rounded-xl font-medium">
+          <span className="px-4 py-2 text-sm text-[#06B6D4] bg-[#06B6D4]/10 border border-[#06B6D4]/20 rounded-xl font-medium">
             +380 more
           </span>
         </div>
@@ -286,7 +286,7 @@ export default function AIAutomationPage() {
       {/* CTA */}
       <section className="py-20 px-6 relative z-10">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-          className="max-w-[1200px] mx-auto bg-gradient-to-br from-[#EC4899]/15 via-[#14151A] to-[#1A1A1E] border border-[#EC4899]/15 rounded-3xl p-12 md:p-20 flex flex-col md:flex-row items-center justify-between gap-10 relative overflow-hidden">
+          className="max-w-[1200px] mx-auto bg-gradient-to-br from-[#EC4899]/15 via-[#1E293B] to-[#243347] border border-[#EC4899]/15 rounded-3xl p-12 md:p-20 flex flex-col md:flex-row items-center justify-between gap-10 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[#EC4899]/8 to-transparent blur-[100px] pointer-events-none" />
           <div className="relative z-10">
             <h2 className="text-4xl font-bold text-white mb-3">Ready to automate?</h2>
@@ -295,7 +295,7 @@ export default function AIAutomationPage() {
             </p>
           </div>
           <a href="/contact"
-            className="flex-shrink-0 inline-flex items-center gap-2 px-8 py-4 bg-[#FF4F27] hover:bg-[#FF6B00] text-white font-semibold rounded-lg transition-all shadow-[0_0_30px_rgba(255,79,39,0.45)] relative z-10 group whitespace-nowrap">
+            className="flex-shrink-0 inline-flex items-center gap-2 px-8 py-4 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-lg transition-all shadow-[0_0_30px_rgba(6,182,212,0.45)] relative z-10 group whitespace-nowrap">
             Book a free session <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
         </motion.div>
