@@ -4,7 +4,8 @@
       "Bash(for file:*)",
       "Bash(do echo:*)",
       "Read(//c/Users/g4t0/lebsystems/**)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(npm run:*)"
     ]
   }
 }

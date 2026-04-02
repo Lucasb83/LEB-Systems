@@ -18,18 +18,18 @@ const fadeUp = {
 const plans = [
   {
     name: "Starter App",
-    price: "$1,800",
+    price: "$3,500",
     currency: "NZD",
     badge: null,
     icon: <Zap className="w-5 h-5 text-slate-300" />,
-    tagline: "Perfect for getting started fast",
-    delivery: "7–10 days",
+    tagline: "Perfect for getting started — one core feature done properly",
+    delivery: "Ready in under 4 weeks",
     features: [
       "1 core feature (e.g. booking or menu)",
-      "Mobile-friendly design",
+      "Mobile-friendly, professional design",
       "1 payment integration (Stripe or Paystation)",
       "30 days post-launch support",
-      "Training session included",
+      "Training session for you & your team",
       "Full source code ownership",
     ],
     notIncluded: ["Multiple integrations", "AI automation", "Ongoing maintenance"],
@@ -39,12 +39,12 @@ const plans = [
   },
   {
     name: "Growth App",
-    price: "$3,500",
+    price: "$4,900",
     currency: "NZD",
     badge: "Most Popular",
     icon: <Star className="w-5 h-5 text-[#06B6D4]" />,
-    tagline: "The complete solution for growing businesses",
-    delivery: "14 days",
+    tagline: "The complete solution for growing Auckland businesses",
+    delivery: "Ready in under 4 weeks",
     features: [
       "3–5 features + full integrations",
       "Payments (Stripe / Paystation)",
@@ -61,16 +61,16 @@ const plans = [
     highlight: true,
   },
   {
-    name: "Enterprise Lite",
-    price: "$5,500",
+    name: "Premium Build",
+    price: "From $7,500",
     currency: "NZD",
     badge: null,
     icon: <Shield className="w-5 h-5 text-[#9333EA]" />,
-    tagline: "Full custom build with AI automation",
-    delivery: "3–4 weeks",
+    tagline: "Fully custom — any feature, any integration, any scale",
+    delivery: "Ready in 3–4 weeks maximum",
     features: [
       "Fully custom app — any feature",
-      "AI automation layer",
+      "AI automation layer included",
       "All integrations included",
       "Multi-user with roles & permissions",
       "Admin dashboard & analytics",
@@ -159,7 +159,7 @@ export default function PricingPage() {
                 </div>
                 <div className="text-xs text-slate-500 mb-8 flex items-center gap-1.5">
                   <Zap className="w-3 h-3 text-[#06B6D4]" />
-                  Delivered in {plan.delivery}
+                  {plan.delivery}
                 </div>
 
                 <a

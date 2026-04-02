@@ -17,8 +17,8 @@ const features = [
 ];
 
 const stats = [
-  { value: "7–14", label: "Days to build" },
-  { value: "From $1,200", label: "NZD pricing" },
+  { value: "< 4 wks", label: "Max delivery time" },
+  { value: "From $3,500", label: "NZD pricing" },
   { value: "100%", label: "Yours to keep" },
 ];
 
@@ -48,11 +48,11 @@ export default function MoveFastSection() {
             <span className="text-xs text-purple-300 font-medium">Fast delivery</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-5">
-            Stop waiting months.<br />Go live in weeks.
+            Stop waiting months.<br />Go live in under 4 weeks.
           </h2>
           <p className="text-slate-400 mb-10 text-base leading-relaxed font-light max-w-md">
             Big agencies charge $20k and take 6 months. We deliver a real, working app
-            for your Auckland business in 7–14 days — starting from $1,200 NZD.
+            for your Auckland business in under 4 weeks — starting from $3,500 NZD.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8 mb-12">

@@ -12,7 +12,7 @@ const fadeUp = {
 const features = [
   {
     title: "No-code speed, custom code when it matters",
-    desc: "We use Bubble, Glide, and FlutterFlow to build fast — and add custom code for anything the tools can't handle.",
+    desc: "We use modern no-code platforms to build fast — and add custom code for anything the tools can't handle. Best of both worlds.",
   },
   {
     title: "You own everything, forever",
@@ -37,11 +37,11 @@ export default function CodeSection() {
             <span className="text-xs text-[#10B981] font-medium">How we build</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6 leading-tight">
-            From idea to live app<br />in 7–14 days
+            From idea to live app<br />in under 4 weeks
           </h2>
           <p className="text-slate-300 mb-10 text-base leading-relaxed max-w-lg font-light">
-            We combine the speed of no-code tools with real development experience —
-            so you get a professional app without the agency price tag or the 3-month wait.
+            We combine the speed of no-code platforms with real development experience —
+            so you get a professional app without the agency price tag or the months-long wait.
           </p>
           <ul className="space-y-7 mb-10">
             {features.map((f) => (
@@ -106,7 +106,7 @@ export default function CodeSection() {
             ))}
             <div className="mt-2 pt-4 border-t border-white/5 flex items-center justify-between text-xs text-slate-500">
               <span>Estimated delivery</span>
-              <span className="text-[#06B6D4] font-semibold">7–14 days</span>
+              <span className="text-[#06B6D4] font-semibold">Under 4 weeks</span>
             </div>
           </div>
         </div>

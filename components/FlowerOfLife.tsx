@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 
 /*
@@ -23,6 +23,12 @@ const BRANCH_NODES = [
 ];
 
 export default function FlowerOfLife() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+  const logoY = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const copyY = useTransform(scrollYProgress, [0, 1], [0, -25]);
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
   const fadeUp = {
     hidden: { opacity: 0, y: 24 },
     visible: (d: number) => ({
@@ -33,7 +39,7 @@ export default function FlowerOfLife() {
   };
 
   return (
-    <section className="relative flex flex-col items-center justify-center w-full min-h-[820px] bg-transparent overflow-hidden pt-24 pb-12">
+    <section ref={sectionRef} className="relative flex flex-col items-center justify-center w-full min-h-[820px] bg-transparent overflow-hidden pt-24 pb-12">
 
       {/* Dot grid background */}
       <div
@@ -45,13 +51,15 @@ export default function FlowerOfLife() {
         }}
       />
 
-      {/* Orange glow centre */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#06B6D4] blur-[200px] opacity-10 pointer-events-none" />
-      {/* Soft purple accent glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] rounded-full bg-[#9333EA] blur-[140px] opacity-8 pointer-events-none" />
+      {/* Parallax glows */}
+      <motion.div style={{ opacity: bgOpacity }} className="pointer-events-none absolute inset-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#06B6D4] blur-[200px] opacity-10" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] rounded-full bg-[#10B981] blur-[140px] opacity-8" />
+      </motion.div>
 
-      {/* ── Circuit-board L logo ── */}
+      {/* ── Circuit-board L logo — parallax ── */}
       <motion.div
+        style={{ y: logoY }}
         className="relative z-10 mb-6"
         initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -131,8 +139,8 @@ export default function FlowerOfLife() {
         </svg>
       </motion.div>
 
-      {/* Copy */}
-      <div className="relative z-20 flex flex-col items-center text-center px-6 max-w-4xl mx-auto">
+      {/* Copy — parallax */}
+      <motion.div style={{ y: copyY }} className="relative z-20 flex flex-col items-center text-center px-6 max-w-4xl mx-auto w-full">
 
         {/* Eyebrow */}
         <motion.div
@@ -163,8 +171,8 @@ export default function FlowerOfLife() {
           custom={2} variants={fadeUp} initial="hidden" animate="visible"
           className="text-lg md:text-xl text-slate-300 font-light leading-relaxed max-w-2xl mb-10"
         >
-          Simple, affordable apps that save you time and make you money —
-          built in 1–2 weeks, fully yours. No lock-in. No agency markup.
+          Simple apps that save you time and grow your café, gym or shop — built locally,
+          fully owned by you, delivered in under 4 weeks.
         </motion.p>
 
         {/* CTAs */}
@@ -173,18 +181,18 @@ export default function FlowerOfLife() {
           className="flex flex-col sm:flex-row items-center gap-4"
         >
           <a
-            href="/pricing"
+            href="/contact"
             className="flex items-center gap-2 px-7 py-3.5 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-lg transition-all shadow-[0_0_30px_rgba(6,182,212,0.45)] hover:shadow-[0_0_45px_rgba(6,182,212,0.6)] group"
           >
-            See Pricing
+            Book a Free Call
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
           <a
-            href="/contact"
+            href="/case-studies"
             className="flex items-center gap-2 px-7 py-3.5 border border-white/15 hover:border-white/30 text-white font-medium rounded-lg transition-all hover:bg-white/5 group"
           >
             <Play className="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" />
-            Get a free consultation
+            See Our Work
           </a>
         </motion.div>
 
@@ -195,7 +203,7 @@ export default function FlowerOfLife() {
         >
           {[
             { value: "50+", label: "Projects delivered" },
-            { value: "7–14", label: "Days to deliver" },
+            { value: "< 4 wks", label: "Delivery time" },
             { value: "100%", label: "Client ownership" },
             { value: "Auckland", label: "Based in NZ" },
           ].map((stat) => (
@@ -205,7 +213,7 @@ export default function FlowerOfLife() {
             </div>
           ))}
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

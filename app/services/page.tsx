@@ -26,14 +26,14 @@ const services = [
     headline: "Never miss a booking again",
     body: "Your clients can book 24/7, pay instantly, and receive automatic reminders — all without you lifting a finger. Perfect for hair salons, gyms, tutors, and any service-based business in Auckland.",
     features: [
-      "Online calendar with real-time availability",
-      "Secure payments via Stripe or Paystation",
-      "Automatic WhatsApp/Email/SMS reminders",
-      "Reduce no-shows by up to 70%",
+      "Reduce no-shows by up to 60–70% with automatic reminders",
+      "Online calendar + real-time availability 24/7",
+      "Save 10+ hours per week on admin and phone calls",
+      "Secure Stripe or Paystation payments built in",
     ],
-    tools: ["Bubble.io", "Stripe", "WhatsApp API", "Google Calendar"],
-    delivery: "14–21 days",
-    from: "$1,800",
+    tools: ["Stripe", "WhatsApp API", "Google Calendar", "n8n"],
+    delivery: "Ready in under 4 weeks",
+    from: "$3,500",
   },
   {
     id: "orders",
@@ -46,14 +46,14 @@ const services = [
     headline: "Faster service. Happier customers.",
     body: "Turn your menu digital and let customers order from their phone. Less waiting, fewer mistakes, happier staff. Ideal for busy Auckland cafés, restaurants, and food trucks.",
     features: [
-      "Digital menu with photos and prices",
-      "Table-side or takeaway ordering via QR code",
-      "Kitchen display system",
-      "Integration with EFTPOS and payments",
+      "Turn tables 30% faster with QR code ordering",
+      "Kitchen errors drop to near-zero with a live display",
+      "Staff freed from taking orders — focus on hospitality",
+      "EFTPOS + Stripe payment integration",
     ],
-    tools: ["Glide", "Stripe", "Square", "Google Sheets"],
-    delivery: "10–14 days",
-    from: "$1,800",
+    tools: ["Stripe", "Square", "Google Sheets", "Make"],
+    delivery: "Ready in under 4 weeks",
+    from: "$3,500",
   },
   {
     id: "crm",
@@ -66,14 +66,14 @@ const services = [
     headline: "Stop juggling spreadsheets and emails",
     body: "Give your clients a professional portal and keep everything organised — from first enquiry to final invoice. Great for coaches, consultants, trainers, and retail shops.",
     features: [
-      "Client login area with documents and invoices",
-      "Simple CRM to track leads and follow-ups",
-      "Automated reminders and notifications",
-      "All data stored securely in New Zealand",
+      "All clients, invoices & history in one place",
+      "Automated follow-ups recover 20–30% of dormant leads",
+      "Xero integration — invoices sync automatically",
+      "All data stored securely in NZ-compliant infrastructure",
     ],
-    tools: ["Bubble.io", "Xero", "n8n", "Calendly"],
-    delivery: "14–21 days",
-    from: "$2,200",
+    tools: ["Xero", "n8n", "Calendly", "Airtable"],
+    delivery: "Ready in under 4 weeks",
+    from: "$3,500",
   },
   {
     id: "inventory",
@@ -86,14 +86,14 @@ const services = [
     headline: "Know exactly what's selling — and when to restock",
     body: "No more complicated software or guesswork. A simple, clean dashboard on your phone or computer shows live stock levels, daily sales, and automatic low-stock alerts.",
     features: [
-      "Live stock levels and low-stock alerts",
-      "Daily/weekly sales reports",
-      "Simple dashboard on phone or computer",
-      "Export to Excel or PDF",
+      "Real-time stock visibility — no more surprise stockouts",
+      "WhatsApp low-stock alerts when items run low",
+      "Daily sales reports emailed to you automatically",
+      "Works across multiple locations or stores",
     ],
-    tools: ["Glide", "Airtable", "n8n", "WhatsApp API"],
-    delivery: "10–14 days",
-    from: "$1,800",
+    tools: ["Airtable", "n8n", "WhatsApp API", "Google Sheets"],
+    delivery: "Ready in under 4 weeks",
+    from: "$3,500",
   },
   {
     id: "whatsapp",
@@ -106,21 +106,21 @@ const services = [
     headline: "Save 10+ hours a week on repetitive messages",
     body: "Automate customer conversations so you spend less time replying and more time running your business. Works 24/7 through WhatsApp and Instagram DMs — even while you sleep.",
     features: [
-      "Automatic replies and appointment booking via WhatsApp",
-      "Marketing message sequences",
-      "Integration with your calendar and payments",
-      "Track conversations in one place",
+      "Zero missed enquiries — auto-replies 24/7",
+      "Booking flows directly inside WhatsApp",
+      "Promotional broadcasts reach 100% of your audience",
+      "Automated reminders cut no-shows by up to 60%",
     ],
-    tools: ["n8n", "WhatsApp Business API", "Google Calendar", "Make"],
-    delivery: "7–14 days",
-    from: "$1,800",
+    tools: ["WhatsApp Business API", "Google Calendar", "Make", "n8n"],
+    delivery: "Ready in under 4 weeks",
+    from: "$3,500",
   },
 ];
 
 const faqs = [
   { q: "Do I need technical knowledge to use the apps you build?", a: "Not at all. Every app I build comes with a full training session for you and your team. I explain everything in plain language — no tech jargon. If you can use a smartphone, you can use your new app." },
   { q: "Who owns the app after it's built?", a: "You do — 100%. You get the source code, the database, and all login credentials at handover. There are no ongoing fees payable to me (only any third-party tool subscriptions, which I'll explain upfront)." },
-  { q: "How long does it really take?", a: "Most apps are delivered in 7–21 days depending on the package. We start with a free consultation to scope your app, and I'll give you an exact timeline before we begin." },
+  { q: "How long does it really take?", a: "Every app is delivered in under 4 weeks — usually 2–3 weeks. We start with a free consultation to scope your app, and I'll give you an exact timeline and fixed price before we begin." },
   { q: "Are the apps compliant with NZ Privacy Act 2020?", a: "Yes. All apps I build store data in NZ-based or compliant cloud infrastructure, handle user data responsibly, and follow NZ Privacy Act 2020 requirements. I can provide documentation if needed." },
   { q: "What if I need changes after the app is launched?", a: "All packages include a 30-day post-launch support period for fixes and small adjustments. For ongoing changes, I offer flexible monthly maintenance plans." },
   { q: "Can I start with a small package and upgrade later?", a: "Absolutely. Many clients start with the Starter App and add features as they grow. I build everything with expansion in mind." },
@@ -164,7 +164,7 @@ export default function ServicesPage() {
         <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible"
           className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300 font-medium">
           <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] shadow-[0_0_6px_#06B6D4]" />
-          Auckland-based · Built in 7–21 days · From $1,800 NZD
+          Auckland-based · Delivered in under 4 weeks · From $3,500 NZD
         </motion.div>
 
         <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="visible"
