@@ -7,11 +7,11 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "LEB Systems — Infrastructure, AI & Custom Software",
+    default: "LEB Systems — AI & Infrastructure Transformation",
     template: "%s | LEB Systems",
   },
-  description: "We design, build, and automate the digital stack that lets your business scale — from enterprise infrastructure to intelligent AI agents and custom applications.",
-  keywords: ["infrastructure development", "web design", "AI implementation", "process automation", "custom applications", "LEB Systems"],
+  description: "LEB Systems partners with AU/NZ B2B companies to deliver AI automation, cloud modernisation, platform engineering, and infrastructure programs that compound over time.",
+  keywords: ["AI automation", "cloud modernisation", "platform engineering", "infrastructure transformation", "AU/NZ B2B", "LEB Systems"],
   openGraph: {
     type: "website",
     locale: "en_US",

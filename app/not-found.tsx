@@ -53,16 +53,16 @@ export default function NotFound() {
             className="flex items-center gap-2 px-7 py-3.5 border border-white/15 hover:border-white/30 text-white font-medium rounded-lg transition-all hover:bg-white/5"
           >
             <Search className="w-4 h-4 text-slate-400" />
-            Get in touch
+            Book Strategy Session
           </a>
         </div>
 
         {/* Quick nav */}
         <div className="mt-14 flex flex-wrap gap-3 justify-center">
           {[
-            { label: "Services", href: "/services" },
             { label: "Solutions", href: "/solutions" },
-            { label: "AI & Automation", href: "/ai-automation" },
+            { label: "Method", href: "/method" },
+            { label: "Insights", href: "/insights" },
             { label: "About", href: "/about" },
           ].map((link) => (
             <a key={link.href} href={link.href}

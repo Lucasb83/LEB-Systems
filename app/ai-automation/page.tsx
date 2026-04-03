@@ -134,7 +134,7 @@ export default function AIAutomationPage() {
 
         <motion.div custom={3} variants={fadeUp} initial="hidden" animate="visible" className="flex flex-wrap gap-4 justify-center">
           <a href="/contact" className="flex items-center gap-2 px-7 py-3.5 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-lg transition-all shadow-[0_0_25px_rgba(6,182,212,0.4)] group">
-            Start an AI project <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            Book Strategy Session <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
           <a href="#automation" className="flex items-center gap-2 px-7 py-3.5 border border-white/15 hover:border-white/30 text-white font-medium rounded-lg transition-all hover:bg-white/5">
             See automation solutions
@@ -296,7 +296,7 @@ export default function AIAutomationPage() {
           </div>
           <a href="/contact"
             className="flex-shrink-0 inline-flex items-center gap-2 px-8 py-4 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-lg transition-all shadow-[0_0_30px_rgba(6,182,212,0.45)] relative z-10 group whitespace-nowrap">
-            Book a free session <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            Book Strategy Session <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
         </motion.div>
       </section>

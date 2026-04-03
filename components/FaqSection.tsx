@@ -6,28 +6,28 @@ import { ChevronDown, ArrowRight } from "lucide-react";
 
 const faqs = [
   {
-    q: "How long does it take to build my app?",
-    a: "Every app is delivered in under 4 weeks — usually 2–3 weeks. We start with a free 15-minute call to scope your app, then I give you a fixed timeline and price before we start. No surprises.",
+    q: "What types of companies do you work with?",
+    a: "We partner with AU/NZ B2B companies with 50–2,000 employees — typically SaaS, FinTech, logistics, professional services, and enterprise operations teams. Our programs work best when there's an internal technical contact and clear business outcomes to target.",
   },
   {
-    q: "Do I need technical knowledge to use what you build?",
-    a: "Not at all. Every app comes with a hands-on training session in plain English. If you can use your smartphone, you can run your new app. I stay available for 30 days after launch too.",
+    q: "What does a LEB Systems program actually involve?",
+    a: "Every engagement follows our five-phase method: Discovery & Audit, Architecture Design, Iterative Build, Validate & Optimise, and Continuous Improvement. We deliver working systems to production every two weeks — not a handover at the end of a 12-month project.",
   },
   {
-    q: "What does '100% ownership' actually mean?",
-    a: "You receive the source code, the database, and all login credentials at handover. No ongoing fees payable to me — only any third-party subscriptions (e.g. Stripe, WhatsApp API), which I explain clearly upfront.",
+    q: "How do you price your programs?",
+    a: "Programs are scoped and priced after the strategy session, once we understand your current state and target outcomes. Typical engagements run as fixed-scope phases with clear deliverables and KPIs agreed before kickoff. No open-ended retainers, no scope creep.",
   },
   {
-    q: "What's included in the price?",
-    a: "All prices include GST, design, build, integrations, deployment, a full training session, and 30 days of post-launch support. What you see is what you pay — no hidden extras.",
+    q: "Do you work alongside our existing team or replace it?",
+    a: "Always alongside. We embed as an extension of your team — not a replacement. Part of every engagement includes capability uplift so your team can operate and extend what we build after handover.",
   },
   {
-    q: "Can I see examples of your work first?",
-    a: "Absolutely — check out our Case Studies page for real Auckland businesses we've built for. Results include 60% fewer no-shows, 30% faster table turnover, and 10+ hours saved per week.",
+    q: "What happens if we need to pause or exit mid-program?",
+    a: "You own everything we build from day one — code, infrastructure, documentation. If you need to pause, we hand over a clean state with runbooks. There is no lock-in and no exit fee.",
   },
   {
-    q: "Can I start small and add more features later?",
-    a: "Yes. Many clients start with the Starter package and expand as their business grows. I build everything with future additions in mind, so adding features later is straightforward.",
+    q: "How quickly can we get started?",
+    a: "Strategy sessions are typically available within 3–5 business days of request. After the session, we issue a program proposal within one week. Most engagements kick off within 2 weeks of proposal acceptance.",
   },
 ];
 
@@ -78,7 +78,7 @@ export default function FaqSection() {
         <div className="text-center mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-5 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300 font-medium">
             <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] shadow-[0_0_6px_#06B6D4]" />
-            Straight answers, no jargon
+            Common questions
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
             Common questions
@@ -98,7 +98,7 @@ export default function FaqSection() {
             href="/contact"
             className="inline-flex items-center gap-2 px-6 py-3 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-lg transition-all shadow-[0_0_25px_rgba(6,182,212,0.35)] hover:shadow-[0_0_40px_rgba(6,182,212,0.5)] group"
           >
-            Book a free 15-min call
+            Book a strategy session
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </a>
         </div>

@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 /*
   Hero logo geometry — viewBox="0 0 200 200", centre=(100,100).
@@ -148,7 +148,7 @@ export default function FlowerOfLife() {
           className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300 font-medium backdrop-blur-sm"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] shadow-[0_0_6px_#06B6D4]" />
-          Auckland-based · NZ Privacy Act Compliant · GST Ready
+          AU/NZ · Enterprise B2B · Multi-month Transformation Programs
         </motion.div>
 
         {/* H1 */}
@@ -157,13 +157,12 @@ export default function FlowerOfLife() {
           className="text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-6"
           style={{ textShadow: "0 0 40px rgba(168,85,247,0.3)" }}
         >
-          Custom No-Code Apps{" "}
+          Your Operations Are the{" "}
           <br className="hidden md:block" />
-          for{" "}
           <span className="bg-gradient-to-r from-[#06B6D4] via-[#10B981] to-[#06B6D4] bg-clip-text text-transparent">
-            Auckland
+            Infrastructure
           </span>{" "}
-          Small Businesses
+          for Everything Else.
         </motion.h1>
 
         {/* Subtitle */}
@@ -171,8 +170,7 @@ export default function FlowerOfLife() {
           custom={2} variants={fadeUp} initial="hidden" animate="visible"
           className="text-lg md:text-xl text-slate-300 font-light leading-relaxed max-w-2xl mb-10"
         >
-          Simple apps that save you time and grow your café, gym or shop — built locally,
-          fully owned by you, delivered in under 4 weeks.
+          We partner with AU/NZ B2B companies to replace manual operations, modernise legacy systems, and build the platforms your team actually ships on.
         </motion.p>
 
         {/* CTAs */}
@@ -184,15 +182,15 @@ export default function FlowerOfLife() {
             href="/contact"
             className="flex items-center gap-2 px-7 py-3.5 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-lg transition-all shadow-[0_0_30px_rgba(6,182,212,0.45)] hover:shadow-[0_0_45px_rgba(6,182,212,0.6)] group"
           >
-            Book a Free Call
+            Book Strategy Session
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
           <a
             href="/case-studies"
             className="flex items-center gap-2 px-7 py-3.5 border border-white/15 hover:border-white/30 text-white font-medium rounded-lg transition-all hover:bg-white/5 group"
           >
-            <Play className="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" />
-            See Our Work
+            <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" />
+            View Case Studies
           </a>
         </motion.div>
 
@@ -202,10 +200,10 @@ export default function FlowerOfLife() {
           className="flex flex-wrap items-center justify-center gap-8 mt-14 pt-10 border-t border-white/5 w-full"
         >
           {[
-            { value: "50+", label: "Projects delivered" },
-            { value: "< 4 wks", label: "Delivery time" },
-            { value: "100%", label: "Client ownership" },
-            { value: "Auckland", label: "Based in NZ" },
+            { value: "4", label: "Transformation pillars" },
+            { value: "99.9%", label: "Uptime SLA" },
+            { value: "3×", label: "Faster delivery" },
+            { value: "AU/NZ", label: "Enterprise market" },
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col items-center gap-1">
               <span className="text-2xl font-bold text-white">{stat.value}</span>

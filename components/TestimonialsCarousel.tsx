@@ -6,39 +6,39 @@ import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Sarah M.",
-    role: "Owner, Flex Auckland Gym",
-    initials: "SM",
+    name: "James T.",
+    role: "CTO, AU SaaS Platform",
+    initials: "JT",
     color: "#06B6D4",
     quote:
-      "Lucas built our booking system in under 2 weeks. Our no-shows dropped by 60% and we save over 10 hours a week on admin. Best investment we've made for the business.",
+      "LEB migrated our entire data pipeline to event-driven architecture in 11 weeks. We handle 40× more volume at half the infrastructure cost. The fortnightly delivery cadence meant zero surprises.",
     stars: 5,
   },
   {
-    name: "James T.",
-    role: "Manager, The Good Cup Café (CBD)",
-    initials: "JT",
+    name: "Rachel M.",
+    role: "VP Engineering, NZ FinTech",
+    initials: "RM",
     color: "#10B981",
     quote:
-      "Table ordering via QR code changed everything. We turn tables 30% faster and kitchen errors dropped to near zero. My staff are less stressed, and tips went up.",
+      "Deployment lead time went from 3 days to 90 minutes. Developer satisfaction scores moved from 3.1 to 4.6 out of 5. The internal developer platform LEB built is now our biggest competitive advantage.",
     stars: 5,
   },
   {
-    name: "Emma K.",
-    role: "Business Coach, Auckland",
-    initials: "EK",
+    name: "David K.",
+    role: "COO, AU Logistics Group",
+    initials: "DK",
     color: "#9333EA",
     quote:
-      "The client portal Lucas built is exactly what I needed — invoices, session notes and follow-ups all in one place. Xero connects automatically. Saved me hours every week.",
+      "22 hours per week of manual operations, eliminated in 8 weeks. The AI classification agent runs 24/7 with 99.2% accuracy. ROI was positive inside 90 days — exactly as scoped.",
     stars: 5,
   },
   {
-    name: "Mike R.",
-    role: "Owner, Kiwi Threads Boutique",
-    initials: "MR",
+    name: "Sophie W.",
+    role: "Head of Infrastructure, NZ Enterprise",
+    initials: "SW",
     color: "#EC4899",
     quote:
-      "We were managing stock across two Auckland stores in spreadsheets. Now I get a WhatsApp alert when anything runs low. Stock accuracy went from guesswork to real-time.",
+      "We went from 94.2% uptime to 99.94% uptime in a 16-week program. MTTD dropped from 45 minutes to 3 minutes. The observability stack LEB built now runs itself.",
     stars: 5,
   },
 ];
@@ -107,10 +107,10 @@ export default function TestimonialsCarousel() {
         <div className="text-center mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-5 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300 font-medium">
             <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] shadow-[0_0_6px_#10B981]" />
-            Real results from Auckland businesses
+            AU/NZ enterprise outcomes
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-            What our clients say
+            What transformation looks like in practice
           </h2>
         </div>
 

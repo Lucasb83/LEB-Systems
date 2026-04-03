@@ -32,24 +32,23 @@ const MiniLogo: React.FC = () => {
 };
 
 const links: Record<string, { label: string; href: string }[]> = {
-  Services: [
-    { label: "Booking & Reservations", href: "/services#booking" },
-    { label: "Order & Menu App", href: "/services#orders" },
-    { label: "Client Portal & CRM", href: "/services#crm" },
-    { label: "Inventory Dashboard", href: "/services#inventory" },
-    { label: "WhatsApp Automation", href: "/services#whatsapp" },
+  Solutions: [
+    { label: "AI Automation Systems",    href: "/solutions#ai-automation" },
+    { label: "Cloud Modernisation",      href: "/solutions#cloud" },
+    { label: "Platform Engineering",     href: "/solutions#platform" },
+    { label: "Continuous Infrastructure", href: "/solutions#infrastructure" },
   ],
   Company: [
-    { label: "About Lucas", href: "/about" },
-    { label: "Pricing", href: "/pricing" },
+    { label: "About",        href: "/about" },
     { label: "Case Studies", href: "/case-studies" },
-    { label: "Contact", href: "/contact" },
+    { label: "Method",       href: "/method" },
+    { label: "Insights",     href: "/insights" },
   ],
   Resources: [
-    { label: "Blog", href: "#" },
-    { label: "Free Consultation", href: "/contact" },
-    { label: "NZ Privacy Act Info", href: "#" },
-    { label: "GST & Invoicing", href: "#" },
+    { label: "Book Strategy Session", href: "/contact" },
+    { label: "Client Portal",         href: "/portal" },
+    { label: "AU Privacy Act",        href: "#" },
+    { label: "Security",              href: "#" },
   ],
 };
 
@@ -73,24 +72,24 @@ export default function Footer() {
       {/* Pre-footer CTA */}
       <div className="relative z-20 max-w-3xl mx-auto text-center mb-24">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight leading-tight">
-          Ready to get your<br />Auckland business an app?
+          Ready to start your transformation?
         </h2>
         <p className="text-slate-300 mb-10 text-lg font-light">
-          Book a free 15-min call with Lucas. No pitch, no pressure — just a honest conversation about what you need.
+          Book a strategy session with our team. We'll map your current state, identify the highest-leverage opportunities, and outline a transformation roadmap — no obligation.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="/pricing"
+            href="/contact"
             className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-lg transition-all shadow-[0_0_30px_rgba(6,182,212,0.45)] hover:shadow-[0_0_50px_rgba(6,182,212,0.6)] group"
           >
-            See Pricing
+            Book Strategy Session
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
           <a
-            href="/contact"
+            href="/case-studies"
             className="inline-flex items-center justify-center px-8 py-3.5 border border-white/15 hover:border-white/30 text-white font-medium rounded-lg transition-all hover:bg-white/5"
           >
-            Book a free consultation
+            View Case Studies
           </a>
         </div>
       </div>
@@ -107,9 +106,9 @@ export default function Footer() {
               <span className="text-white font-semibold text-xl tracking-tight">LEB Systems</span>
             </a>
             <p className="text-slate-400 text-sm font-light mb-3 leading-relaxed">
-              Custom no-code apps for Auckland small businesses. Built fast, priced fairly, owned by you.
+              AI & Infrastructure Transformation Partner for AU/NZ B2B companies. We deliver programs, not projects.
             </p>
-            <p className="text-xs text-slate-500 mb-6">🇳🇿 Proudly based in Auckland, New Zealand</p>
+            <p className="text-xs text-slate-500 mb-6">AU/NZ · Enterprise-grade · Outcome-focused</p>
             <div className="flex items-center gap-4 text-slate-400">
               {/* X / Twitter */}
               <a href="https://x.com/lebsystems" target="_blank" rel="noopener noreferrer" aria-label="LEB Systems on X" className="hover:text-[#06B6D4] transition-colors p-1">

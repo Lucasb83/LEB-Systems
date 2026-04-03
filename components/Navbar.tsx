@@ -34,18 +34,18 @@ function TechLogo({ size = 32 }: { size?: number }) {
   );
 }
 
-const services = [
-  { label: "Booking & Reservations", desc: "Online calendar + payments for salons, gyms & tutors", href: "/services#booking" },
-  { label: "Order & Menu App", desc: "Digital menu + table ordering for cafés & food trucks", href: "/services#orders" },
-  { label: "Client Portal & CRM", desc: "Track clients, invoices & follow-ups in one place", href: "/services#crm" },
-  { label: "Inventory & Sales Dashboard", desc: "Real-time stock & sales reports for retail", href: "/services#inventory" },
-  { label: "WhatsApp Automation", desc: "Auto-replies, appointment booking & marketing flows", href: "/services#whatsapp" },
+const solutions = [
+  { label: "AI Automation Systems",      desc: "Replace manual ops with intelligent agents, 24/7 at scale",                      href: "/solutions#ai-automation" },
+  { label: "Cloud Modernisation",        desc: "Move from legacy infrastructure to scalable cloud-native platforms",              href: "/solutions#cloud" },
+  { label: "Platform Engineering",       desc: "Internal developer platforms that accelerate delivery and reduce complexity",     href: "/solutions#platform" },
+  { label: "Continuous Infrastructure",  desc: "Self-monitoring systems with 99.9% uptime SLA",                                  href: "/solutions#infrastructure" },
 ];
 
 const mainLinks = [
   { label: "Case Studies", href: "/case-studies" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Method",       href: "/method" },
+  { label: "Insights",     href: "/insights" },
+  { label: "About",        href: "/about" },
 ];
 
 export default function Navbar() {
@@ -119,10 +119,10 @@ export default function Navbar() {
             >
               <button
                 className={`flex items-center gap-1 py-1 transition-colors duration-200 ${
-                  isActive("/services") ? "text-white" : "text-slate-400 hover:text-white"
+                  isActive("/solutions") ? "text-white" : "text-slate-400 hover:text-white"
                 }`}
               >
-                Services
+                Solutions
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`} />
               </button>
 
@@ -132,7 +132,7 @@ export default function Navbar() {
                 }`}
               >
                 <div className="bg-[#243347]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-2 shadow-2xl">
-                  {services.map((s) => (
+                  {solutions.map((s) => (
                     <a
                       key={s.label}
                       href={s.href}
@@ -156,14 +156,11 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-4 text-sm font-medium">
-            <a href="/contact" className="text-slate-300 hover:text-white transition-colors">
-              Free consultation
-            </a>
             <a
               href="/contact"
               className="flex items-center gap-1.5 px-5 py-2.5 bg-[#06B6D4] hover:bg-[#0891B2] text-white rounded-lg font-medium transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)]"
             >
-              Get a Quote <ArrowRight className="w-3.5 h-3.5" />
+              Book Strategy Call <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
 
@@ -180,7 +177,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`fixed inset-0 z-40 lg:hidden transition-all duration-300 ${
+        className={`fixed inset-0 z-[60] lg:hidden transition-all duration-300 ${
           mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
@@ -202,8 +199,8 @@ export default function Navbar() {
           </div>
 
           <div className="flex-1 overflow-y-auto px-6 py-6 flex flex-col gap-1">
-            <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Services</p>
-            {services.map((s) => (
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Solutions</p>
+            {solutions.map((s) => (
               <a
                 key={s.label}
                 href={s.href}
@@ -237,14 +234,14 @@ export default function Navbar() {
               onClick={() => setMobileOpen(false)}
               className="flex items-center justify-center gap-2 py-3.5 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.35)]"
             >
-              Get a Quote <ArrowRight className="w-4 h-4" />
+              Book Strategy Call <ArrowRight className="w-4 h-4" />
             </a>
             <a
-              href="/contact"
+              href="/method"
               onClick={() => setMobileOpen(false)}
               className="flex items-center justify-center py-3 text-slate-400 hover:text-white text-sm transition-colors"
             >
-              Book a free consultation
+              View our Method
             </a>
           </div>
         </div>

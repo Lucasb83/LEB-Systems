@@ -1,14 +1,14 @@
 "use client";
 
 import React from "react";
-import { ShieldCheck, MapPin, Receipt, Lock, FileCheck } from "lucide-react";
+import { Globe, Cpu, TrendingUp, Lock, Shield } from "lucide-react";
 
 const items = [
-  { icon: <Receipt className="w-3.5 h-3.5" />, label: "GST Registered" },
-  { icon: <FileCheck className="w-3.5 h-3.5" />, label: "NZ Privacy Act 2020 Compliant" },
-  { icon: <MapPin className="w-3.5 h-3.5" />, label: "Auckland-Based" },
-  { icon: <Lock className="w-3.5 h-3.5" />, label: "Fixed Pricing — No Surprises" },
-  { icon: <ShieldCheck className="w-3.5 h-3.5" />, label: "100% Code Ownership" },
+  { icon: <Globe className="w-3.5 h-3.5" />,     label: "AU/NZ B2B Focused" },
+  { icon: <Cpu className="w-3.5 h-3.5" />,        label: "AI-Native Delivery" },
+  { icon: <TrendingUp className="w-3.5 h-3.5" />, label: "Outcome-Driven Programs" },
+  { icon: <Lock className="w-3.5 h-3.5" />,        label: "Enterprise Security Standards" },
+  { icon: <Shield className="w-3.5 h-3.5" />,      label: "99.9% Uptime SLA" },
 ];
 
 export default function TrustBar() {

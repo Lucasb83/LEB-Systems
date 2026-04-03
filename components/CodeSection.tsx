@@ -11,12 +11,20 @@ const fadeUp = {
 
 const features = [
   {
-    title: "No-code speed, custom code when it matters",
-    desc: "We use modern no-code platforms to build fast — and add custom code for anything the tools can't handle. Best of both worlds.",
+    title: "Outcomes agreed before we write code",
+    desc: "",
   },
   {
-    title: "You own everything, forever",
-    desc: "Full source code, database, and hosting access delivered at handover. No subscriptions to us, no lock-in.",
+    title: "Fortnightly delivery to production",
+    desc: "",
+  },
+  {
+    title: "Full capability transfer at handover",
+    desc: "",
+  },
+  {
+    title: "Continuous improvement retainer available",
+    desc: "",
   },
 ];
 
@@ -34,42 +42,42 @@ export default function CodeSection() {
         <div className="flex-1 z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#06B6D4]/10 border border-[#06B6D4]/20 rounded-full mb-6">
             <Layers className="w-3.5 h-3.5 text-[#06B6D4]" />
-            <span className="text-xs text-[#10B981] font-medium">How we build</span>
+            <span className="text-xs text-[#10B981] font-medium">The LEB Method</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6 leading-tight">
-            From idea to live app<br />in under 4 weeks
+            From current state to transformed operations — in five structured phases.
           </h2>
           <p className="text-slate-300 mb-10 text-base leading-relaxed max-w-lg font-light">
-            We combine the speed of no-code platforms with real development experience —
-            so you get a professional app without the agency price tag or the months-long wait.
+            Our five-phase method replaces big-bang delivery with iterative, outcome-anchored programs.
+            You see working systems every two weeks — not a handover at the end.
           </p>
-          <ul className="space-y-7 mb-10">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5 mb-10">
             {features.map((f) => (
               <li key={f.title} className="flex items-start gap-4">
                 <Check className="w-5 h-5 text-[#06B6D4] mt-0.5 flex-shrink-0" />
                 <p className="text-sm text-slate-300 leading-relaxed">
-                  <strong className="text-white font-semibold">{f.title} — </strong>{f.desc}
+                  <strong className="text-white font-semibold">{f.title}</strong>
                 </p>
               </li>
             ))}
           </ul>
           <a
-            href="/services"
+            href="/method"
             className="inline-flex items-center gap-2 px-6 py-3 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold rounded-lg transition-all shadow-[0_0_25px_rgba(6,182,212,0.4)] group"
           >
-            See all services <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            See the Method <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
         </div>
 
         {/* Visual: App build pipeline */}
         <div className="flex-1 z-10 w-full flex justify-center lg:justify-end">
           <div className="bg-[#0F172A] border border-white/5 rounded-3xl p-8 flex flex-col gap-4 shadow-2xl w-full max-w-sm">
-            <div className="text-xs text-slate-500 font-mono mb-2">Build pipeline — your app</div>
+            <div className="text-xs text-slate-500 font-mono mb-2">Build pipeline — your program</div>
             {[
-              { label: "Free Consultation", color: "emerald", status: "complete" },
-              { label: "Design & Wireframe", color: "emerald", status: "complete" },
-              { label: "Build & Integrate", color: "orange", status: "active" },
-              { label: "Deploy & Train You", color: "slate", status: "pending" },
+              { label: "Discovery & Audit", color: "emerald", status: "complete" },
+              { label: "Architecture Design", color: "emerald", status: "complete" },
+              { label: "Iterative Build", color: "orange", status: "active" },
+              { label: "Validate & Optimise", color: "slate", status: "pending" },
             ].map((step, i) => (
               <div
                 key={step.label}
@@ -105,8 +113,8 @@ export default function CodeSection() {
               </div>
             ))}
             <div className="mt-2 pt-4 border-t border-white/5 flex items-center justify-between text-xs text-slate-500">
-              <span>Estimated delivery</span>
-              <span className="text-[#06B6D4] font-semibold">Under 4 weeks</span>
+              <span>Engagement start</span>
+              <span className="text-[#06B6D4] font-semibold">Within 2 weeks</span>
             </div>
           </div>
         </div>

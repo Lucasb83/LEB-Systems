@@ -10,16 +10,16 @@ const fadeUp = {
 };
 
 const features = [
-  { title: "Free 15-min consultation", desc: "We scope your app together — no obligation" },
-  { title: "Working prototype in days", desc: "See something real before you commit fully" },
-  { title: "Integrates with your tools", desc: "Xero, Google, Stripe, WhatsApp, Calendly + more" },
-  { title: "Training included, always", desc: "You and your team learn to run it yourselves" },
+  { title: "Free strategy session — no obligation", desc: "" },
+  { title: "Working systems in 90 days", desc: "" },
+  { title: "Integrates with your existing stack", desc: "" },
+  { title: "Team capability uplift included", desc: "" },
 ];
 
 const stats = [
-  { value: "< 4 wks", label: "Max delivery time" },
-  { value: "From $3,500", label: "NZD pricing" },
-  { value: "100%", label: "Yours to keep" },
+  { value: "90 days", label: "First outcomes" },
+  { value: "3×", label: "Delivery speed" },
+  { value: "99.9%", label: "Uptime SLA" },
 ];
 
 export default function MoveFastSection() {
@@ -45,14 +45,14 @@ export default function MoveFastSection() {
         <div className="flex-1 z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#9333EA]/10 border border-[#9333EA]/20 rounded-full mb-6">
             <Rocket className="w-3.5 h-3.5 text-[#9333EA]" />
-            <span className="text-xs text-purple-300 font-medium">Fast delivery</span>
+            <span className="text-xs text-purple-300 font-medium">Transformation velocity</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-5">
-            Stop waiting months.<br />Go live in under 4 weeks.
+            Stop waiting on IT.<br />Start compounding returns.
           </h2>
           <p className="text-slate-400 mb-10 text-base leading-relaxed font-light max-w-md">
-            Big agencies charge $20k and take 6 months. We deliver a real, working app
-            for your Auckland business in under 4 weeks — starting from $3,500 NZD.
+            Our programs deliver measurable outcomes within 90 days — not at the end of a 12-month roadmap.
+            Every sprint ships to production.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8 mb-12">
@@ -61,17 +61,16 @@ export default function MoveFastSection() {
                 <Check className="w-5 h-5 text-[#9333EA] flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-sm text-white font-medium">{f.title}</p>
-                  <p className="text-xs text-slate-500 mt-0.5">{f.desc}</p>
                 </div>
               </div>
             ))}
           </div>
 
           <a
-            href="/pricing"
+            href="/method"
             className="inline-flex items-center gap-2 px-6 py-3 bg-[#1E293B] border border-white/10 hover:border-[#9333EA]/50 text-white text-sm font-medium rounded-lg transition-colors group"
           >
-            View pricing packages
+            Explore our method
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </a>
         </div>
